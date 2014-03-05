@@ -1,0 +1,37 @@
+<h1>Listing sheep_sellings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Activity</th>
+      <th>Sheep</th>
+      <th>Weight</th>
+      <th>Price</th>
+      <th>Place</th>
+      <th>Comment</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sheep_sellings.each do |sheep_selling| %>
+      <tr>
+        <td><%= sheep_selling.activity_id %></td>
+        <td><%= sheep_selling.sheep_id %></td>
+        <td><%= sheep_selling.weight %></td>
+        <td><%= sheep_selling.price %></td>
+        <td><%= sheep_selling.place %></td>
+        <td><%= sheep_selling.comment %></td>
+        <td><%= link_to 'Show', sheep_selling %></td>
+        <td><%= link_to 'Edit', edit_sheep_selling_path(sheep_selling) %></td>
+        <td><%= link_to 'Destroy', sheep_selling, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sheep selling', new_sheep_selling_path %>

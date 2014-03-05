@@ -1,0 +1,36 @@
+<h1>Listing lambings</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Datum</th>
+      <th>Broj ovaca</th>
+      <th>broj jagnjadi</th>
+      <th>zenskih</th>
+      <th>actibity_id</th>
+      <th>Napomena</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lambings.each do |lambing| %>
+      <tr>
+        <td><%= lambing.show_date %></td>
+        <td><%= lambing.sheeps.group_by(&:id).count %></td>
+        <td><%= lambing.lambings.count %></td>
+        <td><%= lambing.females_count%></td>
+        <td><%= lambing.id %></td>
+        <td><%= link_to 'Show', '/lambings/'+lambing.id.to_s %></td>
+        <td><%= link_to 'Edit', edit_lambing_path(lambing) %></td>
+        <td><%= link_to 'Izbrisi', lambing, method: :delete, data: { confirm: 'Jesi li siguran?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo Jagnjenje', new_lambing_path %>

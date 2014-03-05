@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Male:</strong>
+  <%= @mating.male_id %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @mating.price %>
+</p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @mating.activity_id %>
+</p>
+
+<p>
+  <strong>Sheep:</strong>
+  <%= @mating.sheep_id %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @mating.comment %>
+</p>
+
+<%= link_to 'Edit', edit_mating_path(@mating) %> |
+<%= link_to 'Back', matings_path %>

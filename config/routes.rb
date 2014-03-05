@@ -1,4 +1,18 @@
 Sheeps::Application.routes.draw do
+  resources :sheep_sellings
+
+  resources :vacinations
+
+  resources :matings
+
+  resources :sheep_purchases
+
+  resources :activities
+
+  resources :lambings
+
+  resources :sheep
+get '/', to: 'lambings#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

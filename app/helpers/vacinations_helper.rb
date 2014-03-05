@@ -1,0 +1,2 @@
+module VacinationsHelper
+end

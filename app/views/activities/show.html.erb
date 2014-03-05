@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <%= @activity.tip %>
+</h2>
+
+
+<p>
+  <strong>Datum:</strong>
+  <%= @activity.show_date %>
+  <strong>od</strong> <%= @activity.time_from %>h
+  <strong>do</strong> <%= @activity.time_to %>h
+</p>
+
+
+<p>
+  <strong>Ukupni troskovi:</strong>
+  <%= @activity.total_costs %>
+</p>
+
+<p>
+  <strong>Napomena:</strong>
+  <%= @activity.comment %>
+</p>
+
+<%= link_to 'Edit', edit_activity_path(@activity) %> |
+<%= link_to 'Back', activities_path %>

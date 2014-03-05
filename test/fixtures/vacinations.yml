@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reason: MyString
+  vaccin_name: MyString
+  activity_id: 1
+  sheep_id: 1
+  comment: MyString
+
+two:
+  reason: MyString
+  vaccin_name: MyString
+  activity_id: 1
+  sheep_id: 1
+  comment: MyString

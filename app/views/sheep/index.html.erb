@@ -1,0 +1,36 @@
+<h1>Listing sheep</h1>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Kod</th>
+      <th>Majka</th>
+      <th>Otac</th>
+      <th>Tezina 100 dana</th>
+      <th>status</th>
+      <th>pol</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sheep.each do |sheep| %>
+      <tr>
+        <td><%= sheep.kod %></td>
+        <td><%= sheep.mother_id %></td>
+        <td><%= sheep.father_id %></td>
+        <td><%= sheep.weight_100_days %></td>
+        <td><%= sheep.status %></td>
+        <td><%= sheep.sex %></td>
+        <td><%= link_to 'Show', sheep %></td>
+        <td><%= link_to 'Edit', edit_sheep_path(sheep) %></td>
+        <td><%= link_to 'Destroy', sheep, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sheep', new_sheep_path %>

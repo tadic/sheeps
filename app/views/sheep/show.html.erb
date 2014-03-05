@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @sheep.code %>
+</p>
+
+<p>
+  <strong>Mother:</strong>
+  <%= @sheep.mother_id %>
+</p>
+
+<p>
+  <strong>Father:</strong>
+  <%= @sheep.father_id %>
+</p>
+
+<p>
+  <strong>Weight 100 days:</strong>
+  <%= @sheep.weight_100_days %>
+</p>
+
+<%= link_to 'Edit', edit_sheep_path(@sheep) %> |
+<%= link_to 'Back', sheep_index_path %>

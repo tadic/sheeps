@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  color: 1
+  date: 1
+  time: 1
+  total_costs: 1.5
+  comment: MyString
+
+two:
+  type: 
+  color: 1
+  date: 1
+  time: 1
+  total_costs: 1.5
+  comment: MyString

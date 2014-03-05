@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  activity_id: 1
+  sheep_id: 1
+  weight: 1.5
+  price: 1.5
+  place: MyString
+  comment: MyString
+
+two:
+  activity_id: 1
+  sheep_id: 1
+  weight: 1.5
+  price: 1.5
+  place: MyString
+  comment: MyString

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @sheep_purchase.price %>
+</p>
+
+<p>
+  <strong>Place:</strong>
+  <%= @sheep_purchase.place %>
+</p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @sheep_purchase.activity_id %>
+</p>
+
+<p>
+  <strong>Sheep:</strong>
+  <%= @sheep_purchase.sheep_id %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @sheep_purchase.comment %>
+</p>
+
+<%= link_to 'Edit', edit_sheep_purchase_path(@sheep_purchase) %> |
+<%= link_to 'Back', sheep_purchases_path %>

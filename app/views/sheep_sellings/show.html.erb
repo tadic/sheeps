@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @sheep_selling.activity_id %>
+</p>
+
+<p>
+  <strong>Sheep:</strong>
+  <%= @sheep_selling.sheep_id %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @sheep_selling.weight %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @sheep_selling.price %>
+</p>
+
+<p>
+  <strong>Place:</strong>
+  <%= @sheep_selling.place %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @sheep_selling.comment %>
+</p>
+
+<%= link_to 'Edit', edit_sheep_selling_path(@sheep_selling) %> |
+<%= link_to 'Back', sheep_sellings_path %>

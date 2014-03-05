@@ -1,0 +1,55 @@
+<%= form_for(@activity) do |f| %>
+
+  <% if @activity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+
+      <ul>
+      <% @activity.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field activity_header" >
+    <strong><%= f.label :vrsta_aktivnosti %></strong>
+    <%= f.select :tip, @ac_types%>
+    <strong> Datum</strong> <input type="text" data-behaviour='datepicker' name='date'>
+    <strong>Ceo dan <input type="checkbox" checked="checked"/> </strong>
+    <%= f.label :vreme_od %>
+    <%= f.time_select :time_from, :minute_step => 20, :start_hour => 10, :end_hour => 22 %>
+    <%= f.label :do %>
+    <%= f.time_select :time_to, :minute_step => 20, :start_hour => 10, :end_hour => 22 %>
+    <br>
+    Izbor ovaca:
+    <select  id='sheeps_selection' class="multiselect" multiple="multiple" >
+      <% @sheeps.each do |s| %>
+        <option value=<%= s.id %>><%= s.code %></option>
+      <% end %>
+    </select>
+    <input type="checkbox" checked data-size="large" data-label-text="<span class='fa fa-youtube fa-lg'></span>" data-on-text="<span class='fa fa-thumbs-up fa-lg'></span>" data-off-text="<span class='fa fa-thumbs-down fa-lg'></span>">
+  </div>
+  <div class = 'activity'>
+    
+  </div>
+ 
+ 
+  <%= render 'lambings' %>
+
+
+  <div class="field">
+    <%= f.label :ukupna_cena_u_evrima %><br>
+    <%= f.text_field :total_costs %>
+  </div>
+  <div class="field">
+    <%= f.label :napomena %><br>
+    <%= f.text_area :comment %>
+  </div>
+  <div class="actions">
+    <%= f.submit :Snimi_i_idi_dalje, class:"btn btn-primary"%>
+  </div>
+ 
+
+<% end %>
+
+  

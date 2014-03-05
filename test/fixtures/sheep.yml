@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  mother_id: 1
+  father_id: 1
+  weight_100_days: 1
+
+two:
+  code: MyString
+  mother_id: 1
+  father_id: 1
+  weight_100_days: 1

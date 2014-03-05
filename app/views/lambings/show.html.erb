@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Dana:</strong>
+  <%= @lambing.date %>
+  <strong>jagnjilo se </strong>
+  <%= @lambing.sheeps.group_by(&:id).count %>
+  <strong> ovaca </strong>
+</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Datum</th>
+      <th>Broj ovaca</th>
+      <th>broj jagnjadi</th>
+      <th>zenskih</th>
+      <th>actibity_id</th>
+      <th>Napomena</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lambing.lambings.each do |lambing| %>
+      <tr>
+        <td><%= lambing.show_date %></td>
+        <td><%= lambing.sheeps.group_by(&:id).count %></td>
+        <td><%= lambing.lambings.count %></td>
+        <td><%= lambing.females_count%></td>
+        <td><%= lambing.id %></td>
+        <td><%= link_to 'Show', lambing %></td>
+        <td><%= link_to 'Edit', edit_lambing_path(lambing) %></td>
+        <td><%= link_to 'Izbrisi', lambing, method: :delete, data: { confirm: 'Jesi li siguran?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <strong>Sheep:</strong>
+  <%= @lambing.sheep_id %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @lambing.comment %>
+</p>
+
+<%= link_to 'Edit', edit_lambing_path(@lambing) %> |
+<%= link_to 'Back', lambings_path %>

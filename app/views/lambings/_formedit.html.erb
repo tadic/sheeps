@@ -1,0 +1,39 @@
+<%= form_for(@lambing) do |f| %>
+
+  <% if @lambing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+
+      <ul>
+      <% @lambing.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field activity_header" >
+    <strong> Datum</strong> <input type="text" data-behaviour='datepicker' name='date' value='<%= @activity.show_date %>'>
+    Izbor ovaca:
+    <select  id='sheeps_selection' name='selected_sheeps[]' class="multiselect" multiple="multiple" >
+      <% @sheeps.each do |s| %>
+          <% if @activity.sheeps.distinct.include? s %>
+            <option value=<%= s.id %> SELECTED><%= s.code %></option>
+          <% else %>
+            <option value=<%= s.id %>><%= s.code %></option>
+          <% end %>
+      <% end %>
+    </select>
+  </div>
+
+  <%= render 'lambingsedit' %>
+  <br>
+  <textarea class="form-control" rows="3" name='comment' placeholder="Unesi zapazanje proteklih jagnjenja..." value='<%=@activity.comment%>'></textarea><br>
+  <div class="actions">
+    <%= f.submit :Snimi, class:"btn btn-primary"%>
+    <%= link_to 'Back', lambings_path, class:"btn btn-default" %>
+  </div>
+
+<% end %>
+
+  
