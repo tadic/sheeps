@@ -1,29 +1,20 @@
+<p id="notice"><%= notice %></p>
 <%= form_for(@lambing) do |f| %>
 
-  <% if @lambing.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
-
-      <ul>
-      <% @activity.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <input type='hidden' name='activity_id'>
   <div class="field activity_header" >
     <strong> Datum</strong> <input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='date'>
     Izbor ovaca:
-    <select  id='sheeps_selection' name='selected_sheeps[]' class="multiselect" multiple="multiple" size=5 >
+    <select  id='sheeps_selection' name='selected_sheeps[]' class="multiselect mutliselect-primary" data-style="btn-primary" multiple="multiple" size=5 >
       <% @sheeps.each do |s| %>
-        <option value=<%= s.id %>><%= s.code %></option>
+        <option value=<%= s.code %>><%= s.code %></option>
       <% end %>
     </select>
 
   </div>
-        
-  <%= render 'lambings' %>
+        <div  id="accordion">
+            <%= render 'lambings' %>
+        </div>
   <br>      
   <textarea class="form-control" rows="3" name='comment' placeholder="Unesi zapazanje proteklih jagnjenja..."></textarea><br>
   <div class="actions">

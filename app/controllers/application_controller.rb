@@ -14,4 +14,6 @@ class ApplicationController < ActionController::Base
       d += date.at(0..1)
      return d.to_i
   end
+ 
+
 end

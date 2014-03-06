@@ -1,37 +1,42 @@
 <%= form_for(@sheep_purchase) do |f| %>
-  <% if @sheep_purchase.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@sheep_purchase.errors.count, "error") %> prohibited this sheep_purchase from being saved:</h2>
 
-      <ul>
-      <% @sheep_purchase.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
+  <input type='hidden' name='activity_id'>  <br><br>
+  
+  <div class="field activity_header" >
+    <strong> Datum</strong> <input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='date'>
+    &nbsp; lokacija <input  type='text' name='place'>
+    &nbsp; nabavljeno <input type="text" name="size" id="quantity" />&nbsp;<span id="errmsg"></span>
+    &nbsp; ovaca <br><br><br>
   </div>
-  <div class="field">
-    <%= f.label :place %><br>
-    <%= f.text_field :place %>
-  </div>
-  <div class="field">
-    <%= f.label :activity_id %><br>
-    <%= f.number_field :activity_id %>
-  </div>
-  <div class="field">
-    <%= f.label :sheep_id %><br>
-    <%= f.number_field :sheep_id %>
-  </div>
-  <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_field :comment %>
-  </div>
+  
+       
+       
+        <div  id="accordion">
+            <table class='table table-hover'>
+              <thead>
+                <tr class='info'>
+                  <th class="col-sm-1">Oznaka</th>
+                  <th class="col-sm-1">nadimak</th>
+                  <th class="col-sm-1">pol</th>         
+                  <th class="col-sm-1">procenat romanov</th>
+                  <th class="col-sm-1">datum rodjenja</th>
+                  <th class="col-sm-1">oznaka oca</th>
+                  <th class="col-sm-1">oznaka majke</th>
+                  <th class="col-sm-2">opis grla</th>
+                  <th class="col-sm-2">napomena</th></tr>
+              </thead>
+              
+              <tbody class='purchasing_list'> 
+                
+              </tbody>
+            </table> 
+        </div>
+  
+  <br>      
+  <textarea class="form-control" rows="3" name='comment' placeholder="Unesi zapazanje protekle nabavke..."></textarea><br>
+  
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :Snimi, class:"btn btn-primary" %>
+    <%= link_to 'Nazad', sheep_purchases_path, class:"btn btn-default" %>
   </div>
 <% end %>

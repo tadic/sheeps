@@ -4,20 +4,20 @@ class LambingsController < ApplicationController
   # GET /lambings
   # GET /lambings.json
   def index
-    @lambings = Activity.all
+    @lambings = Activity.all.sort_by{|a| a[:date]}
     @sheeps = Sheep.all
   end
 
   # GET /lambings/1
   # GET /lambings/1.json
   def show
-      @lambing = Activity.find(params[:id])
+      @activity = Activity.find(params[:id])
   end
 
   # GET /lambings/new
   def new
     @lambing = Lambing.new
-    @sheeps = Sheep.all
+    @sheeps = Sheep.ready_for_lambing
   end
    def lambing_sheep_index_path
       lambing_path
@@ -27,25 +27,38 @@ class LambingsController < ApplicationController
   def edit
       @lambing = Lambing.new
       @activity = Activity.find(params[:id])
-      @sheeps = Sheep.all
+      @sheeps = Sheep.ready_for_lambing
   end
 
   # POST /lambings
   # POST /lambings.json
   def create
+    activity = Activity.find_by id: params[:activity_id]
+    if activity!=nil
+      activity.destroy    #desrtoing edited activity and all lambing_childs
+    end
+   
     lambings =  params[:lambings]
-    activity = Activity.create date: convert_date_to_i(params[:date])
     
+    if lambings==nil   
+       @lambing = Lambing.new
+       @sheeps = Sheep.ready_for_lambing
+      respond_to do |format|
+          format.html { render action: 'new', notice: 'Nista nije snimljeno posto nije ni uneto!' }
+      end
+      return
+    end
 
+        activity = Activity.create date: convert_date_to_i(params[:date]), comment: params[:comment]
     lambings.each do |l|
-
+    mother = Sheep.find_by code: l[:sheep_code]
       alive = (l[:alive] == 'true')
       if alive
-        lamb = Sheep.create sex:l[:sex], mother_id:l[:sheep_id], status:'na farmi'
+        lamb = Sheep.create sex:l[:sex], mother_id: mother.id, status:'na farmi', describe: l[:describe]
       else
-        lamb = Sheep.create sex:l[:sex], mother_id:l[:sheep_id], status:'mrtvo rodjeno'
+        lamb = Sheep.create sex:l[:sex], mother_id: mother.id, status:'mrtvo rodjeno', describe: l[:describe]
       end
-      Lambing.create sheep_id:l[:sheep_id], activity_id: activity.id, lamb_id: lamb.id, is_alive: alive, comment: l[:comment], weight: l[:weight]
+      Lambing.create sheep_id:mother.id, activity_id: activity.id, lamb_id: lamb.id, is_alive: alive, comment: l[:comment], weight: l[:weight]
     end
     
 
@@ -63,31 +76,14 @@ class LambingsController < ApplicationController
   # PATCH/PUT /lambings/1
   # PATCH/PUT /lambings/1.json
   def update
-    ppar = lambing_params
-    lamb = Sheep.find_by id: @lambing.lamb_id
-    if lamb.nil? 
-      lamb = Sheep.create
-    end
-      
-    sex = params.require(:post).permit(:sex)
-    ppar = lambing_params
-
-    lamb.update(mother_id: ppar[:sheep_id], sex: sex[:sex])
-    respond_to do |format|
-      if @lambing.update(lambing_params)
-        format.html { redirect_to @lambing, notice: 'Lambing was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @lambing.errors, status: :unprocessable_entity }
-      end
-    end
+    raise
   end
 
   # DELETE /lambings/1
   # DELETE /lambings/1.json
   def destroy
-    @lambing.destroy
+    a = Activity.find(@lambing.activity_id)
+    a.destroy
     respond_to do |format|
       format.html { redirect_to lambings_url }
       format.json { head :no_content }

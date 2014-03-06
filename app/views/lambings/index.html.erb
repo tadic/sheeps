@@ -1,17 +1,16 @@
-<h1>Listing lambings</h1>
+<h1>Lista jagnjenja</h1>
 
 <table class="table table-hover">
   <thead>
-    <tr>
-      <th>Datum</th>
-      <th>Broj ovaca</th>
-      <th>broj jagnjadi</th>
-      <th>zenskih</th>
-      <th>actibity_id</th>
-      <th>Napomena</th>
-      <th></th>
-      <th></th>
-      <th></th>
+    <tr class='info'>
+      <th class="col-sm-1">Datum</th>
+      <th class="col-sm-1">Broj ovaca</th>
+      <th class="col-sm-1">broj jagnjadi</th>
+      <th class="col-sm-1">zenskih</th>
+      <th class="col-sm-2">Opste zapazanje</th>
+      <th class="col-sm-1"></th>
+      <th class="col-sm-1"></th>
+      <th class="col-sm-1"></th>
     </tr>
   </thead>
 
@@ -20,12 +19,12 @@
       <tr>
         <td><%= lambing.show_date %></td>
         <td><%= lambing.sheeps.group_by(&:id).count %></td>
-        <td><%= lambing.lambings.count %></td>
-        <td><%= lambing.females_count%></td>
-        <td><%= lambing.id %></td>
-        <td><%= link_to 'Show', '/lambings/'+lambing.id.to_s %></td>
-        <td><%= link_to 'Edit', edit_lambing_path(lambing) %></td>
-        <td><%= link_to 'Izbrisi', lambing, method: :delete, data: { confirm: 'Jesi li siguran?' } %></td>
+        <td><%= lambing.lambs_total %>/<%= lambing.lambs_alive %></td>
+        <td><%= lambing.females_total%>/<%= lambing.females_alive%></td>
+        <td><%= lambing.comment %></td>
+        <td><%= link_to 'prikazi', '/lambings/'+lambing.id.to_s, class:"btn btn-primary" %></td>
+        <td><%= link_to 'izmeni', edit_lambing_path(lambing), class:"btn btn-default" %></td>
+        <td><%= link_to 'Izbrisi', lambing.lambings.first, method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,4 +32,4 @@
 
 <br>
 
-<%= link_to 'Novo Jagnjenje', new_lambing_path %>
+<%= link_to 'Novo Jagnjenje', new_lambing_path, class:"btn btn-primary" %>

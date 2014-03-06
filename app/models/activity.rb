@@ -6,8 +6,25 @@ class Activity < ActiveRecord::Base
    Hash["jagnjenje"=> "lambing", "vakcinacija"=>"vacintion", "nabavka ovaca"=>"sheep_purchasing", "parenje"=>"mating", "prodaja"=>"selling"]
   end
 
-  def females_count
-    return lambs.where("sex = ?", 'zensko').count
+  def females_total
+       return lambs.where("sex = ?", 'zensko').count
+  end
+  def females_alive
+     allLambs =lambs.where(sex: 'zensko')
+     i=0
+     allLambs.each do |l|
+       if l.birth.is_alive
+        i += 1
+       end 
+     end
+     return i
+  end
+  
+  def lambs_total
+    lambings.count
+  end
+  def lambs_alive
+    lambings.where(is_alive: true).count
   end
   
  def show_date

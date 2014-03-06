@@ -1,2 +1,11 @@
 .invalid { background-color: #ff8888; }
 
+.multi {background-color: #ff8888;}
+
+#errmsg
+{
+color: red;
+}
+#quantity {
+    width: 40px;
+}

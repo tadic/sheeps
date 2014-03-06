@@ -1,52 +1,45 @@
 <p id="notice"><%= notice %></p>
-
-<p>
+<h1>Prikaz jagnjenja</h1><br>
+<h3>
   <strong>Dana:</strong>
-  <%= @lambing.date %>
-  <strong>jagnjilo se </strong>
-  <%= @lambing.sheeps.group_by(&:id).count %>
-  <strong> ovaca </strong>
-</p>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Datum</th>
-      <th>Broj ovaca</th>
-      <th>broj jagnjadi</th>
-      <th>zenskih</th>
-      <th>actibity_id</th>
-      <th>Napomena</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  <%= @activity.show_date %>
+  <strong>ojagnjilo se </strong>
+  <%= @activity.sheeps.group_by(&:id).count %>
+  <strong> ovce </strong>
+</h3><br>
 
-  <tbody>
-    <% @lambing.lambings.each do |lambing| %>
-      <tr>
-        <td><%= lambing.show_date %></td>
-        <td><%= lambing.sheeps.group_by(&:id).count %></td>
-        <td><%= lambing.lambings.count %></td>
-        <td><%= lambing.females_count%></td>
-        <td><%= lambing.id %></td>
-        <td><%= link_to 'Show', lambing %></td>
-        <td><%= link_to 'Edit', edit_lambing_path(lambing) %></td>
-        <td><%= link_to 'Izbrisi', lambing, method: :delete, data: { confirm: 'Jesi li siguran?' } %></td>
-      </tr>
+
+    <% @activity.sheeps.distinct.each do |sheep| %>
+      <table class="table table-hover">
+        <% lamb_num = @activity.lambings.where(sheep_id: sheep.id).count %>
+         <thead>
+            <tr class='info'>
+              <th class="col-sm-2"><%= sheep.code%> ojagnjila <%= lamb_num %> jagnjadi</th>
+              <th class="col-sm-1">ojagnjeno zivo</th>
+              <th class="col-sm-1">pol</th>
+              <th class="col-sm-1">tezina</th>
+              <th class="col-sm-3">opis jagnjeta</th>
+              <th class="col-sm-3">problemi</th>
+            </tr>
+          </thead>
+         <tbody>
+        <% (@activity.lambings.where(sheep_id: sheep.id)).each do |lambing| %>
+            <tr>
+              <td></td>
+              <td><% if lambing.is_alive %><%= 'da'%><% else %><%= 'ne'%><% end %></td>
+              <td><%= lambing.lamb.sex %></td>
+              <td><%= lambing.weight %></td>
+              <td><%= lambing.lamb.describe%></td>
+              <td><%= lambing.comment %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
     <% end %>
-  </tbody>
-</table>
 
-<p>
-  <strong>Sheep:</strong>
-  <%= @lambing.sheep_id %>
-</p>
+  <textarea class="form-control" rows="3" readonly='true'><%= @activity.comment %></textarea><br>
+  
 
-<p>
-  <strong>Comment:</strong>
-  <%= @lambing.comment %>
-</p>
 
-<%= link_to 'Edit', edit_lambing_path(@lambing) %> |
-<%= link_to 'Back', lambings_path %>
+<%= link_to 'Edit', edit_lambing_path(@activity), class:"btn btn-default" %> 
+<%= link_to 'Back', lambings_path, class:"btn btn-primary" %>
