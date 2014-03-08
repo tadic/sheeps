@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-<h1>Prikaz jagnjenja</h1><br>
 <h3>
   <strong>Dana:</strong>
   <%= @activity.show_date %>
@@ -39,7 +38,6 @@
 
   <textarea class="form-control" rows="3" readonly='true'><%= @activity.comment %></textarea><br>
   
-
-
-<%= link_to 'Edit', edit_lambing_path(@activity), class:"btn btn-default" %> 
-<%= link_to 'Back', lambings_path, class:"btn btn-primary" %>
+<%= link_to 'Izmeni', edit_lambing_path(@activity), class:"btn btn-default" %> 
+<%= link_to 'Izbrisi', @activity.lambings.first, method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %>
+<%= link_to 'Nazad', lambings_path, class:"btn btn-primary" %>

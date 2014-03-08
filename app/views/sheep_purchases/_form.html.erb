@@ -4,9 +4,10 @@
   
   <div class="field activity_header" >
     <strong> Datum</strong> <input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='date'>
-    &nbsp; lokacija <input  type='text' name='place'>
+    &nbsp; lokacija <input  type='text' name='location'>
     &nbsp; nabavljeno <input type="text" name="size" id="quantity" />&nbsp;<span id="errmsg"></span>
-    &nbsp; ovaca <br><br><br>
+    &nbsp; ovaca, ukupan utroseno <input type="text" name="total_costs" id="quantity" style='width:100px'/>&nbsp;<span id="errmsg"></span>evra
+    <br><br><br>
   </div>
   
        
@@ -19,6 +20,7 @@
                   <th class="col-sm-1">nadimak</th>
                   <th class="col-sm-1">pol</th>         
                   <th class="col-sm-1">procenat romanov</th>
+                  <th class="col-sm-1">cena u evrima</th>
                   <th class="col-sm-1">datum rodjenja</th>
                   <th class="col-sm-1">oznaka oca</th>
                   <th class="col-sm-1">oznaka majke</th>

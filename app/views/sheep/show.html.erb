@@ -1,24 +1,18 @@
 <p id="notice"><%= notice %></p>
+<h2>Ovca: <strong><%= @sheep.nickname %></strong>, oznaka: <%= @sheep.code %> <strong><%= @sheep.percent_of_r %>%</strong> romanov</h2>
+<h3>Status: <%= @sheep.status%></h3>
+<p>--------------------------------------------------------<p>
+<h2>Rodjenje</h2>
+<ul>
+  <li><strong>Ojagnjena dana</strong> <%= @sheep.born_date_and_place %></li>
+  <li><strong>Tezina na rodjenju </strong><%=@sheep.birthweight%>kg</li>
+  <li><strong>Majka</strong> <%= @sheep.mother %></li>
+  <li><strong>Otac</strong> <%= @sheep.father %></li>
+  <li><strong>Opis</strong> <%= @sheep.describe %></li>
+</ul>
+  <h2>Jagnjenja</h2>
+  <h2>Lecenja</h2>
+<p><strong>Tezina sa 100 dana:</strong><%= @sheep.weight_100_days %></p>
 
-<p>
-  <strong>Code:</strong>
-  <%= @sheep.code %>
-</p>
-
-<p>
-  <strong>Mother:</strong>
-  <%= @sheep.mother_id %>
-</p>
-
-<p>
-  <strong>Father:</strong>
-  <%= @sheep.father_id %>
-</p>
-
-<p>
-  <strong>Weight 100 days:</strong>
-  <%= @sheep.weight_100_days %>
-</p>
-
-<%= link_to 'Edit', edit_sheep_path(@sheep) %> |
-<%= link_to 'Back', sheep_index_path %>
+<%= link_to 'Izmeni', edit_sheep_path(@sheep), class:"btn btn-primary" %> 
+<%= link_to 'Nazad', sheep_index_path, class:"btn btn-default" %>

@@ -1,16 +1,17 @@
-<h1>Listing sheep</h1>
-
+<h1>Lista ovaca</h1>
+<br>
 <table class='table table-hover'>
   <thead>
-    <tr>
-      <th>Kod</th>
-      <th>Majka</th>
-      <th>Otac</th>
-      <th>Tezina 100 dana</th>
-      <th>status</th>
-      <th>pol</th>
-      <th></th>
-      <th></th>
+    <tr class='danger'>
+      <th class="col-sm-1">Kod</th>
+      <th class="col-sm-1">Nadimak</th>
+      <th class="col-sm-1">pol</th>
+      <th class="col-sm-1">procenat romanov</th>
+      <th class="col-sm-1">status</th>
+      <th class="col-sm-1">poreklo</th>
+      <th class="col-sm-2">opis</th>
+      <th class="col-sm-1"></th>
+      <th class="col-sm-1"></th>
     </tr>
   </thead>
 
@@ -18,19 +19,15 @@
     <% @sheep.each do |sheep| %>
       <tr>
         <td><%= sheep.kod %></td>
-        <td><%= sheep.mother_id %></td>
-        <td><%= sheep.father_id %></td>
-        <td><%= sheep.weight_100_days %></td>
-        <td><%= sheep.status %></td>
+        <td><strong><%= sheep.nickname %></strong></td>
         <td><%= sheep.sex %></td>
-        <td><%= link_to 'Show', sheep %></td>
-        <td><%= link_to 'Edit', edit_sheep_path(sheep) %></td>
-        <td><%= link_to 'Destroy', sheep, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><strong><%= sheep.percent_of_r %></strong></td>
+        <td><%= sheep.status %></td>
+        <td><%= sheep.background   %></td>
+        <td><%= sheep.describe %></td>
+        <td><%= link_to 'Prikazi', sheep, class:"btn btn-primary" %></td>
+        <td><%= link_to 'Izmeni', edit_sheep_path(sheep), class:"btn btn-default" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Sheep', new_sheep_path %>

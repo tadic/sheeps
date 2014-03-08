@@ -1,0 +1,53 @@
+<%=  form_for @sheep_purchase, :html => {:method => :post} do |f|  %>
+
+  <input type='hidden' name='activity_id' value='<%= @activity.id%>'>  <br><br>
+  
+  <div class="field activity_header" >
+    <strong> Datum</strong> <input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='date' value='<%=@activity.show_date%>'>
+    &nbsp; lokacija <input  type='text' name='location' value='<%= @activity.location%>'>
+    &nbsp; nabavljeno <input type="text" name="size" id="quantity" value='<%=@activity.sheep_purchases.count%>'/>&nbsp;<span id="errmsg"></span>
+    &nbsp; ovaca, ukupan utroseno <input type="text" name="total_costs" id="quantity" style='width:100px'  value='<%=@activity.total_costs%>'/>&nbsp;<span id="errmsg"></span>evra
+    <br><br><br>
+  </div>
+        <div  id="accordion">
+            <table class='table table-hover'>
+              <thead>
+                <tr class='info'>
+                  <th class="col-sm-1">Oznaka</th>
+                  <th class="col-sm-1">nadimak</th>
+                  <th class="col-sm-1">pol</th>         
+                  <th class="col-sm-1">procenat romanov</th>
+                  <th class="col-sm-1">cena u evrima</th>
+                  <th class="col-sm-1">datum rodjenja</th>
+                  <th class="col-sm-1">oznaka oca</th>
+                  <th class="col-sm-1">oznaka majke</th>
+                  <th class="col-sm-2">opis grla</th>
+                  <th class="col-sm-2">napomena</th></tr>
+              </thead>
+              
+              <tbody class='purchasing_list'>
+                <%@activity.sheep_purchases.each do |sp|%>
+                        <tr><td><input type='text' name='purchases[][sheep_code]' value='<%= sp.sheep.code %>'style='width: 70px'></td>
+                    <td><input type='text' name='purchases[][nickname]' value='<%= sp.sheep.nickname %>' style='width: 70px'></td>
+                    <td><select class='btn' name='purchases[][sex]'><option>musko</option><option <% if sp.sheep.sex=='zensko'%><%='SELECTED'%><%end%>>zensko</option></select></td>
+                    <td><input type='text' name='purchases[][percent_of_r]' value='<%= sp.sheep.percent_of_r %>' style='width: 40px'>%</td>
+                    <td><input type='text' name='purchases[][price]' value='<%= sp.price %>' style='width: 40px'></td>
+                    <td><input type='text' name='purchases[][date_of_birth]'data-behaviour='datepicker' format='dd-mm-yyyy' value='<%= sp.date_of_birth %>' style='width: 90px'></td>
+                    <td><input type='text' name='purchases[][father_code]' style='width: 70px' value='<%= sp.father_code %>'></td>
+                    <td><input type='text' name='purchases[][mother_code]' style='width: 70px' value='<%= sp.mother_code%>'></td>
+                    <td><input type='text' name='purchases[][sheep_describe]' style='width: 280px' value='<%= sp.sheep.describe %>'></td>
+                    <td><input type='text' name='purchases[][purchase_comment]' style='width: 120px' value='<%= sp.comment %>'></td></tr>
+                <% end %>
+              </tbody>
+            </table> 
+        </div>
+  
+  <br>      
+  <textarea class="form-control" rows="3" name='comment' value='<%= @activity.comment %>' placeholder="Unesi zapazanje protekle nabavke..."></textarea><br>
+  
+  <div class="actions">
+    <%= f.submit :Snimi, class:"btn btn-primary" %>
+    <%= link_to 'Nazad', sheep_purchases_path, class:"btn btn-default" %>
+  </div>
+  
+ <%end%>

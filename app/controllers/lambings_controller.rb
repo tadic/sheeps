@@ -4,7 +4,7 @@ class LambingsController < ApplicationController
   # GET /lambings
   # GET /lambings.json
   def index
-    @lambings = Activity.all.sort_by{|a| a[:date]}
+    @lambings = Activity.where(a_type: 'jagnjenja').sort_by{|a| a[:date]}
     @sheeps = Sheep.all
   end
 
@@ -30,40 +30,49 @@ class LambingsController < ApplicationController
       @sheeps = Sheep.ready_for_lambing
   end
 
+  def are_empty_params(lambings)
+     if lambings==nil   
+        @lambing = Lambing.new
+        @sheeps = Sheep.ready_for_lambing
+        respond_to do |format|
+          format.html { render action: 'new', notice: 'Nista nije snimljeno posto nije ni uneto!' }
+        end
+      return true
+     end
+    return false
+  end
+  
+  def desrtoy_activity(id)
+      activity = Activity.find_by id: id
+      if activity!=nil
+        activity.destroy    #desrtoing edited activity and all lambing_childs
+      end
+  end
   # POST /lambings
   # POST /lambings.json
   def create
-    activity = Activity.find_by id: params[:activity_id]
-    if activity!=nil
-      activity.destroy    #desrtoing edited activity and all lambing_childs
-    end
-   
     lambings =  params[:lambings]
-    
-    if lambings==nil   
-       @lambing = Lambing.new
-       @sheeps = Sheep.ready_for_lambing
-      respond_to do |format|
-          format.html { render action: 'new', notice: 'Nista nije snimljeno posto nije ni uneto!' }
-      end
-      return
-    end
+    return if are_empty_params(lambings)
 
-        activity = Activity.create date: convert_date_to_i(params[:date]), comment: params[:comment]
+    desrtoy_activity(params[:activity_id])
+    @activity = Activity.new date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: 'jagnjenja'
+    
     lambings.each do |l|
-    mother = Sheep.find_by code: l[:sheep_code]
-      alive = (l[:alive] == 'true')
-      if alive
-        lamb = Sheep.create sex:l[:sex], mother_id: mother.id, status:'na farmi', describe: l[:describe]
-      else
-        lamb = Sheep.create sex:l[:sex], mother_id: mother.id, status:'mrtvo rodjeno', describe: l[:describe]
-      end
-      Lambing.create sheep_id:mother.id, activity_id: activity.id, lamb_id: lamb.id, is_alive: alive, comment: l[:comment], weight: l[:weight]
+        mother = Sheep.find_by code: l[:sheep_code]
+        alive = (l[:alive] == 'true')
+        lambing = Lambing.new sheep_id:mother.id, is_alive: alive, comment: l[:comment], weight: l[:weight]
+        if alive
+          lamb = Sheep.new sex:l[:sex], mother_id: mother.id, status:'na farmi', describe: l[:describe]
+        else
+          lamb = Sheep.new sex:l[:sex], mother_id: mother.id, status:'mrtvo rodjeno', describe: l[:describe]
+        end
+        lambing.lamb = lamb
+        @activity.lambings.push(lambing)
     end
     
 
     respond_to do |format|
-      if true
+      if @activity.save
         format.html { redirect_to lambings_path, notice: 'Lambing was successfully created.' }
         format.json { render action: 'index', status: :created, location: lambings_path }
       else

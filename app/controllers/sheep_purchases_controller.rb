@@ -1,15 +1,16 @@
 class SheepPurchasesController < ApplicationController
-  before_action :set_sheep_purchase, only: [:show, :edit, :update, :destroy]
+
 
   # GET /sheep_purchases
   # GET /sheep_purchases.json
   def index
-    @sheep_purchases = SheepPurchase.all
+    @s_purchases = Activity.where(a_type: 'nabavka_ovaca').sort_by{|a| a[:date]}
   end
 
   # GET /sheep_purchases/1
   # GET /sheep_purchases/1.json
   def show
+    @activity = Activity.find(params[:id])
   end
 
   # GET /sheep_purchases/new
@@ -19,16 +20,46 @@ class SheepPurchasesController < ApplicationController
 
   # GET /sheep_purchases/1/edit
   def edit
+      @sheep_purchase = SheepPurchase.new
+      @activity = Activity.find(params[:id])
   end
-
+  
+  def desrtoy_activity(id)
+      activity = Activity.find_by id: id
+      if activity!=nil
+        activity.destroy    #desrtoing edited activity and all lambing_childs
+      end
+  end
+  
+  def are_empty_params(purchases)
+    if purchases==nil   
+      @sheep_purchase = SheepPurchase.new
+      respond_to do |format|
+          format.html { render action: 'new', notice: 'Nista nije snimljeno posto nije ni uneto!' }
+      end
+      return true
+    end
+    return false
+  end
   # POST /sheep_purchases
   # POST /sheep_purchases.json
   def create
-    @sheep_purchase = SheepPurchase.new(sheep_purchase_params)
+    purchases = params[:purchases]
+    return if are_empty_params(params[:purchases])
+
+    desrtoy_activity(params[:activity_id])
+    @activity = Activity.new date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: 'nabavka_ovaca', location: params[:location], total_costs:params[:total_costs]
+
+    purchases.each do |p|
+       @sheep = Sheep.new code:p[:sheep_code], sex:p[:sex], status:'na farmi', describe: p[:sheep_describe], percent_of_r: p[:percent_of_r], nickname:p[:nickname]
+       @sheep_purchase= SheepPurchase.new   date_of_birth: convert_date_to_i(p[:date_of_birth]), comment: p[:purchase_comment], mother_code: p[:mother_code], father_code: p[:father_code], price: p[:price]
+       @sheep_purchase.sheep = @sheep
+       @activity.sheep_purchases.push(@sheep_purchase)
+    end
 
     respond_to do |format|
-      if @sheep_purchase.save
-        format.html { redirect_to @sheep_purchase, notice: 'Sheep purchase was successfully created.' }
+      if @activity.save
+        format.html { redirect_to '/sheep_purchases/'+@activity.id.to_s, notice: 'Sheep purchase was successfully created.' }
         format.json { render action: 'show', status: :created, location: @sheep_purchase }
       else
         format.html { render action: 'new' }
@@ -54,7 +85,8 @@ class SheepPurchasesController < ApplicationController
   # DELETE /sheep_purchases/1
   # DELETE /sheep_purchases/1.json
   def destroy
-    @sheep_purchase.destroy
+    @sheep_purchase = SheepPurchase.find(params[:id])
+    @sheep_purchase.activity.destroy
     respond_to do |format|
       format.html { redirect_to sheep_purchases_url }
       format.json { head :no_content }

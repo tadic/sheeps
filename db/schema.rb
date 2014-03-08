@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305203221) do
+ActiveRecord::Schema.define(version: 20140307211358) do
 
   create_table "activities", force: true do |t|
     t.integer  "color"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20140305203221) do
     t.string   "tip"
     t.string   "time_to"
     t.string   "time_from"
+    t.text     "a_type"
+    t.text     "location"
   end
 
   create_table "lambings", force: true do |t|
@@ -56,6 +58,8 @@ ActiveRecord::Schema.define(version: 20140305203221) do
     t.string   "status"
     t.text     "sex"
     t.text     "describe"
+    t.float    "percent_of_r"
+    t.text     "nickname"
   end
 
   create_table "sheep_purchases", force: true do |t|
@@ -66,6 +70,9 @@ ActiveRecord::Schema.define(version: 20140305203221) do
     t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "mother_code"
+    t.text     "father_code"
+    t.integer  "date_of_birth"
   end
 
   create_table "sheep_sellings", force: true do |t|

@@ -19,8 +19,9 @@ function set_sheep_rows(rows_number){
     row="<tr><td><input type='text' name='purchases[][sheep_code]' style='width: 70px'></td>"+
             "<td><input type='text' name='purchases[][nickname]' style='width: 70px'></td>"+
             "<td><select class='btn' name='purchases[][sex]'><option>musko</option><option>zensko</option></select></td>"+
-            "<td><input type='text' name='purchases[][percente_of_r]' style='width: 40px'>%</td>"+
-            "<td><input type='text' name='purchases[][sheep_born_date] 'data-behaviour='datepicker' format='dd-mm-yyyy' style='width: 90px'></td>"+
+            "<td><input type='text' name='purchases[][percent_of_r]' style='width: 40px'>%</td>"+
+            "<td><input type='text' name='purchases[][price]' style='width: 40px'></td>"+
+            "<td><input type='text' name='purchases[][date_of_birth]'data-behaviour='datepicker' format='dd-mm-yyyy' style='width: 90px'></td>"+
             "<td><input type='text' name='purchases[][father_code]' style='width: 70px'></td>"+
             "<td><input type='text' name='purchases[][mother_code]' style='width: 70px'></td>"+
             "<td><input type='text' name='purchases[][sheep_describe]' style='width: 280px'></td>"+

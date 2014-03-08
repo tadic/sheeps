@@ -1,29 +1,43 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @sheep_purchase.price %>
-</p>
-
-<p>
-  <strong>Place:</strong>
-  <%= @sheep_purchase.place %>
-</p>
-
-<p>
-  <strong>Activity:</strong>
-  <%= @sheep_purchase.activity_id %>
-</p>
-
-<p>
-  <strong>Sheep:</strong>
-  <%= @sheep_purchase.sheep_id %>
-</p>
-
-<p>
-  <strong>Comment:</strong>
-  <%= @sheep_purchase.comment %>
-</p>
-
-<%= link_to 'Edit', edit_sheep_purchase_path(@sheep_purchase) %> |
-<%= link_to 'Back', sheep_purchases_path %>
+  <div class="field activity_header" >
+    <h3><strong> Dana</strong> <%=@activity.show_date%>&nbsp; iz mesta <%= @activity.location%></h3>
+    <h3>nabavljeno je &nbsp;<%=@activity.sheep_purchases.count%> ovaca. <strong>Ukupni troskovi: </strong><%=@activity.total_costs%> evra</h3>
+    <br><br>
+  </div>
+        <div  id="accordion">
+            <table class='table table-hover'>
+              <thead>
+                <tr class='info'>
+                  <th class="col-sm-1">Oznaka</th>
+                  <th class="col-sm-1">nadimak</th>
+                  <th class="col-sm-1">pol</th>         
+                  <th class="col-sm-1">procenat romanov</th>
+                  <th class="col-sm-1">cena u evrima</th>
+                  <th class="col-sm-1">datum rodjenja</th>
+                  <th class="col-sm-1">oznaka oca</th>
+                  <th class="col-sm-1">oznaka majke</th>
+                  <th class="col-sm-2">opis grla</th>
+                  <th class="col-sm-2">napomena</th></tr>
+              </thead>
+              <tbody class='purchasing_list'>
+                <%@activity.sheep_purchases.each do |sp|%>
+                        <tr><td><%= sp.sheep.code %></td>
+                    <td><%= sp.sheep.nickname %></td>
+                    <td><%= sp.sheep.sex%></td>
+                    <td><%= sp.sheep.percent_of_r %>%</td>
+                    <td><%= sp.price %></td>
+                    <td><%= sp.date_of_birth %></td>
+                    <td><%= sp.father_code %></td>
+                    <td><%= sp.mother_code%></td>
+                    <td><%= sp.sheep.describe %></td>
+                    <td><%= sp.comment %>'</td></tr>
+                <% end %>
+              </tbody>
+            </table> 
+        </div>
+  
+  <br>      
+  <textarea class="form-control" rows="3" name='comment' readonly='true' value='<%= @activity.comment %>' placeholder="Nije bilo zapaznja..."></textarea><br>
+<%= link_to 'Izmeni', edit_sheep_purchase_path(@activity), class:"btn btn-default" %>
+<%= link_to 'Izbrisi', @activity.sheep_purchases.first, method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %>
+<%= link_to 'Nazad', sheep_purchases_path, class:"btn btn-primary" %> 
