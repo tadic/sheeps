@@ -14,7 +14,6 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
-//= require sheep_purchase
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require bootstrap-timepicker
