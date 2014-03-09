@@ -18,7 +18,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-timepicker-rails'
 gem "select2-rails"
 gem 'bootstrap-multiselect-rails4'
-gem 'bootstrap-sass'
+gem "bootstrap-sass", "~> 3.1.0.2"
 
 
 
