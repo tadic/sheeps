@@ -1,29 +1,34 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Reason:</strong>
-  <%= @vacination.reason %>
-</p>
-
-<p>
-  <strong>Vaccin name:</strong>
-  <%= @vacination.vaccin_name %>
-</p>
-
-<p>
-  <strong>Activity:</strong>
-  <%= @vacination.activity_id %>
-</p>
-
-<p>
-  <strong>Sheep:</strong>
-  <%= @vacination.sheep_id %>
-</p>
-
-<p>
-  <strong>Comment:</strong>
-  <%= @vacination.comment %>
-</p>
-
-<%= link_to 'Edit', edit_vacination_path(@vacination) %> |
-<%= link_to 'Back', vacinations_path %>
+  <div class="field activity_header" >
+    <h2>Zbog <strong><%= @activity.vacinations.first.reason %>a</strong></h2>
+    <h3><strong> Dana</strong> <%=@activity.show_date%>&nbsp;
+    <% if @activity.a_type=='vakcinacija'%>vakcinisano<% else %>leceno<% end %> je &nbsp;<%=@activity.vacinations.count%> ovaca.</h3> 
+    <h3>Korisceno sredstvo: <strong><%= @activity.vacinations.first.vaccin_name%></strong></h3>
+    <h3><strong>Ukupni troskovi: </strong><%=@activity.total_costs%> evra</h3>
+    <br><h2>Lista ovaca:</h2>
+  </div>
+        <div  id="accordion">
+            <table class='table table-hover'>
+              <thead>
+                <tr class='info'>
+                  <th class="col-sm-1">Oznaka</th>
+                  <th class="col-sm-1">nadimak</th>
+                  <th class="col-sm-1">pol</th>         
+                  <th class="col-sm-2">opis grla</th>
+              </thead>
+              <tbody class='purchasing_list'>
+                <%@activity.vaccin_sheeps.each do |sheep|%>
+                <tr><td><%= sheep.code %></td>
+                    <td><%= sheep.nickname%></td>
+                    <td><%= sheep.sex %></td>
+                    <td><%= sheep.describe %></td>
+                <% end %>
+              </tbody>
+            </table> 
+        </div>
+  
+  <br>      
+  <textarea class="form-control" rows="3" name='comment' readonly='true'  placeholder="Nije bilo zapaznja..."><%= @activity.comment %></textarea><br>
+<%= link_to 'Izmeni', edit_vacination_path(@activity), class:"btn btn-default" %>
+<%= link_to 'Izbrisi', @activity.vacinations.first, method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %>
+<%= link_to 'Nazad', :back, class:"btn btn-primary" %> 

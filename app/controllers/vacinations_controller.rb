@@ -1,33 +1,64 @@
 class VacinationsController < ApplicationController
-  before_action :set_vacination, only: [:show, :edit, :update, :destroy]
 
   # GET /vacinations
   # GET /vacinations.json
   def index
-    @vacinations = Vacination.all
+    @activity =  Activity.where("a_type= 'vakcinacija' OR a_type= 'lecenje'").sort_by{|a| a[:date]}
   end
 
   # GET /vacinations/1
   # GET /vacinations/1.json
   def show
+    @activity = Activity.find(params[:id])
   end
 
   # GET /vacinations/new
   def new
     @vacination = Vacination.new
+    @sheeps = Sheep.all
   end
 
   # GET /vacinations/1/edit
   def edit
+    @vacination = Vacination.new
+    @sheeps = Sheep.all
+    @activity = Activity.find(params[:id])
+  end
+  
+  def desrtoy_activity(id)
+      activity = Activity.find_by id: id
+      if activity!=nil
+        activity.destroy    #desrtoing edited activity and all lambing_childs
+      end
+  end
+  
+  def params_are_empty(sheeps)
+    if sheeps==nil   
+      @vacination = Vacination.new
+      respond_to do |format|
+          format.html { render action: 'new', notice: 'Nista nije snimljeno posto nije ni uneto!' }
+      end
+      return true
+    end
+    return false
   end
 
   # POST /vacinations
   # POST /vacinations.json
   def create
-    @vacination = Vacination.new(vacination_params)
+    sheeps = params[:sheeps]
+    return if params_are_empty(sheeps)
 
+    desrtoy_activity(params[:activity_id])
+    @activity = Activity.new date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: params[:type_of_a], total_costs:params[:total_costs]
+
+    sheeps.each do |p|
+       @vacination = Vacination.new sheep_id:p[:sheep_id], reason: params[:reason], vaccin_name: params[:vaccin_name]
+       @activity.vacinations.push(@vacination)
+    end
+    
     respond_to do |format|
-      if @vacination.save
+      if @activity.save
         format.html { redirect_to @vacination, notice: 'Vacination was successfully created.' }
         format.json { render action: 'show', status: :created, location: @vacination }
       else
@@ -54,7 +85,8 @@ class VacinationsController < ApplicationController
   # DELETE /vacinations/1
   # DELETE /vacinations/1.json
   def destroy
-    @vacination.destroy
+    @vacination = Vacination.find(params[:id])
+    @vacination.activity.destroy
     respond_to do |format|
       format.html { redirect_to vacinations_url }
       format.json { head :no_content }

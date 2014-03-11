@@ -1,30 +1,32 @@
-<h1>Listing vacinations</h1>
-
-<table>
+<h1 class='page_title'>Lista lecenja i zdravstvene zastite</h1>
+<br>
+<table class="table table-hover">
   <thead>
-    <tr>
-      <th>Reason</th>
-      <th>Vaccin name</th>
-      <th>Activity</th>
-      <th>Sheep</th>
-      <th>Comment</th>
-      <th></th>
-      <th></th>
-      <th></th>
+    <tr class='danger'>
+      <th class="col-sm-2">Datum</th>
+      <th class="col-sm-1">vrsta aktivnosti</th>
+      <th class="col-sm-1">razlog</th>
+      <th class="col-sm-1">sredstvo</th>
+      <th class="col-sm-1">broj ovaca</th>
+      <th class="col-sm-1">ukupni troskovi</th>
+      <th class="col-sm-3">Opste zapazanje</th>
+      <th class="col-sm-1"></th>
+      <th class="col-sm-1"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @vacinations.each do |vacination| %>
+    <% @activity.each do |a| %>
       <tr>
-        <td><%= vacination.reason %></td>
-        <td><%= vacination.vaccin_name %></td>
-        <td><%= vacination.activity_id %></td>
-        <td><%= vacination.sheep_id %></td>
-        <td><%= vacination.comment %></td>
-        <td><%= link_to 'Show', vacination %></td>
-        <td><%= link_to 'Edit', edit_vacination_path(vacination) %></td>
-        <td><%= link_to 'Destroy', vacination, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= a.show_date %></td>
+        <td><%= a.a_type %></td>
+        <td><%= a.vacinations.first.reason %></td>
+        <td><strong><%= a.vacinations.first.vaccin_name %></strong></td>
+        <td><%= a.vacinations.count%></td>
+        <td><%= a.total_costs%></td>
+        <td><%= a.comment %></td>
+        <td><%= link_to 'prikazi', '/vacinations/'+a.id.to_s, class:"btn btn-primary" %></td>
+        <td><%= link_to 'izmeni', edit_vacination_path(a), class:"btn btn-default" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +34,6 @@
 
 <br>
 
-<%= link_to 'New Vacination', new_vacination_path %>
+<%= link_to 'Nova vakcinacija/lecenje', new_vacination_path, class:"btn btn-primary" %>
+
+

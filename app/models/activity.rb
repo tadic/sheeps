@@ -1,8 +1,9 @@
 class Activity < ActiveRecord::Base
   has_many :lambings, :dependent => :destroy
   has_many :sheep_purchases, :dependent => :destroy
+  has_many :vacinations, :dependent => :destroy
   has_many :sheeps, through: :lambings
-
+    has_many :vaccin_sheeps, through: :vacinations, :source => :sheep
   has_many :lambs, through: :lambings
   def self.types
    Hash["jagnjenje"=> "lambing", "vakcinacija"=>"vacintion", "nabavka ovaca"=>"sheep_purchasing", "parenje"=>"mating", "prodaja"=>"selling"]
@@ -11,6 +12,17 @@ class Activity < ActiveRecord::Base
   def females_total
        return lambs.where("sex = ?", 'zensko').count
   end
+  
+  def edit_path
+      return '/lambings/'+id.to_s+'/edit' if a_type == 'jagnjenja'   
+      return '/sheep_purchases/'+id.to_s+'/edit' if a_type == 'nabavka_ovaca'
+      return '/vacinations/'+id.to_s+'/edit' if a_type == 'lecenje' || a_type == 'vakcinacija'
+  end
+  def show_path
+      return '/lambings/'+id.to_s if a_type == 'jagnjenja'   
+      return '/sheep_purchases/'+id.to_s if a_type == 'nabavka_ovaca'
+      return '/vacinations/'+id.to_s if a_type == 'lecenje' || a_type == 'vakcinacija'
+  end  
   def females_alive
      allLambs =lambs.where(sex: 'zensko')
      i=0

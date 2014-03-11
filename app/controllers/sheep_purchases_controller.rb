@@ -44,8 +44,10 @@ class SheepPurchasesController < ApplicationController
   # POST /sheep_purchases
   # POST /sheep_purchases.json
   def create
+  
     purchases = params[:purchases]
     return if are_empty_params(params[:purchases])
+
 
     desrtoy_activity(params[:activity_id])
     @activity = Activity.new date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: 'nabavka_ovaca', location: params[:location], total_costs:params[:total_costs]
@@ -59,7 +61,7 @@ class SheepPurchasesController < ApplicationController
 
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to '/sheep_purchases/'+@activity.id.to_s, notice: 'Sheep purchase was successfully created.' }
+        format.html { redirect_to '/sheep_purchases/'+@activity.id.to_s, notice: 'Nabavka ovaca je uspesno snimljena.' }
         format.json { render action: 'show', status: :created, location: @sheep_purchase }
       else
         format.html { render action: 'new' }

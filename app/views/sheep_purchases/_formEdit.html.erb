@@ -9,7 +9,7 @@
     &nbsp; ovaca, ukupan utroseno <input type="text" name="total_costs" id="quantity" style='width:100px'  value='<%=@activity.total_costs%>'/>&nbsp;<span id="errmsg"></span>evra
     <br><br><br>
   </div>
-        <div  id="accordion">
+        <div  id="sheep_purchases">
             <table class='table table-hover'>
               <thead>
                 <tr class='info'>
@@ -43,11 +43,11 @@
         </div>
   
   <br>      
-  <textarea class="form-control" rows="3" name='comment' value='<%= @activity.comment %>' placeholder="Unesi zapazanje protekle nabavke..."></textarea><br>
+  <textarea class="form-control" rows="3" name='comment'  placeholder="Unesi zapazanje protekle nabavke..."><%= @activity.comment %></textarea><br>
   
   <div class="actions">
     <%= f.submit :Snimi, class:"btn btn-primary" %>
-    <%= link_to 'Nazad', sheep_purchases_path, class:"btn btn-default" %>
+    <%= link_to 'Nazad', :back, class:"btn btn-default" %>
   </div>
   
  <%end%>

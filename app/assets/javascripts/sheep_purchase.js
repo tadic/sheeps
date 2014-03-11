@@ -1,10 +1,15 @@
 
-$("#quantity").ready(function(){
+$("#sheep_purchases").ready(function(){
    $("#quantity").keyup(function (e) {
+      if ($(this).val().length>2) {
+         $(this).val('0');
+         set_sheep_rows(0);
+         return false;
+      }
      if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
         $("#errmsg").html("!").show().fadeOut("slow");
         $(this).val('');
-               return false;
+        return false;
     }
     set_sheep_rows(parseInt($(this).val()));
    });

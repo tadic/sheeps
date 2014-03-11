@@ -9,14 +9,16 @@ $(document).ready(function(){
        autoclose: true
     });
 
-    $('.multiselect').multiselect({
+    $('#sheeps_selection').multiselect({
         maxHeight: 400,
          onChange: function(element, checked) {
+               if (element.val()!='') {
                 add_remove_sheep_row(element.val());
+            }
         },
         includeSelectAllOption : true,
         selectAllText : ' Selektuj sve',
-        selectAllValue : 'multiselect-all',
+        selectAllValue : '' ,
         enableFiltering: true,
         nonSelectedText: 'Nista selektovano'
     });
@@ -42,7 +44,7 @@ function add_remove_sheep_row(el){
     hiden_row =$('#sheep_row').first(); //the hiden one
     if (index != -1) {
         $new_row = hiden_row.clone();
-        $new_row.find('a').html('Ovca ' + el);
+        $new_row.find('span').html('Ovca ' + el + ' ojagnjila');
         $new_row.find('.lambing_list').attr( 'id', 'lambing_list_'+el);    
         $new_row.find('.lambNum').attr( 'id', el);
         $new_row.show();

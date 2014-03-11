@@ -8,11 +8,8 @@
     &nbsp; nabavljeno <input type="text" name="size" id="quantity" />&nbsp;<span id="errmsg"></span>
     &nbsp; ovaca, ukupan utroseno <input type="text" name="total_costs" id="quantity" style='width:100px'/>&nbsp;<span id="errmsg"></span>evra
     <br><br><br>
-  </div>
-  
-       
-       
-        <div  id="accordion">
+  </div>    
+        <div  id="sheep_purchases">
             <table class='table table-hover'>
               <thead>
                 <tr class='info'>
@@ -33,12 +30,11 @@
               </tbody>
             </table> 
         </div>
-  
   <br>      
   <textarea class="form-control" rows="3" name='comment' placeholder="Unesi zapazanje protekle nabavke..."></textarea><br>
   
   <div class="actions">
     <%= f.submit :Snimi, class:"btn btn-primary" %>
-    <%= link_to 'Nazad', sheep_purchases_path, class:"btn btn-default" %>
+    <%= link_to 'Nazad', :back, class:"btn btn-default" %>
   </div>
 <% end %>

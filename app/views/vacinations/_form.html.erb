@@ -1,37 +1,65 @@
 <%= form_for(@vacination) do |f| %>
-  <% if @vacination.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@vacination.errors.count, "error") %> prohibited this vacination from being saved:</h2>
 
-      <ul>
-      <% @vacination.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <div class="row">
+        <div class="col-md-4">
+          <h1 class='page_title'>Novi unos</h1>
+        </div>
+        <div class="col-md-3">
+          <h3><input type="radio" name="type_of_a" value="vakcinacija" CHECKED> vakcinacija</h3>
+          <h3><input type="radio" name="type_of_a" value="lecenje"> lecenje</h3>
+        </div>
+      </div>
+  <input type='hidden' name='activity_id'> 
+  <div class="field activity_header" >
+    <table class='table'>
+      <thead><th class="col-sm-1"></th><th class="col-sm-2"></th></thead>
+      <tbody>
+        <tr>
+          <td ><strong> Datum</strong></td>
+          <td><input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='date'>
+          ukupan trosak <input type="text" name="total_costs" id="vaccin_costs" style='width:60px'/>&nbsp;<span id="errmsg"></span>evra</td>
+        </tr>
+        <tr>
+          <td ><strong>razlog lecenja/zastite</strong></td>
+          <td><input  type='text' style='width:350px' name='reason'></td>
+        </tr>
+        <tr>
+          <td><strong>naziv sredstva</strong></td>
+          <td><input  type='text' style='width:350px' name='vaccin_name'></td>
+        </tr>
+      </tbody>
+    </table>
+
+    
+        Ovce: 
+    <select id='vaccin_sheeps' class='multiselect mutliselect-primary' name='selected_sheeps[]' multiple="multiple" size=5>
+      <% @sheeps.each do |s| %>
+        <option data-value='{"id" : "<%= s.id %>", "nickname" : "<%= s.nickname %>", "code" : "<%= s.code %>", "sex" : "<%= s.sex %>", "describe" : "<%= s.describe %>" }'><%= s.code%> <%= s.nickname %></option>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    </select>
 
-  <div class="field">
-    <%= f.label :reason %><br>
-    <%= f.text_field :reason %>
   </div>
-  <div class="field">
-    <%= f.label :vaccin_name %><br>
-    <%= f.text_field :vaccin_name %>
-  </div>
-  <div class="field">
-    <%= f.label :activity_id %><br>
-    <%= f.number_field :activity_id %>
-  </div>
-  <div class="field">
-    <%= f.label :sheep_id %><br>
-    <%= f.number_field :sheep_id %>
-  </div>
-  <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_field :comment %>
-  </div>
+            <div  id="vaccinations">
+            <table class='table table-hover'>
+              <thead>
+                <tr class='info'>
+                  <th class="col-sm-1">oznaka</th>
+                  <th class="col-sm-1">nadimak</th>
+                  <th class="col-sm-1">pol</th>         
+                  <th class="col-sm-2">opis</th></tr>
+              </thead>
+              
+              <tbody class='vaccination_list'> 
+                
+              </tbody>
+            </table> 
+        </div>
+  <textarea class="form-control" rows="3" name='comment' placeholder="Unesi zapazanje proteklog lecenja/vakcinacije..."></textarea><br>
+  
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :Snimi, class:"btn btn-primary" %>
+    <%= link_to 'Nazad', :back, class:"btn btn-default" %>
   </div>
 <% end %>
+
+

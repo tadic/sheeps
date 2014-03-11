@@ -1,5 +1,5 @@
-<h1>Lista svih aktivnosti</h1>
-
+<h1 class='page_title'>Lista svih aktivnosti</h1>
+<br>
 <table class="table table-hover">
   <thead>
     <tr class='danger'>
@@ -15,18 +15,15 @@
   <tbody>
     <% @activities.each do |activity| %>
       <tr>
-        <td><%= activity.a_type %> </td>
+        <td><strong><%= activity.a_type %></strong></td>
         <td><%= activity.show_date %> </td>
         <td><%= activity.total_costs %> </td>
         <td><%= activity.comment %> </td>
-        <td><%= link_to 'Show', activity, class:"btn btn-primary" %> </td>
-        <td><%= link_to 'Edit', edit_activity_path(activity), class:"btn btn-default" %> </td>
+        <td><%= link_to 'Show', activity.show_path, class:"btn btn-primary" %> </td>
+        <td><%= link_to 'Edit', activity.edit_path, class:"btn btn-default" %> </td>
      <!--   <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
    -->   </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Activity', new_activity_path, class:"btn btn-danger" %>
