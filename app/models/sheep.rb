@@ -20,6 +20,12 @@ class Sheep < ActiveRecord::Base
       sheep_purchase.activity.location
     end
   end
+  def percent_of_lambings
+    number_of_lambings = lambings.select(:activity_id).distinct.count
+    number_of_lambs = lambings.count
+    return 100* number_of_lambs / number_of_lambings
+  end
+  
   def birthweight
     if birth!=nil
       if birth.weight>0
