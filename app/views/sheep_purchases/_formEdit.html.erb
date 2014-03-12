@@ -5,7 +5,7 @@
   <div class="field activity_header" >
     <strong> Datum</strong> <input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='date' value='<%=@activity.show_date%>'>
     &nbsp; lokacija <input  type='text' name='location' value='<%= @activity.location%>'>
-    ukupno utroseno <input type="text" name="total_costs" id="quantity" style='width:100px'  value='<%=@activity.total_costs%>'/>&nbsp;<span id="errmsg"></span>evra,
+    ukupno utroseno <input type="text" name="total_costs" style='width:100px'  value='<%=@activity.total_costs%>'/>&nbsp;<span id="errmsg"></span>evra,
     &nbsp; nabavljeno <input type="text" name="size" id="quantity" value='<%=@activity.sheep_purchases.count%>'/>&nbsp;<span id="errmsg"></span>
     <div class='btn-group'>
       <button type='button' id='add_sheep' class="btn btn-default">+</button>
@@ -32,12 +32,12 @@
               
               <tbody class='purchasing_list'>
                 <%@activity.sheep_purchases.each do |sp|%>
-                        <tr><td><input type='text' name='purchases[][sheep_code]' value='<%= sp.sheep.code %>'style='width: 70px'></td>
+                        <tr class='purchase_row'><td><input type='text' name='purchases[][sheep_code]' value='<%= sp.sheep.code %>'style='width: 70px'></td>
                     <td><input type='text' name='purchases[][nickname]' value='<%= sp.sheep.nickname %>' style='width: 70px'></td>
                     <td><select class='btn' name='purchases[][sex]'><option>musko</option><option <% if sp.sheep.sex=='zensko'%><%='SELECTED'%><%end%>>zensko</option></select></td>
                     <td><input type='text' name='purchases[][percent_of_r]' value='<%= sp.sheep.percent_of_r %>' style='width: 40px'>%</td>
                     <td><input type='text' name='purchases[][price]' value='<%= sp.price %>' style='width: 40px'></td>
-                    <td><input type='text' name='purchases[][date_of_birth]'data-behaviour='datepicker' format='dd-mm-yyyy' value='<%= sp.date_of_birth %>' style='width: 90px'></td>
+                    <td><input type='text' name='purchases[][date_of_birth]'data-behaviour='datepicker' format='dd-mm-yyyy' value='<%= sp.show_date_of_birth %>' style='width: 90px'></td>
                     <td><input type='text' name='purchases[][father_code]' style='width: 70px' value='<%= sp.father_code %>'></td>
                     <td><input type='text' name='purchases[][mother_code]' style='width: 70px' value='<%= sp.mother_code%>'></td>
                     <td><input type='text' name='purchases[][sheep_describe]' style='width: 280px' value='<%= sp.sheep.describe %>'></td>

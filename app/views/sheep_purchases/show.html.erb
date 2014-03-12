@@ -13,7 +13,7 @@
                   <th class="col-sm-1">pol</th>         
                   <th class="col-sm-1">procenat romanov</th>
                   <th class="col-sm-1">cena u evrima</th>
-                  <th class="col-sm-1">datum rodjenja</th>
+                  <th class="col-sm-2">datum rodjenja</th>
                   <th class="col-sm-1">oznaka oca</th>
                   <th class="col-sm-1">oznaka majke</th>
                   <th class="col-sm-2">opis grla</th>
@@ -26,11 +26,11 @@
                     <td><%= sp.sheep.sex%></td>
                     <td><%= sp.sheep.percent_of_r %>%</td>
                     <td><%= sp.price %></td>
-                    <td><%= sp.date_of_birth %></td>
+                    <td><%= sp.show_date_of_birth %></td>
                     <td><%= sp.father_code %></td>
                     <td><%= sp.mother_code%></td>
                     <td><%= sp.sheep.describe %></td>
-                    <td><%= sp.comment %>'</td></tr>
+                    <td><%= sp.comment %></td></tr>
                 <% end %>
               </tbody>
             </table> 
