@@ -1,5 +1,5 @@
 
-$(document).ready(function(){
+$("#vaccinations").ready(function(){
 
  $(".select").select2();
 
@@ -9,7 +9,7 @@ $(document).ready(function(){
        autoclose: true
     });
 
-    $('#sheeps_selection').multiselect({
+    $('#lambing_sheeps_selection').multiselect({
         maxHeight: 400,
          onChange: function(element, checked) {
                if (element.val()!='') {
@@ -39,7 +39,7 @@ $(document).ready(function(){
 });
 
 function add_remove_sheep_row(el){  
-    var values = $('.multiselect').val();
+    var values = $('#lambing_sheeps_selection').val();
     index = jQuery.inArray( el, values );
     hiden_row =$('#sheep_row').first(); //the hiden one
     if (index != -1) {
@@ -50,14 +50,13 @@ function add_remove_sheep_row(el){
         $new_row.show();
         $new_row.attr('class', 'table table-hover');
         $new_row.attr('id', 'sheep_row_'+el);
-        $new_row.appendTo("#accordion");          
+        $new_row.appendTo("#lambings");          
     } else {
-        $("#accordion").find("#sheep_row_"+el).remove();
+        $("#lambings").find("#sheep_row_"+el).remove();
     }     
 }
 function set_lamb_rows_for_sheep(n, sheep_code){
     list = '';
-
     for (i=0; i<n; i++){
 
         list += "<tr><td><input type='hidden' name='lambings[][sheep_code]' style='width: 50px' value='"+sheep_code+"'></td>"+
@@ -67,7 +66,7 @@ function set_lamb_rows_for_sheep(n, sheep_code){
                 "<td><input name='lambings[][describe]' style='width: 280px'></td>"+
                 "<td><input name='lambings[][comment]' style='width: 280px'></td></tr>";
     }
-    table = $('#accordion').first();
+    table = $('#lambings').first();
     table.find('#lambing_list_'+ sheep_code).html(list);
 }
 

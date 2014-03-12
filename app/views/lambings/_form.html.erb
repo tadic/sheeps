@@ -5,14 +5,14 @@
   <div class="field activity_header" >
     <strong> Datum</strong> <input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='date'>
     Izbor ovaca:
-    <select  id='sheeps_selection' name='selected_sheeps[]' class="multiselect mutliselect-primary" data-style="btn-primary" multiple="multiple" size=5 >
+    <select  id='lambing_sheeps_selection' name='selected_sheeps[]' class="multiselect mutliselect-primary" data-style="btn-primary" multiple="multiple" size=5 >
       <% @sheeps.each do |s| %>
         <option value=<%= s.code %>><%= s.code %></option>
       <% end %>
     </select>
 
   </div>
-        <div  id="accordion">
+        <div  id="lambings">
             <%= render 'lambings' %>
         </div>
   <br>      

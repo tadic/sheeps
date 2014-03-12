@@ -1,11 +1,11 @@
-<div  id="accordion"  >
+<div  id="lambings"  >
   <%= render 'lambings' %>
   <%  @activity.sheeps.distinct.each do |sheep| %>
       <% lamb_num = @activity.lambings.where(sheep_id: sheep.id).count %>
       <table id='sheep_row' class="table table-hover">
         <thead>
           <tr class='info'><th class="col-sm-2"><a>Ovca <%= sheep.code%></a> ojagnjila
-             <select class='lambNum btn btn_primary'>
+             <select class='lambNum' id='<%= sheep.code %>'>
               <% (1..7).each do |i| %>
                 <% if i==lamb_num %>
                    <option value=<%= i %> SELECTED><%= i %></option>
@@ -18,12 +18,12 @@
             <th class="col-sm-1">ojagnjeno zivo</th><th class="col-sm-3">opis jagnjeta</th><th class="col-sm-3">problemi</th></tr>
         </thead>
         
-        <tbody class='lambing_list'>
+        <tbody class='lambing_list' id = '<%='lambing_list_' + sheep.code %>'>
           <% (@activity.lambings.where(sheep_id: sheep.id)).each do |lambing| %>
           <tr><td><input type='hidden' name='lambings[][sheep_code]' value='<%= lambing.sheep.code %>'></td>
               <td><select class='btn' name='lambings[][sex]'><option selected>neutvrdjen</option><option <% if lambing.lamb.sex=='musko'%><%= 'SELECTED' %><% end %>>musko</option><option <% if lambing.lamb.sex=='zensko'%><%= 'SELECTED' %><% end %>>zensko</option></select></td>
               <td><input name='lambings[][weight]' style='width: 50px' value='<%= lambing.weight%>'/></td>
-              <td><input type='checkbox'  name='lambings[][alive]' <%= 'checked' if lambing.is_alive? %> value='true' ></td>
+              <td><input type='checkbox'  name='lambings[][alive]' <% if lambing.is_alive %><%= 'checked'%><% end %>></td>
               <td><input name='lambings[][describe]' style='width: 280px' value='<%= lambing.lamb.describe%>'></td>
               <td><input name='lambings[][comment]' style='width: 280px' value='<%= lambing.comment%>'></td></tr>
           <% end %>

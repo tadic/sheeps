@@ -6,7 +6,7 @@
   <div class="field activity_header" >
     <strong> Datum</strong> <input type="text" data-behaviour='datepicker' name='date' value='<%= @activity.show_date %>'>
     Izbor ovaca:
-    <select  id='sheeps_selection' name='selected_sheeps[]' class="multiselect" data-style="btn-primary" multiple="multiple" >
+    <select  id='lambing_sheeps_selection' name='selected_sheeps[]' class="multiselect" data-style="btn-primary" multiple="multiple" >
       <% @sheeps.each do |s| %>
           <% if @activity.sheeps.distinct.include? s %>
             <option value=<%= s.code %> SELECTED><%= s.code %></option>
