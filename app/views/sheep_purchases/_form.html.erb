@@ -5,8 +5,13 @@
   <div class="field activity_header" >
     <strong> Datum</strong> <input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='date'>
     &nbsp; lokacija <input  type='text' name='location'>
-    &nbsp; nabavljeno <input type="text" name="size" id="quantity" />&nbsp;<span id="errmsg"></span>
-    &nbsp; ovaca, ukupan utroseno <input type="text" name="total_costs" id="quantity" style='width:100px'/>&nbsp;<span id="errmsg"></span>evra
+    ukupno utroseno <input type="text" name="total_costs" id="quantity" style='width:100px'/>&nbsp;<span id="errmsg"></span>evra,
+     &nbsp; nabavljeno <input type="text" name="size" id="quantity" />&nbsp;<span id="errmsg"></span>
+    <div class='btn-group'>
+      <button type='button' id='add_sheep' class="btn btn-default">+</button>
+      <button type='button' id='remove_sheep' class="btn btn-success">-</button>
+    </div>
+  &nbsp; ovaca.
     <br><br><br>
   </div>    
         <div  id="sheep_purchases">

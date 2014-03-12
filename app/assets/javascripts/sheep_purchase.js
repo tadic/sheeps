@@ -13,15 +13,27 @@ $("#sheep_purchases").ready(function(){
     }
     set_sheep_rows(parseInt($(this).val()));
    });
+   $('#add_sheep').click(function(){
+      current_rows_number = $(".purchasing_list").find('.purchase_row').length;
+      $("#quantity").val(current_rows_number+1);
+      insert_sheep_row();
+      refresh_calendar();
+   });
+      $('#remove_sheep').click(function(){
+      current_rows_number = $(".purchasing_list").find('.purchase_row').length;
+      if (current_rows_number>0) {
+         $("#quantity").val(current_rows_number-1);
+         remove_sheep_row()
+      }
+
+   });
     
     
     
 });
 
-
-function set_sheep_rows(rows_number){
-    all_rows='';
-    row="<tr><td><input type='text' name='purchases[][sheep_code]' style='width: 70px'></td>"+
+function insert_sheep_row(){
+   row="<tr class='purchase_row'><td><input type='text' name='purchases[][sheep_code]' style='width: 70px'></td>"+
             "<td><input type='text' name='purchases[][nickname]' style='width: 70px'></td>"+
             "<td><select class='btn' name='purchases[][sex]'><option>musko</option><option>zensko</option></select></td>"+
             "<td><input type='text' name='purchases[][percent_of_r]' style='width: 40px'>%</td>"+
@@ -31,17 +43,34 @@ function set_sheep_rows(rows_number){
             "<td><input type='text' name='purchases[][mother_code]' style='width: 70px'></td>"+
             "<td><input type='text' name='purchases[][sheep_describe]' style='width: 280px'></td>"+
             "<td><input type='text' name='purchases[][purchase_comment]' style='width: 120px'></td></tr>";
-            
-                
-    for (i=0; i<rows_number; i++){
-        all_rows += row;
-    }
-   $(".purchasing_list").html(all_rows);
+      $(".purchasing_list").append(row);
+}
 
+function remove_sheep_row(){
+   $(".purchasing_list").find('.purchase_row').last().remove();
+}
+function refresh_calendar(){
+   
     $('[data-behaviour~=datepicker]').datepicker({
        language: "rs",
        format: 'dd-mm-yyyy',
        autoclose: true
     });
     $('[data-behaviour~=datepicker]').datepicker('refresh');
+}
+function set_sheep_rows(rows_number){
+
+    current_rows_number = $(".purchasing_list").find('.purchase_row').length;
+   if (rows_number>current_rows_number) {
+         for (i=current_rows_number; i<rows_number; i++){
+             insert_sheep_row();
+         }
+        refresh_calendar();
+    } else {
+         for (i=rows_number; i<current_rows_number; i++){
+             remove_sheep_row();
+         }
+    }
+
+
 }
