@@ -3,8 +3,7 @@
   <strong>Dana:</strong>
   <%= @activity.show_date %>
   <strong>ojagnjilo se </strong>
-  <%= @activity.sheeps.group_by(&:id).count %>
-  <strong> ovce </strong>
+  <%= sheep_many(@activity.sheeps.group_by(&:id).count) %>
 </h3><br>
 
 
@@ -13,7 +12,7 @@
         <% lamb_num = @activity.lambings.where(sheep_id: sheep.id).count %>
          <thead>
             <tr class='info'>
-              <th class="col-sm-2"><%= sheep.code%> ojagnjila <%= lamb_num %> jagnjadi</th>
+              <th class="col-sm-2"><%= sheep.code%> ojagnjila <%= lamb_many(lamb_num) %></th>
               <th class="col-sm-1">ojagnjeno zivo</th>
               <th class="col-sm-1">pol</th>
               <th class="col-sm-1">tezina</th>

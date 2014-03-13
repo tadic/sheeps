@@ -47,21 +47,30 @@ class SheepPurchasesController < ApplicationController
   
     purchases = params[:purchases]
     return if are_empty_params(params[:purchases])
-
-
-    desrtoy_activity(params[:activity_id])
+    @activity = Activity.find_by id: params[:activity_id].to_i
+    if @activity!=nil
+      update(@activity)
+      return
+    end
     @activity = Activity.new date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: 'nabavka_ovaca', location: params[:location], total_costs:params[:total_costs]
-
+    
     purchases.each do |p|
+       add_purchase(p)
+    end
+     save_activity(@activity)
+  end
+  
+  def add_purchase(p)
        @sheep = Sheep.new code:p[:sheep_code], sex:p[:sex], status:'na farmi', describe: p[:sheep_describe], percent_of_r: p[:percent_of_r], nickname:p[:nickname]
        @sheep_purchase= SheepPurchase.new   date_of_birth: convert_date_to_i(p[:date_of_birth]), comment: p[:purchase_comment], mother_code: p[:mother_code], father_code: p[:father_code], price: p[:price]
        @sheep_purchase.sheep = @sheep
        @activity.sheep_purchases.push(@sheep_purchase)
-    end
-
+  end
+  
+  def save_activity(activity)
     respond_to do |format|
-      if @activity.save
-        format.html { redirect_to '/sheep_purchases/'+@activity.id.to_s, notice: 'Nabavka ovaca je uspesno snimljena.' }
+      if activity.save
+        format.html { redirect_to '/sheep_purchases/'+ activity.id.to_s, notice: 'Nabavka ovaca je uspesno snimljena.' }
         format.json { render action: 'show', status: :created, location: @sheep_purchase }
       else
         format.html { render action: 'new' }
@@ -72,16 +81,31 @@ class SheepPurchasesController < ApplicationController
 
   # PATCH/PUT /sheep_purchases/1
   # PATCH/PUT /sheep_purchases/1.json
-  def update
-    respond_to do |format|
-      if @sheep_purchase.update(sheep_purchase_params)
-        format.html { redirect_to @sheep_purchase, notice: 'Sheep purchase was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @sheep_purchase.errors, status: :unprocessable_entity }
+  def update(activity)
+    purchases = params[:purchases]
+    activity.update date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: 'nabavka_ovaca', location: params[:location], total_costs:params[:total_costs]
+    
+    activity.sheep_purchases.each do |sp|
+      founded = false
+      purchases.each do |p|
+        if sp.id==p[:sheep_purchase_id].to_i    # if old purchase s not deleted - update
+          founded = true
+         # @sheep = Sheep.find_by id: sp.sheep.id
+          sp.update date_of_birth: convert_date_to_i(p[:date_of_birth]), comment: p[:purchase_comment], mother_code: p[:mother_code], father_code: p[:father_code], price: p[:price]
+          sp.sheep.update code:p[:sheep_code], sex:p[:sex], status:'na farmi', describe: p[:sheep_describe], percent_of_r: p[:percent_of_r], nickname:p[:nickname]
+        end
+      end
+      if not founded
+        sp.destroy
       end
     end
+
+    purchases.each do |p|
+      if p[:sheep_purchase_id]==nil               #  if is new - create
+        add_purchase(p)
+      end
+    end
+     save_activity(@activity)
   end
 
   # DELETE /sheep_purchases/1

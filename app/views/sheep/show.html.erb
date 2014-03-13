@@ -1,28 +1,27 @@
 <p id="notice"><%= notice %></p>
-<h2>Ovca: <strong><%= @sheep.nickname %></strong>, oznaka: <%= @sheep.code %> <strong><%= @sheep.percent_of_r %>%</strong> romanov</h2>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Ovca: <strong class='page_title'><%= @sheep.nickname %></strong>, oznaka: <%= @sheep.code %> </h2>
+<h2><strong><%= @sheep.percent_of_r %>%</strong> romanov</h2>
 <h3>Status: <%= @sheep.status%></h3>
 <p>--------------------------------------------------------<p>
-<h2>Rodjenje</h2>
-<ul>
-  <li><strong>Ojagnjena dana</strong> <%= @sheep.born_date_and_place %></li>
-  <li><strong>Tezina na rodjenju </strong><%=@sheep.birthweight%>kg</li>
-  <li><strong>Majka</strong> <%= @sheep.mother %></li>
-  <li><strong>Otac</strong> <%= @sheep.father %></li>
-  <li><strong>Opis</strong> <%= @sheep.describe %></li>
-</ul>
-  <h2>Jagnjenja
-  <% if @sheep.lambings.count== 0%>
-    <%= 'jos nije bilo'%></h2>
-  <% else %>
-    <p>Ovca se jagnjila <%= @sheep.lambings.select(:activity_id).distinct.count%> puta</p>
-    
-    <p>ukupno ojagnjila <%= @sheep.lambings.count%> jagnj. od cega <%= @sheep.lambings.where(is_alive: TRUE).count%> zivih</p>
-    
-    <p>procenat jagnjenja <%= @sheep.percent_of_lambings %>%</p>
-    <p>Na poslednjem jagnjenju, dana:<%= @sheep.lambings.last.activity.show_date%> ojagnjila <%= @sheep.lambings.select(@sheep.lambings.last.activity_id).distinct.count%> jaganjaca</p>
-  <% end %>
-  <h2>Lecenja</h2>
-<p><strong>Tezina sa 100 dana:</strong><%= @sheep.weight_100_days %></p>
+      <div class="row">
+        <div class="col-md-5">
+          <%= render 'birth'%>
+        </div>
+        <div class="col-md-6">
+          <%= render 'lambings'%>
+        </div>
+      </div>
+        </div>
+        <div class="col-md-4  ">
+          <%= render 'health'%>
+        </div>
+      </div>
+      
 
+
+<br><br><br>
 <%= link_to 'Izmeni', edit_sheep_path(@sheep), class:"btn btn-primary" %> 
 <%= link_to 'Nazad', sheep_index_path, class:"btn btn-default" %>

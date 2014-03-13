@@ -5,7 +5,26 @@ class Sheep < ActiveRecord::Base
     has_one :birth, :class_name => 'Lambing', :foreign_key => 'lamb_id'
     has_many :lambings, :class_name => 'Lambing', :foreign_key => 'sheep_id'
     has_one :sheep_purchase
+    has_many :vacinations, :dependent => :destroy
     
+    def self_vacinations
+      vacc = []
+      vacinations.each do |v|
+          if v.activity.a_type=='vakcinacija'
+            vacc.push(v)
+          end
+      end
+      return vacc
+    end
+    def terapies
+      vacc = []
+      vacinations.each do |v| 
+          if v.activity.a_type=='lecenje'
+            vacc.push(v)
+          end
+      end
+      return vacc
+    end
   def kod
    if code==nil
       'nije dodeljen'
@@ -16,8 +35,9 @@ class Sheep < ActiveRecord::Base
   def background
     if birth!=nil
       'sa farme'
-    else
-      sheep_purchase.activity.location
+    end
+    if sheep_purchase!= nil
+        sheep_purchase.activity.location
     end
   end
   def percent_of_lambings
@@ -25,6 +45,8 @@ class Sheep < ActiveRecord::Base
     number_of_lambs = lambings.count
     return 100* number_of_lambs / number_of_lambings
   end
+  
+
   
   def birthweight
     if birth!=nil

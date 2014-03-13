@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
   <div class="field activity_header" >
-    <h2>Zbog <strong><%= @activity.vacinations.first.reason %>a</strong></h2>
+    <h2 class='page_title'><%= @activity.vacinations.first.reason %>a</h2>
     <h3><strong> Dana</strong> <%=@activity.show_date%>&nbsp;
     <% if @activity.a_type=='vakcinacija'%>vakcinisano<% else %>leceno<% end %> je &nbsp;<%=@activity.vacinations.count%> ovaca.</h3> 
     <h3>Korisceno sredstvo: <strong><%= @activity.vacinations.first.vaccin_name%></strong></h3>

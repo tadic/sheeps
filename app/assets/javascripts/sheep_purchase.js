@@ -27,8 +27,18 @@ $("#sheep_purchases").ready(function(){
       }
 
    });
+      
+
+      
+   $('.remove_this_sheep').click(function(){
+      if (confirm('Da li ste sigurni da zelite da izbrisete ovu ovcu iz baze podataka?')) {
+          sheep_id = $(this).val();
+          $("#s_purchase_"+sheep_id).remove();
+          $("#quantity").val($("#quantity").val()-1);
+      } 
+   });
     
-    
+      
     
 });
 
@@ -41,7 +51,7 @@ function insert_sheep_row(){
             "<td><input type='text' name='purchases[][date_of_birth]'data-behaviour='datepicker' format='dd-mm-yyyy' style='width: 90px'></td>"+
             "<td><input type='text' name='purchases[][father_code]' style='width: 70px'></td>"+
             "<td><input type='text' name='purchases[][mother_code]' style='width: 70px'></td>"+
-            "<td><input type='text' name='purchases[][sheep_describe]' style='width: 280px'></td>"+
+            "<td><input type='text' name='purchases[][sheep_describe]' style='width: 150px'></td>"+
             "<td><input type='text' name='purchases[][purchase_comment]' style='width: 120px'></td></tr>";
       $(".purchasing_list").append(row);
 }

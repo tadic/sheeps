@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
   <div class="field activity_header" >
     <h3><strong> Dana</strong> <%=@activity.show_date%>&nbsp; iz mesta <%= @activity.location%></h3>
-    <h3>nabavljeno je &nbsp;<%=@activity.sheep_purchases.count%> ovaca. <strong>Ukupni troskovi: </strong><%=@activity.total_costs%> evra</h3>
+    <h3>nabavljeno je &nbsp;<%= sheep_many(@activity.sheep_purchases.count)%> . <strong>Ukupni troskovi: </strong><%=@activity.total_costs%> evra</h3>
     <br><br>
   </div>
         <div  id="accordion">

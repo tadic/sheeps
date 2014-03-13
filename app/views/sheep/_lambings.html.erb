@@ -1,0 +1,12 @@
+<h2 class='page_title'>Jagnjenja
+  <% if @sheep.lambings.count== 0%>
+    <%= 'jos nije bilo'%></h2>
+  <% else %>
+</h2>
+<ul>
+    <li>Ovca se jagnjila <%= @sheep.lambings.select(:activity_id).distinct.count%> puta</li>  
+    <li>ukupno ojagnjila <%= lamb_many(@sheep.lambings.count)%>  od cega <%= @sheep.lambings.where(is_alive: TRUE).count%> zivih</li>  
+    <li>procenat jagnjenja <%= @sheep.percent_of_lambings %>%</li>
+    <li>Na poslednjem jagnjenju, dana:<%= @sheep.lambings.last.activity.show_date%> ojagnjila <%= lamb_many(@sheep.lambings.where(activity_id: @sheep.lambings.last.activity_id).count)%></li>
+</ul>
+  <% end %>
