@@ -23,7 +23,7 @@
           <tr><td><input type='hidden' name='lambings[][sheep_code]' value='<%= lambing.sheep.code %>'></td>
               <td><select class='btn' name='lambings[][sex]'><option selected>neutvrdjen</option><option <% if lambing.lamb.sex=='musko'%><%= 'SELECTED' %><% end %>>musko</option><option <% if lambing.lamb.sex=='zensko'%><%= 'SELECTED' %><% end %>>zensko</option></select></td>
               <td><input name='lambings[][weight]' style='width: 50px' value='<%= lambing.weight%>'/></td>
-              <td><input type='checkbox'  name='lambings[][alive]' <% if lambing.is_alive %><%= 'checked'%><% end %>></td>
+              <td><input type='checkbox'  name='lambings[][alive]' <% if lambing.is_alive %>checked value="true"<% else %>value='false'<% end %>></td>
               <td><input name='lambings[][describe]' style='width: 280px' value='<%= lambing.lamb.describe%>'></td>
               <td><input name='lambings[][comment]' style='width: 280px' value='<%= lambing.comment%>'></td></tr>
           <% end %>

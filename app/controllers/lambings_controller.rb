@@ -56,7 +56,7 @@ class LambingsController < ApplicationController
 
     desrtoy_activity(params[:activity_id])
     @activity = Activity.new date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: 'jagnjenja'
-    
+
     lambings.each do |l|
         mother = Sheep.find_by code: l[:sheep_code]
         alive = (l[:alive] == 'true')
