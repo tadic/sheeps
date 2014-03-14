@@ -33,16 +33,18 @@ class Sheep < ActiveRecord::Base
     end
   end
   def background
-    if birth!=nil
-      'sa farme'
-    end
     if sheep_purchase!= nil
         sheep_purchase.activity.location
+    else
+      'sa farme'
     end
   end
   def percent_of_lambings
     number_of_lambings = lambings.select(:activity_id).distinct.count
-    number_of_lambs = lambings.count
+        number_of_lambs = lambings.count
+    if number_of_lambings==0
+      return 0
+    end
     return 100* number_of_lambs / number_of_lambings
   end
   
@@ -50,7 +52,7 @@ class Sheep < ActiveRecord::Base
   
   def birthweight
     if birth!=nil
-      if birth.weight>0
+      if birth.weight!=nil
         return birth.weight 
       end
       return 'nije mereno'

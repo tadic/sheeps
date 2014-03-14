@@ -5,6 +5,7 @@
     <tr class='danger'>
       <th>Tip akivnosti</th>
       <th>Datum</th>
+      <th>Lokacija</th>
       <th>Ukupni troskovi</th>
       <th>Napomena</th>
       <th></th>
@@ -17,6 +18,7 @@
       <tr>
         <td><strong><%= activity.a_type %></strong></td>
         <td><%= activity.show_date %> </td>
+        <td><%= activity.location %> </td>
         <td><%= activity.total_costs %> </td>
         <td><%= activity.comment %> </td>
         <td><%= link_to 'Show', activity.show_path, class:"btn btn-primary" %> </td>

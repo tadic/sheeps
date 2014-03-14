@@ -50,7 +50,7 @@ class VacinationsController < ApplicationController
     return if params_are_empty(sheeps)
 
     desrtoy_activity(params[:activity_id])
-    @activity = Activity.new date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: params[:type_of_a], total_costs:params[:total_costs]
+    @activity = Activity.new date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: params[:type_of_a], total_costs:params[:total_costs], location: 'farma'
 
     sheeps.each do |p|
        @vacination = Vacination.new sheep_id:p[:sheep_id], reason: params[:reason], vaccin_name: params[:vaccin_name]

@@ -55,7 +55,7 @@ class LambingsController < ApplicationController
     return if are_empty_params(lambings)
 
     desrtoy_activity(params[:activity_id])
-    @activity = Activity.new date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: 'jagnjenja'
+    @activity = Activity.new date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: 'jagnjenja', location: 'farma'
 
     lambings.each do |l|
         mother = Sheep.find_by code: l[:sheep_code]

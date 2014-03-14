@@ -7,6 +7,7 @@
       <th class="col-sm-1">Nadimak</th>
       <th class="col-sm-1">pol</th>
       <th class="col-sm-1">procenat romanov</th>
+      <th class="col-sm-1">procenat jagnjenja</th>
       <th class="col-sm-1">status</th>
       <th class="col-sm-1">poreklo</th>
       <th class="col-sm-2">opis</th>
@@ -21,9 +22,10 @@
         <td><%= sheep.kod %></td>
         <td><strong><%= sheep.nickname %></strong></td>
         <td><%= sheep.sex %></td>
-        <td><strong><%= sheep.percent_of_r %></strong></td>
+        <td><%= sheep.percent_of_r %>%</td>
+        <td><strong><%= sheep.percent_of_lambings%>%</strong></td>
         <td><%= sheep.status %></td>
-        <td><%= sheep.background   %></td>
+        <td><%= sheep.background%></td>
         <td><%= sheep.describe %></td>
         <td><%= link_to 'Prikazi', sheep, class:"btn btn-primary" %></td>
         <td><%= link_to 'Izmeni', edit_sheep_path(sheep), class:"btn btn-default" %></td>
