@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @mortality.date %>
+</p>
+
+<p>
+  <strong>Sheep:</strong>
+  <%= @mortality.sheep_id %>
+</p>
+
+<p>
+  <strong>Describe:</strong>
+  <%= @mortality.describe %>
+</p>
+
+<%= link_to 'Edit', edit_mortality_path(@mortality) %> |
+<%= link_to 'Back', mortalities_path %>

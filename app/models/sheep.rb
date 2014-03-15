@@ -5,6 +5,7 @@ class Sheep < ActiveRecord::Base
     has_one :birth, :class_name => 'Lambing', :foreign_key => 'lamb_id'
     has_many :lambings, :class_name => 'Lambing', :foreign_key => 'sheep_id'
     has_one :sheep_purchase
+    has_one :mortality, :dependent => :destroy
     has_many :vacinations, :dependent => :destroy
     
     def self_vacinations

@@ -1,0 +1,30 @@
+
+<h1 class='page_title'>Lista uginuca</h1>
+<br>
+<table class='table table-hover'>
+  <thead>
+    <tr class='danger'>
+      <th class="col-sm-2">datum</th>
+      <th class="col-sm-1">Nadimak</th>
+      <th class="col-sm-1">kod</th>
+      <th class="col-sm-6">opis</th>
+      <th class="col-sm-1"></th>
+      <th class="col-sm-1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mortalities.each do |mortality| %>
+      <tr>
+        <td><%= mortality.activity.show_date %></td>
+        <td><%= mortality.sheep.nickname %></td>
+        <td><%= mortality.sheep.code %></td>
+        <td><%= mortality.sheep.describe %></td>
+        <td><%= link_to 'Prikazi', mortality, class:"btn btn-primary" %></td>
+        <td><%= link_to 'Izmeni', edit_mortality_path(mortality), class:"btn btn-default" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Novo uginuce', new_mortality_path, class:"btn btn-primary" %>

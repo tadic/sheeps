@@ -6,6 +6,20 @@ class SheepController < ApplicationController
   def index
     @sheep = Sheep.all
   end
+  def statistics
+    @chart = LazyHighCharts::HighChart.new('graph') do |f|
+      #f.title({ :text=>"Prosek jagnjenja za [2014]"})
+
+      
+      f.options[:xAxis][:categories] = ['0 kom.', '1 kom.', '2 kom.', '3 kom.', '4 kom.', '5 kom.']
+      f.labels(:items=>[:html=>"Broj ovaca po broju ojagnjenih", :style=>{:left=>"40px", :top=>"8px", :color=>"black"} ])      
+      f.series(:type=> 'column',:name=> '2013 prosek 220%',:data=> [2, 17, 26, 22, 4])
+      f.series(:type=> 'column',:name=> '2014 prosek 235%',:data=> [1, 13, 32, 27, 6])
+      #f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
+
+    end
+    
+  end
 
   # GET /sheep/1
   # GET /sheep/1.json
@@ -69,6 +83,6 @@ class SheepController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sheep_params
-      params.require(:sheep).permit(:code, :mother_id, :father_id, :weight_100_days, :sex)
+      params.require(:sheep).permit(:code, :mother_id, :father_id, :weight_100_days, :sex, :percent_of_r, :describe, :nickname)
     end
 end

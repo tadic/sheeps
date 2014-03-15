@@ -1,0 +1,21 @@
+<%= form_for(@remove) do |f| %>
+  <% if @remove.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@remove.errors.count, "error") %> prohibited this remove from being saved:</h2>
+
+      <ul>
+      <% @remove.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :death %><br>
+    <%= f.text_field :death %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

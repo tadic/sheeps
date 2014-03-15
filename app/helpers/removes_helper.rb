@@ -1,0 +1,2 @@
+module RemovesHelper
+end

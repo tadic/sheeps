@@ -20,7 +20,7 @@ gem "select2-rails"
 gem 'bootstrap-multiselect-rails4'
 gem "bootstrap-sass", "~> 3.1.0.2"
 
-
+gem 'lazy_high_charts'
 
 group :development do
   gem 'rails_layout'

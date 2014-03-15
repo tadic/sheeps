@@ -1,0 +1,27 @@
+<h1>Listing removes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Death</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @removes.each do |remove| %>
+      <tr>
+        <td><%= remove.death %></td>
+        <td><%= link_to 'Show', remove %></td>
+        <td><%= link_to 'Edit', edit_remove_path(remove) %></td>
+        <td><%= link_to 'Destroy', remove, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Remove', new_remove_path %>

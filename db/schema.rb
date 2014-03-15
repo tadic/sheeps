@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140307211358) do
+ActiveRecord::Schema.define(version: 20140314212912) do
 
   create_table "activities", force: true do |t|
     t.integer  "color"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20140307211358) do
     t.string   "time_from"
     t.text     "a_type"
     t.text     "location"
+  end
+
+  create_table "deaths", force: true do |t|
+    t.string   "date"
+    t.string   "integer"
+    t.string   "sheep_id"
+    t.string   "describe"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "lambings", force: true do |t|
@@ -44,6 +54,22 @@ ActiveRecord::Schema.define(version: 20140307211358) do
     t.integer  "activity_id"
     t.integer  "sheep_id"
     t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mortalities", force: true do |t|
+    t.string   "integer"
+    t.string   "sheep_id"
+    t.string   "describe"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "activity_id"
+  end
+
+  create_table "removes", force: true do |t|
+    t.string   "death"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
