@@ -1,5 +1,5 @@
 
-$("#vaccinations").ready(function(){
+$("#new_uginuce").ready(function(){
  refresh_calendar();
  $('.select').select2();
 
