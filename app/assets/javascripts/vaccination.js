@@ -1,5 +1,5 @@
 
-/*$("#vaccinations").ready(function(){
+("#vaccinations").ready(function(){
 
     add_sheep_to_vactination();
     $('#vaccin_sheeps').multiselect({
@@ -39,4 +39,3 @@ function add_sheep_to_vactination(){
        });
         $(".vaccination_list").html(all_html);    
 }
-*/

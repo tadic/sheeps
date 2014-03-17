@@ -1,5 +1,5 @@
 
-/*$("#sheep_purchases").ready(function(){
+$("#sheep_purchases").ready(function(){
    $("#quantity").keyup(function (e) {
       if ($(this).val().length>2) {
          $(this).val('0');
@@ -83,4 +83,4 @@ function set_sheep_rows(rows_number){
     }
 
 
-}*/
+}
