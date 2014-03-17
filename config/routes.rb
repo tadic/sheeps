@@ -1,6 +1,4 @@
 Sheeps::Application.routes.draw do
-  resources :mortalities
-
   resources :removes
 
   resources :sheep_sellings
@@ -16,6 +14,8 @@ Sheeps::Application.routes.draw do
   resources :lambings
 
   resources :sheep
+  
+    resources :uginuces
 get '/', to: 'lambings#index'
 get '/statistics', to: 'sheep#statistics'
   # The priority is based upon order of creation: first created -> highest priority.

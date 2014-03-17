@@ -1,0 +1,29 @@
+<h1 class='page_title'>Lista uginuca</h1>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr class='danger'>
+      <th class="col-sm-2">Datum</th>
+      <th class="col-sm-1">ovca</th>
+      <th class="col-sm-3">razlog</th>
+      <th class="col-sm-1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @uginuces.each do |u| %>
+      <tr>
+        <td><%= u.activity.show_date %></td>
+        <td><%= u.sheep.code %></td>
+        <td><%= u.sheep.nickname %></td>
+        <td><strong><%= u.activity.comment %></strong></td>
+        <td><%= link_to 'prikazi', '/uginuces/'+u.id.to_s, class:"btn btn-primary" %></td>
+     <!--   <td></td>-->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'novo uginuce', new_uginuce_path, class:"btn btn-primary" %>

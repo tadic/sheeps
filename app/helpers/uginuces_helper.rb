@@ -1,0 +1,2 @@
+module UginucesHelper
+end

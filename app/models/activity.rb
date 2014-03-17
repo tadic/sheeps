@@ -5,7 +5,7 @@ class Activity < ActiveRecord::Base
   has_many :sheeps, through: :lambings
   has_many :vaccin_sheeps, through: :vacinations, :source => :sheep
   has_many :lambs, through: :lambings
-  has_one :mortality
+  has_one :uginuce
   def self.types
    Hash["jagnjenje"=> "lambing", "vakcinacija"=>"vacintion", "nabavka ovaca"=>"sheep_purchasing", "parenje"=>"mating", "prodaja"=>"selling"]
   end

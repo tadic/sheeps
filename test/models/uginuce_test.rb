@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MortalityTest < ActiveSupport::TestCase
+class UginuceTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

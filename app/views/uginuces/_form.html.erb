@@ -1,0 +1,25 @@
+<%= form_for(@uginuce) do |f| %>
+  <% if @uginuce.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@uginuce.errors.count, "error") %> prohibited this uginuce from being saved:</h2>
+
+      <ul>
+      <% @uginuce.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sheep_id %><br>
+    <%= f.number_field :sheep_id %>
+  </div>
+  <div class="field">
+    <%= f.label :activity_id %><br>
+    <%= f.number_field :activity_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
