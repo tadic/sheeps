@@ -19,6 +19,5 @@
 //= require bootstrap-timepicker
 //= require select2
 //= require bootstrap-multiselect
-//= require highcharts/highcharts                                                           
-//= require highcharts/highcharts-more                                                         
+//= require highcharts/highcharts                                                                                                                  
 //= require_tree .
