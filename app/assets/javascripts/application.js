@@ -14,9 +14,12 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require select2
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require bootstrap-timepicker
-//= require select2
 //= require bootstrap-multiselect
+//= require highcharts
+//= require highcharts/highcharts-more # to get the new features in 2.3.0
+//= require highcharts/adapters/mootools-adapter
 //= require_tree .
