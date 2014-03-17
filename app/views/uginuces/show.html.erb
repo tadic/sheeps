@@ -1,14 +1,13 @@
 <p id="notice"><%= notice %></p>
+<h2><strong>Dana </strong><%= @uginuce.activity.show_date%></h2>
+<h3>
+  Uginula je ovca: <%= @uginuce.sheep.code%> <%= @uginuce.sheep.nickname%>
+</h3>
+<%= @uginuce.activity.id %>
+<br>
+<textarea class="form-control" rows="3" name='comment' readonly='true'  placeholder="Nije bilo zapaznja..."><%= @uginuce.activity.comment %></textarea><br>
 
-<p>
-  <strong>Sheep:</strong>
-  <%= @uginuce.sheep_id %>
-</p>
 
-<p>
-  <strong>Activity:</strong>
-  <%= @uginuce.activity_id %>
-</p>
-
-<%= link_to 'Edit', edit_uginuce_path(@uginuce) %> |
-<%= link_to 'Back', uginuces_path %>
+<%= link_to 'Izmeni', edit_uginuce_path(@uginuce), class:"btn btn-primary" %>
+<%= link_to 'Izbrisi', @uginuce , method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %>
+<%= link_to 'Nazad', uginuces_path, class:"btn btn-default" %>

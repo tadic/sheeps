@@ -17,6 +17,11 @@ class Sheep < ActiveRecord::Base
       end
       return vacc
     end
+    
+    def code_nickname
+      code.to_s + ' ' + nickname.to_s
+    end
+    
     def terapies
       vacc = []
       vacinations.each do |v| 

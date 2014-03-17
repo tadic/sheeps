@@ -27,14 +27,14 @@ class UginucesController < ApplicationController
   # POST /uginuces
   # POST /uginuces.json
   def create
-    @mortality = Mortality.new(mortality_params)
-    @sheep = Sheep.find_by id: @mortality.sheep_id
+    @uginuce = Uginuce.new(uginuce_params)
+    @sheep = Sheep.find_by id: @uginuce.sheep_id
     @sheep.update status:'uginulo'
-    a = Activity.create date: convert_date_to_i(params[:mortality][:date]), a_type: 'uginuce'
+    a = Activity.new date: convert_date_to_i(params[:uginuce_date]), a_type: 'uginuce', comment:params[:uginuce_comment]
 
-    @mortality.activity = a
+    a.uginuce = @uginuce
     respond_to do |format|
-      if @uginuce.save
+      if a.save
         format.html { redirect_to @uginuce, notice: 'Uginuce was successfully created.' }
         format.json { render action: 'show', status: :created, location: @uginuce }
       else
@@ -47,14 +47,14 @@ class UginucesController < ApplicationController
   # PATCH/PUT /uginuces/1
   # PATCH/PUT /uginuces/1.json
   def update
-    if @mortality.sheep.id!= params[:mortality][:sheep_id].to_i
-        @old_sheep = Sheep.find_by id: @mortality.sheep_id
+    if @uginuce.sheep.id!= params[:uginuce][:sheep_id].to_i
+        @old_sheep = Sheep.find_by id: @uginuce.sheep_id
         @old_sheep.update status:'na farmi'
-        @new_sheep = Sheep.find_by id: params[:mortality][:sheep_id]
+        @new_sheep = Sheep.find_by id: params[:uginuce][:sheep_id]
         @new_sheep.update status:'uginulo'
     end
     
-    @mortality.activity.update date: convert_date_to_i(params[:mortality][:date])
+    @uginuce.activity.update date: convert_date_to_i(params[:uginuce_date]), comment:params[:uginuce_comment]
     respond_to do |format|
       if @uginuce.update(uginuce_params)
         format.html { redirect_to @uginuce, notice: 'Uginuce was successfully updated.' }
@@ -69,6 +69,7 @@ class UginucesController < ApplicationController
   # DELETE /uginuces/1
   # DELETE /uginuces/1.json
   def destroy
+    @uginuce.sheep.update status:'na farmi'
     @uginuce.destroy
     respond_to do |format|
       format.html { redirect_to uginuces_url }
@@ -84,6 +85,6 @@ class UginucesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def uginuce_params
-      params.require(:uginuce).permit(:sheep_id, :activity_id)
+      params.require(:uginuce).permit(:sheep_id)
     end
 end

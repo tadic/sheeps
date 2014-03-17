@@ -10,16 +10,25 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :sheep_id %><br>
-    <%= f.number_field :sheep_id %>
-  </div>
-  <div class="field">
-    <%= f.label :activity_id %><br>
-    <%= f.number_field :activity_id %>
-  </div>
+  <br><br>
+  <strong> Datum</strong> <input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='uginuce_date' <% if @uginuce.activity!= nil %>value='<%=@uginuce.activity.show_date %>'<%end%>>
+   
+  uginula ovca:
+  <select name='[uginuce][sheep_id]' class = 'select' style='width: 150px'>
+    <%@sheeps.each do |s|%>
+      <% if @uginuce.sheep!=nil and s.id== @uginuce.sheep.id%>
+          <option value='<%= s.id %>' selected><%= s.code%> <%=  s.nickname %></option>
+      <% else%>
+          <option value='<%= s.id %>'><%= s.code%> <%=  s.nickname %></option>
+      <% end %>
+    <% end %>
+  </select>
+  <br><br>
+  <textarea class="form-control" rows="3" name='uginuce_comment'  placeholder="Unesi razlog i opste zapazanje..."><% if @uginuce.activity!= nil %><%= @uginuce.activity.comment %><% end %></textarea><br>
+  
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :Snimi, class:"btn btn-primary" %>
+    <%= link_to 'Back', uginuces_path, class:"btn btn-default"  %>
+      
   </div>
 <% end %>
