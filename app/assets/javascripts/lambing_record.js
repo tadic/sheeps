@@ -1,6 +1,5 @@
 
 $("document").ready(function(){
-alert("alert");
  $(".select").select2();
 
     $('[data-behaviour~=datepicker]').datepicker({
