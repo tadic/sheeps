@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :sheep_many, :lamb_many
+  helper_method :sheep_many, :lamb_many, :sheeps_number_in_time
   def sheep_path
       '/sheep'
   end
@@ -15,7 +15,32 @@ class ApplicationController < ActionController::Base
       d += date.at(0..1)
      return d.to_i
  end
- 
+  def sheeps_number_in_time
+    arr = []
+    arr.push(0);
+    sheep_number = 0
+    activities = Activity.all.sort_by{|a| a[:date]}
+    upDate = 200    # january
+    activities.each do |a|
+      while a.date%10000 > upDate
+        arr.push(sheep_number)
+        upDate += 100
+      end     
+          if a.a_type=='jagnjenja'
+            a.lambings.each do |l|
+              if l.is_alive
+                sheep_number += 1          
+              end
+            end
+          elsif a.a_type == 'nabavka_ovaca'
+              sheep_number += a.sheep_purchases.count
+          elsif a.a_type == 'uginuce'
+              sheep_number -= 1
+          end   
+    end
+    arr.push(sheep_number)
+    return arr
+  end
   def sheep_many(n)
     case (n%10)
       when 1

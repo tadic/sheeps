@@ -5,7 +5,10 @@
           <%= high_chart("graph", @chart) %>
         </div>
         <div id ='graph2' class='col-md-4' style='height: 300px'>
-          <%= high_chart("graph2", @chart2) %>
+        <%= sheeps_number_in_time.each do |key|%>
+        <p><%= key%></p>
+      <% end %>
+      <%= high_chart("graph2", @chart2) %>
         </div>
 </div>
 

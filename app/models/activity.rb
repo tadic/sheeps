@@ -35,6 +35,8 @@ class Activity < ActiveRecord::Base
      return i
   end
   
+ 
+  
   def lambs_total
     lambings.count
   end
