@@ -1,6 +1,5 @@
 
-("#vaccinations").ready(function(){
-
+$("document").ready(function(){
     add_sheep_to_vactination();
     $('#vaccin_sheeps').multiselect({
         onChange: function(){

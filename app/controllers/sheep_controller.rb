@@ -1,6 +1,6 @@
 class SheepController < ApplicationController
   before_action :set_sheep, only: [:show, :edit, :update, :destroy]
-
+  include ActionView::Helpers::NumberHelper # <-
   # GET /sheep
   # GET /sheep.json
   def index
@@ -8,19 +8,30 @@ class SheepController < ApplicationController
   end
   def statistics
     @chart = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title({ :text=>"Prosek jagnjenja za 2014 je" + average_lambings.to_s})  
-      f.options[:xAxis][:categories] = ['1 kom.', '2 kom.', '3 kom.', '4 kom.', '5 kom.']
-      f.labels(:items=>[:html=>"Broj ovaca po broju ojagnjenih", :style=>{:left=>"40px", :top=>"8px", :color=>"black"} ])      
-      # f.series(:type=> 'column',:name=> '2013 prosek 220%',:data=> [2, 17, 26, 22, 4])
-      f.series(:type=> 'column',:name=> '2014 prosek 235%',:data=> [l_find(1), l_find(2), l_find(3), l_find(4), l_find(5)])
+      f.title({ :text=>"Jagnjenja u [2014]"})  
+      f.options[:xAxis][:categories] = ['1', '2', '3', '4', '5', '6']
+      f.options[:yAxis][:title] = {text: 'broj ovaca (kom.)'  }
+      f.options[:xAxis][:title] = {text: 'broj jaganjaca po ovci (kom.)'  }
+      f.labels(:items=>[:html=>"Ukupno: "+Lambing.count.to_s+" jagnjenjadi iz "+number_of_lambings.to_s+" jagnjenja", :style=>{:left=>"40px", :top=>"8px", :color=>"black"} ])      
+      # f.series(:type=> 'column',:name=> '2013 prosek ' + average_lambings.to_s,:data=> [2, 17, 26, 22, 4])
+      f.series(:type=> 'column',:name=> '2014 prosek ' + average_lambings.to_s + '%',:data=> [l_find(1), l_find(2), l_find(3), l_find(4), l_find(5), l_find(6)])
       #f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
-
+    end
+    @chart2 = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title({ :text=>"Jagnjenja u [2014]"})  
+      f.options[:xAxis][:categories] = ['1', '2', '3', '4', '5', '6']
+      f.options[:yAxis][:title] = {text: 'broj ovaca (kom.)'  }
+      f.options[:xAxis][:title] = {text: 'broj jaganjaca po ovci (kom.)'  }
+      f.labels(:items=>[:html=>"Ukupno: "+Lambing.count.to_s+" jagnjenjadi iz "+number_of_lambings.to_s+" jagnjenja", :style=>{:left=>"40px", :top=>"8px", :color=>"black"} ])      
+      # f.series(:type=> 'column',:name=> '2013 prosek ' + average_lambings.to_s,:data=> [2, 17, 26, 22, 4])
+      f.series(:type=> 'column',:name=> '2014 prosek ' + average_lambings.to_s + '%',:data=> [l_find(1), l_find(2), l_find(3), l_find(4), l_find(5), l_find(6)])
+      #f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
     end
     
   end
 
 def average_lambings
-  return (Lambing.all.count/number_of_lambings).to_f
+  return number_with_precision((100*Lambing.all.count.to_f/number_of_lambings).to_f, precision: 2)
 end
 
 def number_of_lambings

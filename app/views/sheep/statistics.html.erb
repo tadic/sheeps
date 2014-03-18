@@ -2,12 +2,13 @@
 <div class="row">
   <h3>Jagnjenja za 2013/2014</h3>
         <div id ='graph' class='col-md-4' style='height: 300px'>
-<%= high_chart("graph", @chart) %>
-
-
+          <%= high_chart("graph", @chart) %>
+        </div>
+        <div id ='graph2' class='col-md-4' style='height: 300px'>
+          <%= high_chart("graph2", @chart2) %>
         </div>
 </div>
-Ojagnjila 1 <%= @lambings.select { |l| l.count == 6 }.count%>
+
 
 
 

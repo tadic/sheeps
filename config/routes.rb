@@ -17,7 +17,9 @@ Sheeps::Application.routes.draw do
   
     resources :uginuces
 get '/', to: 'sheep#statistics'
+
 get '/statistics', to: 'sheep#statistics'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
