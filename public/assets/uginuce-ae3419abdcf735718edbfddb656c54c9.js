@@ -1,1 +1,0 @@
-function refresh_calendar(){$("[data-behaviour~=datepicker]").datepicker({language:"rs",format:"dd-mm-yyyy",autoclose:!0}),$("[data-behaviour~=datepicker]").datepicker("refresh")}$("#new_uginuce").ready(function(){refresh_calendar(),$(".select").select2()});
