@@ -31,13 +31,15 @@ class Sheep < ActiveRecord::Base
       end
       return vacc
     end
+  
   def kod
    if code==nil
       'nije dodeljen'
-    else
+   else
      return code
-    end
+   end
   end
+  
   def background
     if sheep_purchase!= nil
         sheep_purchase.activity.location
@@ -45,16 +47,27 @@ class Sheep < ActiveRecord::Base
       'sa farme'
     end
   end
+  
   def percent_of_lambings
-    number_of_lambings = lambings.select(:activity_id).distinct.count
-        number_of_lambs = lambings.count
     if number_of_lambings==0
       return 0
     end
     return 100* number_of_lambs / number_of_lambings
   end
   
+def number_of_lambings
+  lambings.select(:activity_id).distinct.count
+end
 
+
+def self.best_sheep(n)
+  Sheep.all.sort_by{|a| a.percent_of_lambings}.last(n).reverse
+end
+
+
+def number_of_lambs
+  lambings.count
+end
   
   def birthweight
     if birth!=nil

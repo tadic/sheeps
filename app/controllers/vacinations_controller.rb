@@ -35,11 +35,13 @@ class VacinationsController < ApplicationController
   def params_are_empty(sheeps)
     if sheeps==nil   
       @vacination = Vacination.new
+      @sheeps = Sheep.all
       respond_to do |format|
           format.html { render action: 'new', notice: 'Nista nije snimljeno posto nije ni uneto!' }
       end
       return true
     end
+    raise
     return false
   end
 
@@ -48,10 +50,8 @@ class VacinationsController < ApplicationController
   def create
     sheeps = params[:sheeps]
     return if params_are_empty(sheeps)
-
-    desrtoy_activity(params[:activity_id])
+    
     @activity = Activity.new date: convert_date_to_i(params[:date]), comment: params[:comment], a_type: params[:type_of_a], total_costs:params[:total_costs], location: 'farma'
-
     sheeps.each do |p|
        @vacination = Vacination.new sheep_id:p[:sheep_id], reason: params[:reason], vaccin_name: params[:vaccin_name]
        @activity.vacinations.push(@vacination)
@@ -59,6 +59,7 @@ class VacinationsController < ApplicationController
     
     respond_to do |format|
       if @activity.save
+        desrtoy_activity(params[:activity_id])
         format.html { redirect_to '/vacinations/'+ @activity.id.to_s, notice: 'Vacination was successfully created.' }
         format.json { render action: 'show', status: :created, location: @vacination }
       else
@@ -71,6 +72,7 @@ class VacinationsController < ApplicationController
   # PATCH/PUT /vacinations/1
   # PATCH/PUT /vacinations/1.json
   def update
+    raise
     respond_to do |format|
       if @vacination.update(vacination_params)
         format.html { redirect_to '/vacinations/'+ activity.id.to_s, notice: 'Vacination was successfully updated.' }

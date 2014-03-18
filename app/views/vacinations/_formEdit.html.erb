@@ -15,7 +15,7 @@
             <td><input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='date' value='<%= @activity.show_date %>'>
           ukupan trosak <input type="text" name="total_costs" id='vaccin_costs' value='<%= @activity.total_costs %>' style='width:60px'/>&nbsp;<span id="errmsg"></span>evra</td></tr>
         <tr><td ><strong>razlog lecenja/zastite</strong></td>
-          <td><input  type='text' style='width:350px' 'name='reason' value='<%= @activity.vacinations.first.reason%>'></td></tr>
+          <td><input  type='text' style='width:350px' name='reason' value='<%= @activity.vacinations.first.reason%>'></td></tr>
         <tr><td><strong>naziv sredstva</strong></td>
           <td><input  type='text' style='width:350px' name='vaccin_name' value='<%= @activity.vacinations.first.vaccin_name%>'></td></tr>
       </tbody>

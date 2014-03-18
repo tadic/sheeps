@@ -7,6 +7,7 @@ class SheepController < ApplicationController
     @sheep = Sheep.all
   end
   def statistics
+    bs = Sheep.best_sheep(5)
     @chart = LazyHighCharts::HighChart.new('graph') do |f|
       f.title({ :text=>"Jagnjenja u [2014]"})  
       f.options[:xAxis][:categories] = ['1', '2', '3', '4', '5', '6']
@@ -25,6 +26,14 @@ class SheepController < ApplicationController
       #f.series(:type=> 'column',:name=> '2014 prosek ' + average_lambings.to_s + '%',:data=> [l_find(1), l_find(2), l_find(3), l_find(4), l_find(5), l_find(6)])
       f.series(:type=> 'spline',:name=> 'Trenutno stanje: ' + Sheep.all.where("status = 'na farmi'").count.to_s + ' grla', :data=> sheeps_number_in_time)
     end
+    @chart3 = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title({ :text=>"Najbolje ovce"})  
+      f.options[:xAxis][:categories] = [bs[0].nickname, bs[1].nickname, bs[2].nickname, bs[3].nickname, bs[4].nickname]
+      f.options[:yAxis][:title] = {text: 'prosek jagnjenja' }
+      f.options[:xAxis][:title] = {text: 'naziv ovce' }
+      f.series(:type=> 'bar',:name=> 'Najboljih 5 grla',
+               :data=> [bs[0].percent_of_lambings, bs[1].percent_of_lambings, bs[2].percent_of_lambings, bs[3].percent_of_lambings, bs[4].percent_of_lambings])
+    end
     
   end
   
@@ -32,6 +41,8 @@ class SheepController < ApplicationController
 def average_lambings
   return number_with_precision((100*Lambing.all.count.to_f/number_of_lambings).to_f, precision: 2)
 end
+
+
 
 def number_of_lambings
   Lambing.find(:all, :select => "activity_id, sheep_id, count(*) AS count", :group => "activity_id, sheep_id").count

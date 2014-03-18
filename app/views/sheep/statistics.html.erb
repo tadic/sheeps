@@ -1,14 +1,14 @@
 
 <div class="row">
-  <h3>Jagnjenja za 2013/2014</h3>
+  <h3>Statistika za 2014</h3>
         <div id ='graph' class='col-md-4' style='height: 300px'>
           <%= high_chart("graph", @chart) %>
         </div>
         <div id ='graph2' class='col-md-4' style='height: 300px'>
-        <%= sheeps_number_in_time.each do |key|%>
-        <p><%= key%></p>
-      <% end %>
-      <%= high_chart("graph2", @chart2) %>
+           <%= high_chart("graph2", @chart2) %>
+        </div>
+        <div id ='graph3' class='col-md-4' style='height: 300px'>
+           <%= high_chart("graph3", @chart3) %>
         </div>
 </div>
 
