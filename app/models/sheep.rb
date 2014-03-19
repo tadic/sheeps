@@ -63,7 +63,21 @@ end
 def self.best_sheep(n)
   Sheep.all.sort_by{|a| a.percent_of_lambings}.last(n).reverse
 end
+def birthdate
+    if birth!=nil
+     return birth.activity.date
+    end
+    return sheep_purchase.date_of_birth
+end
 
+def age
+  b_date = birthdate
+  current = (Time.now.strftime("%Y%m")).to_i
+  if b_date/10000 == current/100
+    return (current - b_date/100).to_s + ' mes.'
+  end
+  return (current/100 - b_date/10000).to_s + ' god.'
+end
 
 def number_of_lambs
   lambings.count

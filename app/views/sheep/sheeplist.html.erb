@@ -1,0 +1,69 @@
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+<script>
+    function SeepsController($scope, $http) {
+        $http.get('sheep.json').success( function(data, status, headers, config) {
+            $scope.sheeps = data;
+        });
+        $scope.order = 'percent_of_r';
+        $scope.reverse = false
+        $scope.click = function (order){
+            $scope.order = order;
+            $scope.reverse =!$scope.reverse
+            console.log(order);
+        }
+        $scope.searchText = 'na farmi';
+    }
+</script>
+
+<div ng-app ng-controller="SeepsController">
+<div class="row">
+        <div class="col-md-9">
+          <h1 class='page_title'>Lista ovaca</h1>
+          <br>
+          <h4>Ukupno prikazano {{filtered.length}} grla</h4>
+        </div>
+        <div class="col-md-3">
+          <br>
+          <input type='search' ng-model="searchText2"class="form-control input-small" placeholder="pretraga">
+          <input type='search' ng-model="searchText3"class="form-control" placeholder="pretraga">
+          <input type='search' ng-model="searchText" class="form-control" placeholder="pretraga" >
+            <br>
+        </div>
+</div>
+
+
+<table class='table table-hover'>
+  <thead>
+    <tr class='danger'>
+      <th class="col-sm-1"> <span ng-click="click('kod')">Kod</span></th>
+      <th class="col-sm-1"> <span ng-click="click('nickname')">Nadimak</span></th>
+      <th class="col-sm-1"> <span ng-click="click('sex')">Starost</span></th>
+      <th class="col-sm-1"> <span ng-click="click('sex')">Pol</span></th>
+      <th class="col-sm-1"> <span ng-click="click('percent_of_r')">procenat romanov</span></th>
+      <th class="col-sm-1"> <span ng-click="click('percent_of_lambings')">procenat jagnjenja</span></th>
+      <th class="col-sm-1"><span ng-click="click('status')">status</span></th>
+      <th class="col-sm-1"><span ng-click="click('background')">poreklo</span></th>
+      <th class="col-sm-2"><span ng-click="click('describe')">opis</span></th>
+      <th class="col-sm-1"></th>
+      <th class="col-sm-1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr ng-repeat="sheep in filtered = (sheeps|filter:searchText| filter:searchText2| filter:searchText3)| orderBy:order:reverse">
+        <td>{{ sheep.code }}</td>
+        <td><strong>{{ sheep.nickname }}</strong></td>
+        <td>{{ sheep.age }}</td>
+        <td>{{ sheep.sex }}</td>
+        <td><strong>{{ sheep.percent_of_r }}%</strong></td>
+        <td>{{ sheep.percent_of_lambings }}</td>
+        <td>{{ sheep.status }}</td>
+        <td>{{ sheep.background }}</td>
+        <td>{{ sheep.describe }}</td>
+        <td><a ng-href="sheep/{{sheep.id}}" class='btn btn-primary'>Prikazi</a></td>
+        <td><a ng-href="sheep/{{sheep.id}}/edit" class='btn btn-default'>Izmeni</a></td>
+      </tr>
+  </tbody>
+</table>
+
+</div>

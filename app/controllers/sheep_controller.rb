@@ -6,6 +6,9 @@ class SheepController < ApplicationController
   def index
     @sheep = Sheep.all
   end
+  def sheeplist
+    
+  end
   def statistics
     bs = Sheep.best_sheep(5)
     @chart = LazyHighCharts::HighChart.new('graph') do |f|
