@@ -21,9 +21,9 @@
         <li><%= link_to 'uginuce', new_uginuce_path %></li>
     </ul>
   </li>
-    <li><%= link_to 'izadji', signout_path, method: :delete %></li>
+    <li><%= link_to 'izadji', signout_path, method: :delete, class:"btn btn-default"%></li>
 <% else %>
-    <li><%= link_to 'prikljuci se', new_session_path %></li>
+    <li class='sign'><%= link_to 'prikljuci se', new_session_path, class:"btn btn-default" %></li>
 <% end %>
 
 
