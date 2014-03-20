@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<h2><strong>Dana </strong><%= @other_purchase.activity.show_date%></h2>
+<h3>
+  Utroseno: <%= @other_purchase.activity.total_costs%> evra
+</h3>
+<h3>
+  Lokacija: <%= @other_purchase.activity.location %>
+</h3>
+<strong>Nabavljeno:</strong>
+<textarea class="form-control" rows="3" name='comment' readonly='true'  placeholder="Nije bilo zapaznja..."><%= @other_purchase.what %></textarea><br>
+
+<strong>Razlog:</strong>
+<textarea class="form-control" rows="3" name='comment' readonly='true'  placeholder="Nije bilo zapaznja..."><%= @other_purchase.why %></textarea><br>
+
+<strong>Zapazanje:</strong>
+<textarea class="form-control" rows="3" name='comment' readonly='true'  placeholder="Nije bilo zapaznja..."><%= @other_purchase.activity.comment %></textarea><br>
+
+
+<br><br>
+<%= link_to 'Edit', edit_other_purchase_path(@other_purchase), class:"btn btn-primary" %> 
+<%= link_to 'Back', other_purchases_path, class:"btn btn-default" %>

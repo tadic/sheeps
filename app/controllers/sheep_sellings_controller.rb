@@ -1,5 +1,6 @@
 class SheepSellingsController < ApplicationController
   before_action :set_sheep_selling, only: [:show, :edit, :update, :destroy]
+  before_action :check_current_user, only: [:new, :edit, :destroy, :index, :show]
 
   # GET /sheep_sellings
   # GET /sheep_sellings.json

@@ -1,0 +1,34 @@
+<h1 class='page_title'>Ostale nabavke</h1>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr class='danger'>
+      <th class="col-sm-2">Datum</th>
+      <th class="col-sm-1">lokacija</th>
+      <th class="col-sm-1">sta je nabavljeno</th>
+      <th class="col-sm-1">razlog</th>
+      <th class="col-sm-1">ukupni troskovi</th>
+      <th class="col-sm-3">opste zapazanje</th>
+      <th class="col-sm-1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @o_purchases.each do |op| %>
+      <tr>
+        <td><%= op.activity.show_date %></td>
+        <td><%= op.activity.location %></td>
+        <td><strong><%= op.what %></strong></td>
+        <td><strong><%= op.why %></strong></td>
+        <td><%= op.activity.total_costs%></td>
+        <td><%= op.activity.comment %></td>
+        <td><%= link_to 'prikazi', op, class:"btn btn-primary" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if not current_user.nil? %>
+        <%= link_to 'Nova nabavka', new_other_purchase_path, class:"btn btn-primary" %>
+<% end %>

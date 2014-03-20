@@ -1,7 +1,7 @@
 
 $("#sheep_purchases").ready(function(){
    $("#quantity").keyup(function (e) {
-      if ($(this).val().length>2) {
+      if ($(this).val().length>4) {
          $(this).val('0');
          set_sheep_rows(0);
          return false;

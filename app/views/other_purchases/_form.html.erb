@@ -1,0 +1,39 @@
+<%= form_for(@other_purchase) do |f| %>
+  <% if @other_purchase.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@other_purchase.errors.count, "error") %> prohibited this other_purchase from being saved:</h2>
+
+      <ul>
+      <% @other_purchase.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <br>
+  <strong> Datum</strong> <input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='dnabavka_date'
+          <% if @other_purchase.activity!= nil %>value='<%=@other_purchase.activity.show_date %>'<%end%>> &nbsp;
+  lokacija <input  type='text' name='dnabavka_location'
+          <% if @other_purchase.activity!= nil %>value='<%=@other_purchase.activity.location %>'<%end%>>
+  ukupno utroseno <input type="text" id='quantity' name="dnabavka_total_costs" style='width:100px'
+          <% if @other_purchase.activity!= nil %>value='<%=@other_purchase.activity.total_costs %>'<%end%>>
+  &nbsp;<span id="errmsg"></span>evra,
+    
+  <div class="field">
+    <br>
+    <%= f.text_area :what, class:"form-control col-sm-3", placeholder:"Sta je sve nabavljeno..." %>
+  </div>
+  <br><br>
+  <div class="field">
+    <br>
+    <%= f.text_area :why, class:"form-control", placeholder:"Unesi razlog..."%>
+  </div>
+  
+  <textarea class="form-control" rows="3" name='dnabavka_comment'  placeholder="Unesi opste zapazanje..."><% if @other_purchase.activity!= nil %><%= @other_purchase.activity.comment %><% end %></textarea><br>
+  
+  <div class="actions">
+    <%= f.submit :Snimi, class:"btn btn-primary" %>
+    <%= link_to 'Nazad', :back, class:"btn btn-default" %>
+  </div>
+<% end %>

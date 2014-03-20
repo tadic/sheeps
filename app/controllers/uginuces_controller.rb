@@ -1,6 +1,6 @@
 class UginucesController < ApplicationController
   before_action :set_uginuce, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_current_user, only: [:new, :edit, :destroy, :index, :show]
   # GET /uginuces
   # GET /uginuces.json
   def index
@@ -30,7 +30,7 @@ class UginucesController < ApplicationController
     @uginuce = Uginuce.new(uginuce_params)
     @sheep = Sheep.find_by id: @uginuce.sheep_id
     @sheep.update status:'uginulo'
-    a = Activity.new date: convert_date_to_i(params[:uginuce_date]), a_type: 'uginuce', comment:params[:uginuce_comment]
+    a = Activity.new date: convert_date_to_i(params[:uginuce_date]), a_type: 'uginuce', comment:params[:uginuce_comment], location: 'farma'
 
     a.uginuce = @uginuce
     respond_to do |format|

@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
   def sheep_path
       '/sheep'
   end
+  def check_current_user
+    if current_user.nil?
+      render new_session_path
+    end
+  end
   
   def current_user
     return nil if session[:user_id].nil? 

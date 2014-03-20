@@ -1,5 +1,7 @@
 class SheepController < ApplicationController
   before_action :set_sheep, only: [:show, :edit, :update, :destroy]
+  before_action :check_current_user, only: [:new, :edit, :destroy, :index, :show, :statistics, :sheeplist]
+  
   include ActionView::Helpers::NumberHelper # <-
   # GET /sheep
   # GET /sheep.json
@@ -50,6 +52,7 @@ end
 def number_of_lambings
   Lambing.find(:all, :select => "activity_id, sheep_id, count(*) AS count", :group => "activity_id, sheep_id").count
 end
+
 def l_find(n)
   @lambings = Lambing.find(:all, :select => "activity_id, sheep_id, count(*) AS count", :group => "activity_id, sheep_id")
   return  @lambings.select { |l| l.count == n }.count

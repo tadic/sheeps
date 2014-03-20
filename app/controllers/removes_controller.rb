@@ -1,5 +1,5 @@
 class RemovesController < ApplicationController
-  before_action :set_remove, only: [:show, :edit, :update, :destroy]
+  before_action :set_remove, only: [:show, :edit, :update, :destroy, :]
 
   # GET /removes
   # GET /removes.json

@@ -1,5 +1,5 @@
 class VacinationsController < ApplicationController
-
+  before_action :check_current_user, only: [:new, :edit, :destroy, :index, :show]
   # GET /vacinations
   # GET /vacinations.json
   def index
@@ -41,7 +41,6 @@ class VacinationsController < ApplicationController
       end
       return true
     end
-    raise
     return false
   end
 

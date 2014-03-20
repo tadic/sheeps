@@ -1,4 +1,6 @@
 Sheeps::Application.routes.draw do
+  resources :other_purchases
+
   resources :users
 
   resources :removes

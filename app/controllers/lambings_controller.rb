@@ -1,5 +1,6 @@
 class LambingsController < ApplicationController
   before_action :set_lambing, only: [:update, :destroy]
+  before_action :check_current_user, only: [:new, :edit, :destroy, :index, :show]
 
   # GET /lambings
   # GET /lambings.json

@@ -1,5 +1,5 @@
 class SheepPurchasesController < ApplicationController
-
+  before_action :check_current_user, only: [:new, :edit, :destroy, :index, :show]
 
   # GET /sheep_purchases
   # GET /sheep_purchases.json

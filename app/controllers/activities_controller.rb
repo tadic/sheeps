@@ -1,5 +1,6 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
+  before_action :check_current_user, only: [:new, :edit, :destroy, :index, :show]
 
   # GET /activities
   # GET /activities.json

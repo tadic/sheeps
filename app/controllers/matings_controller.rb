@@ -1,5 +1,6 @@
 class MatingsController < ApplicationController
   before_action :set_mating, only: [:show, :edit, :update, :destroy]
+  before_action :check_current_user, only: [:new, :edit, :destroy, :index, :show]
 
   # GET /matings
   # GET /matings.json
