@@ -73,10 +73,16 @@ end
 def age
   b_date = birthdate
   current = (Time.now.strftime("%Y%m")).to_i
-  if b_date/10000 == current/100
-    return (current - b_date/100).to_s + ' mes.'
+  months = 12*(current/100 -  b_date/10000) + (current%100) - (b_date/100)%100
+  if months < 13
+    return (months).to_s + ' mes.'
   end
-  return (current/100 - b_date/10000).to_s + ' god.'
+  if months > 100
+    return '?'
+  end
+  
+
+  return (months.to_f/12).round(1).to_s + ' god.'
 end
 
 def number_of_lambs
