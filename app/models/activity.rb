@@ -23,6 +23,7 @@ class Activity < ActiveRecord::Base
       return '/lambings/'+id.to_s if a_type == 'jagnjenja'   
       return '/sheep_purchases/'+id.to_s if a_type == 'nabavka_ovaca'
       return '/vacinations/'+id.to_s if a_type == 'lecenje' || a_type == 'vakcinacija'
+      return '/uginuces/'+id.to_s if a_type == 'uginuce'
   end  
   def females_alive
      allLambs =lambs.where(sex: 'zensko')

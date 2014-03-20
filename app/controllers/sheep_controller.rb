@@ -16,9 +16,9 @@ class SheepController < ApplicationController
       f.options[:xAxis][:categories] = ['1', '2', '3', '4', '5', '6']
       f.options[:yAxis][:title] = {text: 'broj ovaca (kom.)'  }
       f.options[:xAxis][:title] = {text: 'broj jaganjaca po ovci (kom.)'  }
-      f.labels(:items=>[:html=>"Ukupno: "+Lambing.count.to_s+" jagnjenjadi iz "+number_of_lambings.to_s+" jagnjenja", :style=>{:left=>"40px", :top=>"8px", :color=>"black"} ])      
+      f.labels(:items=>[:html=>""+Lambing.count.to_s+" jagnjenjadi iz "+number_of_lambings.to_s+" jagnjenja: " + average_lambings.to_s + "%", :style=>{:left=>"20px", :top=>"4px", :color=>"green"} ])      
       # f.series(:type=> 'column',:name=> '2013 prosek ' + average_lambings.to_s,:data=> [2, 17, 26, 22, 4])
-      f.series(:type=> 'column',:name=> '2014 prosek ' + average_lambings.to_s + '%',:data=> [l_find(1), l_find(2), l_find(3), l_find(4), l_find(5), l_find(6)])
+      f.series(:type=> 'column',:name=> 'borj ovaca',:data=> [l_find(1), l_find(2), l_find(3), l_find(4), l_find(5), l_find(6)])
       #f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
     end
     @chart2 = LazyHighCharts::HighChart.new('graph') do |f|
@@ -27,14 +27,14 @@ class SheepController < ApplicationController
       f.options[:yAxis][:title] = {text: 'broj grla (kom.)'  }
       # f.series(:type=> 'column',:name=> '2013 prosek ' + average_lambings.to_s,:data=> [2, 17, 26, 22, 4])
       #f.series(:type=> 'column',:name=> '2014 prosek ' + average_lambings.to_s + '%',:data=> [l_find(1), l_find(2), l_find(3), l_find(4), l_find(5), l_find(6)])
-      f.series(:type=> 'spline',:name=> 'Trenutno stanje: ' + Sheep.all.where("status = 'na farmi'").count.to_s + ' grla', :data=> sheeps_number_in_time)
+      f.series(:type=> 'spline',:name=> 'Trenutno stanje:', :data=> sheeps_number_in_time)
     end
     @chart3 = LazyHighCharts::HighChart.new('graph') do |f|
       f.title({ :text=>"Najbolje ovce"})  
       f.options[:xAxis][:categories] = [bs[0].nickname, bs[1].nickname, bs[2].nickname, bs[3].nickname, bs[4].nickname]
-      f.options[:yAxis][:title] = {text: 'prosek jagnjenja' }
+      f.options[:yAxis][:title] = {text: 'prosek jagnjenja u %' }
       f.options[:xAxis][:title] = {text: 'naziv ovce' }
-      f.series(:type=> 'bar',:name=> 'Najboljih 5 grla',
+      f.series(:type=> 'bar',:name=> 'Procenat jagnjenja',
                :data=> [bs[0].percent_of_lambings, bs[1].percent_of_lambings, bs[2].percent_of_lambings, bs[3].percent_of_lambings, bs[4].percent_of_lambings])
     end
     

@@ -23,5 +23,7 @@
 
 
 <br><br><br>
-<%= link_to 'Izmeni', edit_sheep_path(@sheep), class:"btn btn-primary" %> 
+<% if not current_user.nil? %>
+        <%= link_to 'Izmeni', edit_sheep_path(@sheep), class:"btn btn-primary" %>
+<% end %>
 <%= link_to 'Nazad', sheep_index_path, class:"btn btn-default" %>

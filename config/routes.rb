@@ -1,4 +1,6 @@
 Sheeps::Application.routes.draw do
+  resources :users
+
   resources :removes
 
   resources :sheep_sellings
@@ -15,8 +17,14 @@ Sheeps::Application.routes.draw do
 
   resources :sheep
   
+  resources :sessions, only: [:new, :create]
+  
+  get 'signin', to: 'sessions#new'
+  delete 'signout', to: 'sessions#destroy'
+  
     resources :uginuces
 get '/', to: 'sheep#statistics'
+get 'root', to: 'sheep#statistics'
 
 get '/statistics', to: 'sheep#statistics'
 

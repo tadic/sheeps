@@ -12,7 +12,6 @@
       <th class="col-sm-1">poreklo</th>
       <th class="col-sm-2">opis</th>
       <th class="col-sm-1"></th>
-      <th class="col-sm-1"></th>
     </tr>
   </thead>
 
@@ -28,7 +27,6 @@
         <td><%= sheep.background%></td>
         <td><%= sheep.describe %></td>
         <td><%= link_to 'Prikazi', sheep, class:"btn btn-primary" %></td>
-        <td><%= link_to 'Izmeni', edit_sheep_path(sheep), class:"btn btn-default" %></td>
       </tr>
     <% end %>
   </tbody>

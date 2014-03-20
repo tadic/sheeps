@@ -5,7 +5,8 @@
 <li><%= link_to 'vakcinacije/lecenja', vacinations_path %></li>
 <li><%= link_to 'jagnjenja', lambings_path %></li>
 <li><%= link_to 'uginuca', uginuces_path %></li>
-<li class="dropdown">
+<% if not current_user.nil? %>
+  <li class="dropdown">
     <a class="dropdown-toggle"
        data-toggle="dropdown"
        href="#">
@@ -13,9 +14,16 @@
         <b class="caret"></b>
       </a>
     <ul class="dropdown-menu">
-      <li><%= link_to 'jagnjenje', new_lambing_path %></li>
-      <li><%= link_to 'nabavka ovaca', new_sheep_purchase_path %></li>
-      <li><%= link_to 'vakcinacija/lecenje', new_vacination_path %></li>
-      <li><%= link_to 'uginuce', new_uginuce_path %></li>
+
+        <li><%= link_to 'jagnjenje', new_lambing_path %></li>
+        <li><%= link_to 'nabavka ovaca', new_sheep_purchase_path %></li>
+        <li><%= link_to 'vakcinacija/lecenje', new_vacination_path %></li>
+        <li><%= link_to 'uginuce', new_uginuce_path %></li>
     </ul>
-</li>
+  </li>
+    <li><%= link_to 'izadji', signout_path, method: :delete %></li>
+<% else %>
+    <li><%= link_to 'prikljuci se', new_session_path %></li>
+<% end %>
+
+

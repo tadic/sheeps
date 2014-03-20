@@ -1,0 +1,10 @@
+<h1 class='page_title'>Prikljuci se</h1>
+
+<p id="notice"><%= notice %></p>
+<br>
+<%= form_tag sessions_path do %>
+  Korisnicko ime <%= text_field_tag :username, params[:username] %>
+  Lozinka <%= password_field_tag :password, params[:password] %><br><br>
+  <%= submit_tag "Prikljuci se", class: "btn btn-primary" %>
+  
+<% end %>

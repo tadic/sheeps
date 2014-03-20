@@ -9,7 +9,6 @@
       <th class="col-sm-1">zenskih</th>
       <th class="col-sm-3">Opste zapazanje</th>
       <th class="col-sm-1"></th>
-      <th class="col-sm-1"></th>
     </tr>
   </thead>
 
@@ -22,7 +21,6 @@
         <td><%= lambing.females_total%>/<%= lambing.females_alive%></td>
         <td><%= lambing.comment %></td>
         <td><%= link_to 'prikazi', '/lambings/'+lambing.id.to_s, class:"btn btn-primary" %></td>
-        <td><%= link_to 'izmeni', edit_lambing_path(lambing), class:"btn btn-default" %></td>
        <!-- <td></td>
     -->  </tr>
     <% end %>
@@ -30,5 +28,6 @@
 </table>
 
 <br>
-
+<% if not current_user.nil? %>
 <%= link_to 'Novo Jagnjenje', new_lambing_path, class:"btn btn-primary" %>
+<% end %>

@@ -9,8 +9,6 @@
       <th class="col-sm-1">ukupni troskovi</th>
       <th class="col-sm-3">Opste zapazanje</th>
       <th class="col-sm-1"></th>
-      <th class="col-sm-1"></th>
-      <th class="col-sm-1"></th>
     </tr>
   </thead>
 
@@ -23,7 +21,6 @@
         <td><%= sp.total_costs%></td>
         <td><%= sp.comment %></td>
         <td><%= link_to 'prikazi', '/sheep_purchases/'+sp.id.to_s, class:"btn btn-primary" %></td>
-        <td><%= link_to 'izmeni', edit_sheep_purchase_path(sp), class:"btn btn-default" %></td>
      <!--   <td></td>-->
       </tr>
     <% end %>
@@ -31,5 +28,6 @@
 </table>
 
 <br>
-
-<%= link_to 'Nova nabavka ovaca', new_sheep_purchase_path, class:"btn btn-primary" %>
+<% if not current_user.nil? %>
+        <%= link_to 'Nova nabavka ovaca', new_sheep_purchase_path, class:"btn btn-primary" %>
+<% end %>

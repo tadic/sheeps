@@ -38,6 +38,8 @@
   
   <br>      
   <textarea class="form-control" rows="3" name='comment' readonly='true'  placeholder="Nije bilo zapaznja..."><%= @activity.comment %></textarea><br>
-<%= link_to 'Izmeni', edit_sheep_purchase_path(@activity), class:"btn btn-default" %>
-<%= link_to 'Izbrisi', @activity.sheep_purchases.first, method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %>
+<% if not current_user.nil? %>
+        <%= link_to 'Izmeni', edit_sheep_purchase_path(@activity), class:"btn btn-default" %>
+        <%= link_to 'Izbrisi', @activity.sheep_purchases.first, method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %>
+<% end %>
 <%= link_to 'Nazad', :back, class:"btn btn-primary" %> 

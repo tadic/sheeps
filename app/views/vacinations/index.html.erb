@@ -26,14 +26,13 @@
         <td><%= a.total_costs%></td>
         <td><%= a.comment %></td>
         <td><%= link_to 'prikazi', '/vacinations/'+a.id.to_s, class:"btn btn-primary" %></td>
-        <td><%= link_to 'izmeni', edit_vacination_path(a), class:"btn btn-default" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'Nova vakcinacija/lecenje', new_vacination_path, class:"btn btn-primary" %>
-
+<% if not current_user.nil? %>
+    <%= link_to 'Nova vakcinacija/lecenje', new_vacination_path, class:"btn btn-primary" %>
+<% end %>
 

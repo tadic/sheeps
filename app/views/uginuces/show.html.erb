@@ -7,7 +7,8 @@
 <br>
 <textarea class="form-control" rows="3" name='comment' readonly='true'  placeholder="Nije bilo zapaznja..."><%= @uginuce.activity.comment %></textarea><br>
 
-
-<%= link_to 'Izmeni', edit_uginuce_path(@uginuce), class:"btn btn-primary" %>
-<%= link_to 'Izbrisi', @uginuce , method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %>
+<% if not current_user.nil? %>
+      <%= link_to 'Izmeni', edit_uginuce_path(@uginuce), class:"btn btn-primary" %>
+      <%= link_to 'Izbrisi', @uginuce , method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %>
+<% end %>
 <%= link_to 'Nazad', uginuces_path, class:"btn btn-default" %>

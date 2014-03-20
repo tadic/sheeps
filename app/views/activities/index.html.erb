@@ -9,7 +9,6 @@
       <th>Ukupni troskovi</th>
       <th>Napomena</th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -21,8 +20,7 @@
         <td><%= activity.location %> </td>
         <td><%= activity.total_costs %> </td>
         <td><%= activity.comment %> </td>
-        <td><%= link_to 'Show', activity.show_path, class:"btn btn-primary" %> </td>
-        <td><%= link_to 'Edit', activity.edit_path, class:"btn btn-default" %> </td>
+        <td><%= link_to 'Prikazi', activity.show_path, class:"btn btn-primary" %> </td>
      <!--   <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
    -->   </tr>
     <% end %>

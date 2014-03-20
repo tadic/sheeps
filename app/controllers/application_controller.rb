@@ -2,9 +2,14 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :sheep_many, :lamb_many, :sheeps_number_in_time
+  helper_method :sheep_many, :lamb_many, :sheeps_number_in_time, :current_user
   def sheep_path
       '/sheep'
+  end
+  
+  def current_user
+    return nil if session[:user_id].nil? 
+    User.find(session[:user_id]) 
   end
  def convert_date_to_i(date)
     if date==nil or date.length<9
