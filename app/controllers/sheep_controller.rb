@@ -39,6 +39,21 @@ class SheepController < ApplicationController
       f.series(:type=> 'bar',:name=> 'Procenat jagnjenja',
                :data=> [bs[0].percent_of_lambings, bs[1].percent_of_lambings, bs[2].percent_of_lambings, bs[3].percent_of_lambings, bs[4].percent_of_lambings])
     end
+    c = costs_in_time
+    m = many_in_time
+    @chart4 = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title({ :text=>"Rashodi/Prihodi"})  
+      f.options[:xAxis][:categories] = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dec']
+      f.options[:yAxis][:title] = {text: 'iznos u evrima' }
+      f.options[:xAxis][:title] = {text: '2014' }
+      f.series(:name=> 'Rashodi',
+               :data=> c)
+      f.series(:name=> 'Prihodi',
+               :data=> m)
+      f.series(:type=> 'areaspline',:name=> 'Total',
+               :data=> c)
+ 
+    end
     
   end
   
