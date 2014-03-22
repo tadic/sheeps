@@ -65,7 +65,9 @@ class ApplicationController < ActionController::Base
         upDate += 100
       end     
           if  a.a_type=='ostale_nabavke' or a.a_type=='nabavka_ovaca'
+            if a.total_costs != nil                   
             costs += a.total_costs
+            end
           end   
     end
     arr.push(-costs)

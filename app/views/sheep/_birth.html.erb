@@ -1,8 +1,8 @@
-<h2 class='page_title'>Rodjenje</h2>
+<h3 class='page_title'>Rodjenje</h3>
 <ul>
   <li><strong>Ojagnjena dana</strong> <%= @sheep.born_date_and_place %></li>
   <li><strong>Tezina na rodjenju </strong><%=@sheep.birthweight%>kg</li>
-  <li><strong>Majka</strong> <%= @sheep.mother %></li>
+  <li><strong>Majka</strong> <% if @sheep.birth!=nil%><%= link_to @sheep.mother.to_s, @sheep.birth.sheep %><% else %><%= @sheep.mother %><% end %></li>
   <li><strong>Otac</strong> <%= @sheep.father %></li>
   <li><strong>Opis</strong> <%= @sheep.describe %></li>
 </ul>

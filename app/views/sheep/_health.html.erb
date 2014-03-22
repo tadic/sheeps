@@ -1,10 +1,10 @@
-<h2 class='page_title'>Preventiva <% if @sheep.self_vacinations.length==0%><%= 'nije bilo'%></h2><% else %></h2>
+<h3 class='page_title'>Preventiva <% if @sheep.self_vacinations.length==0%><%= 'nije bilo'%></h3><% else %></h3>
 <ul>
   <li>Ovca je redovno tretirana <%= @sheep.self_vacinations.count%> puta</li>
   <li>poslednji tretman bio je <strong><%=@sheep.self_vacinations.last.reason%></strong>, dana <%= @sheep.self_vacinations.last.activity.show_date%></li>
 </ul>
 <% end %>
-<h2 class='page_title'>Lecenja <% if @sheep.terapies.length==0%><%= 'nije bilo'%></h2><% else %></h2>
+<h3 class='page_title'>Lecenja <% if @sheep.terapies.length==0%><%= 'nije bilo'%></h3><% else %></h3>
   <br>
   <h4>Ovca je lecena <%= @sheep.terapies.count%> puta</h4>
   <table class='table table-hover'>

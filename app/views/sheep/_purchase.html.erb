@@ -1,0 +1,8 @@
+<% if @sheep.sheep_purchase!=nil%>
+  <h3 class='page_title'>Nabavljena <%= @sheep.sheep_purchase.activity.show_date%></h3>
+  <ul>
+    <li><strong>mesto</strong> - <%= @sheep.sheep_purchase.activity.location%></li>
+    <li><strong>cena</strong> - <%= @sheep.sheep_purchase.price%></li>
+  </ul>
+
+<% end %>
