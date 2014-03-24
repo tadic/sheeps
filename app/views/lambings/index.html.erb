@@ -19,7 +19,7 @@
         <td><%= lambing.show_date %></td>
         <td><%= lambing.sheeps.group_by(&:id).count %></td>
         <td><strong><% lambing.sheeps.distinct.each do |s| %>
-               <% if s.nickname!= nil %>
+               <% if s.nickname!= '' %>
                   <%= s.nickname + ', '%>
                <% else %>
                   <%= s.code + ', ' %>       
