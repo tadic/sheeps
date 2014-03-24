@@ -125,7 +125,11 @@ end
   
   def mother
     if birth!=nil
-      return birth.sheep.nickname 
+      if birth.sheep.nickname!= ''
+        return birth.sheep.nickname
+      else
+        return birth.sheep.code
+      end
     else
       return sheep_purchase.mother_code
     end 
