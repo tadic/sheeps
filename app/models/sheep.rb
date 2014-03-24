@@ -114,9 +114,18 @@ end
      end
      
    end
+   
+  def from
+    if birth!=nil
+      l = birth.activity.lambings
+      return  l.where(sheep_id: mother_id).count
+    end
+    return '?'
+  end
+  
   def mother
     if birth!=nil
-      return birth.sheep.code + ' - nadimak ' + nik_n 
+      return birth.sheep.nickname 
     else
       return sheep_purchase.mother_code
     end 
