@@ -86,7 +86,7 @@ class SheepController < ApplicationController
       age += 1
       num += s
     end
-    return number_with_precision((sum/num).to_f, precision: 2)
+    return number_with_precision((sum.to_f/num).to_f, precision: 2)
   end
 
 def average_lambings
