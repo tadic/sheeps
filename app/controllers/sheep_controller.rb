@@ -9,8 +9,8 @@ class SheepController < ApplicationController
     @sheep = Sheep.all
   end
   def sheeplist
-    
   end
+  
   def statistics
     bs = Sheep.best_sheep(5)
     @chart = LazyHighCharts::HighChart.new('graph') do |f|
@@ -52,11 +52,42 @@ class SheepController < ApplicationController
                :data=> m)
       f.series(:type=> 'areaspline',:name=> 'Total',
                :data=> c)
- 
     end
-    
+    sr = starosna_raspodela
+    @chart5 = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title({ :text=>"Starost zenskih odraslih ovaca"})  
+      f.options[:xAxis][:categories] = ['0 god.', '1 god.', '2 god.', '3 god.', '4 god.', '5 god.', '6 god.', '7 god.', '8 god.', '9 god.']
+      f.options[:yAxis][:title] = {text: 'broj ovaca (kom.)'  }
+      f.options[:xAxis][:title] = {text: 'starost (god.)'  }
+      f.labels(:items=>[:html=>"Prosecna starost " + average_age + " god.", :style=>{:left=>"20px", :top=>"4px", :color=>"green"} ])      
+      # f.series(:type=> 'column',:name=> '2013 prosek ' + average_lambings.to_s,:data=> [2, 17, 26, 22, 4])
+      f.series(:type=> 'column',:name=> 'borj ovaca',:data=> sr, :style=>{:color => "green"})
+      #f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
+    end
   end
   
+  def starosna_raspodela
+    arr = [0,0,0,0,0,0,0,0,0,0]
+    sheeps = Sheep.all
+    sheeps.each do |s|
+      if s.sex=='zensko' and s.age_in_months > 6 and s.age_in_months < 100
+        arr[(s.age_in_months/12).to_i] += 1
+      end
+    end
+    return arr
+  end
+  def average_age
+    sum = 0
+    age = 0
+    num = 0
+    arr = starosna_raspodela
+    arr.each do |s|
+      sum += age*s
+      age += 1
+      num += s
+    end
+    return number_with_precision((sum/num).to_f, precision: 2)
+  end
 
 def average_lambings
   return number_with_precision((100*Lambing.all.count.to_f/number_of_lambings).to_f, precision: 2)

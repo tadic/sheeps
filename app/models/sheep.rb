@@ -63,6 +63,7 @@ end
 def self.best_sheep(n)
   Sheep.all.sort_by{|a| a.percent_of_lambings}.last(n).reverse
 end
+
 def birthdate
     if birth!=nil
      return birth.activity.date
@@ -70,18 +71,20 @@ def birthdate
     return sheep_purchase.date_of_birth
 end
 
-def age
+def age_in_months
   b_date = birthdate
   current = (Time.now.strftime("%Y%m")).to_i
-  months = 12*(current/100 -  b_date/10000) + (current%100) - (b_date/100)%100
-  if months < 13
+  return  12*(current/100 -  b_date/10000) + (current%100) - (b_date/100)%100
+end
+
+def age
+  months = age_in_months
+  if months < 12
     return (months).to_s + ' mes.'
   end
   if months > 100
     return '?'
   end
-  
-
   return (months.to_f/12).round(1).to_s + ' god.'
 end
 
