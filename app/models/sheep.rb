@@ -61,7 +61,7 @@ end
 
 
 def self.best_sheep(n)
-  Sheep.all.sort_by{|a| a.percent_of_lambings}.last(n).reverse
+  Sheep.all.sort_by{|a| [a.percent_of_lambings, a.birthdate]}.last(n).reverse
 end
 
 def birthdate

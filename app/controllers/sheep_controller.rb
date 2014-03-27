@@ -61,7 +61,8 @@ class SheepController < ApplicationController
       f.options[:xAxis][:title] = {text: 'starost (god.)'  }
       f.labels(:items=>[:html=>"Prosecna starost " + average_age + " god.", :style=>{:left=>"20px", :top=>"4px", :color=>"green"} ])      
       # f.series(:type=> 'column',:name=> '2013 prosek ' + average_lambings.to_s,:data=> [2, 17, 26, 22, 4])
-      f.series(:type=> 'column',:name=> 'borj ovaca',:data=> sr, :style=>{:color => "green"})
+      f.series(:type=> 'column',:name=> 'borj ovaca',:data=> sr)
+       f.series(:type=> 'column',:data=> sr)
       #f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
     end
   end
