@@ -118,10 +118,29 @@ end
      
    end
    
-  def from
+   def self.best_female_lambs(n)
+     females = Sheep.where("sex= 'zensko' AND status = 'na farmi'")
+     best_f_l = []
+     females.each do |f|
+       if f.age_in_months < 8
+          best_f_l.push(f)
+       end
+     end
+     return best_f_l.sort_by{|a| [a.lambs_from_lambing]}.last(n).reverse
+   end
+   
+   def lambs_from_lambing
     if birth!=nil
       l = birth.activity.lambings
       return  l.where(sheep_id: mother_id).count
+    end
+    return 0
+   end
+   
+  def from
+    n = lambs_from_lambing
+    if n > 0
+      return n
     end
     return '?'
   end

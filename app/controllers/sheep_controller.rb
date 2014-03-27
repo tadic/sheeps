@@ -65,6 +65,16 @@ class SheepController < ApplicationController
        f.series(:type=> 'column',:data=> sr)
       #f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
     end
+    bl = Sheep.best_female_lambs(5)
+    @chart6 = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title({ :text=>"Najbolji zenski jaganjci"})  
+      f.options[:xAxis][:categories] = [bl[0].code_nickname, bl[1].code_nickname, bl[2].code_nickname, bl[3].code_nickname, bl[4].code_nickname]
+      f.options[:yAxis][:title] = {text: 'iz legla od' }
+      f.series(:type=> 'bar',:name=> 'velicina legla (kom.)',
+               :data=> [{y: bl[0].lambs_from_lambing, color: 'red'}, {y: bl[1].lambs_from_lambing, color: 'green'},
+                        {y: bl[2].lambs_from_lambing, color: 'black'}, bl[3].lambs_from_lambing,
+                        {y: bl[4].lambs_from_lambing, color: 'orange'}])
+    end
   end
   
   def starosna_raspodela
