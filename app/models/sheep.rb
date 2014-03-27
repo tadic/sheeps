@@ -126,7 +126,14 @@ end
           best_f_l.push(f)
        end
      end
-     return best_f_l.sort_by{|a| [a.lambs_from_lambing]}.last(n).reverse
+     return best_f_l.sort_by{|a| [a.lambs_from_lambing, a.mother_rating]}.last(n).reverse
+   end
+   
+   def mother_rating
+    if birth!=nil
+       return birth.sheep.lambs_from_lambing
+    end
+    return 0
    end
    
    def lambs_from_lambing
@@ -153,7 +160,12 @@ end
         return birth.sheep.code
       end
     else
-      return sheep_purchase.mother_code
+      if sheep_purchase.mother_code==''
+        return 'nepoznata'
+      else
+        return sheep_purchase.mother_code
+      end
+      
     end 
   end
 
