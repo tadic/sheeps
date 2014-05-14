@@ -54,9 +54,7 @@ class ApplicationController < ActionController::Base
   
   def costs_in_time
     arr = []
-    arr.push(0)
     costs = 0
-    
     activities = Activity.all.sort_by{|a| a[:date]}
     upDate = 200    # january
     activities.each do |a|
@@ -76,7 +74,22 @@ class ApplicationController < ActionController::Base
   end
   
   def many_in_time
-    return [0,0,0,0,0]
+    arr = []
+    many = 0
+    sellings = Activity.where(a_type: 'prodaja').sort_by{|a| a[:date]}
+    upDate = 200    # january
+    sellings.each do |a|
+      while a.date%10000 > upDate
+        arr.push(many)
+        many = 0
+        upDate += 100
+      end     
+      if a.total_costs != nil                   
+        many += a.total_costs
+      end  
+    end
+    arr.push(many)
+    return arr
   end
   
   def sheep_many(n)
