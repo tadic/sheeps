@@ -13,6 +13,9 @@ color: red;
 .page_title{
     color: #306EFF;
 }
+.status{
+    color: #0FB509;
+}
 #add_sheep {
   background-color: hsl(201, 100%, 30%) !important;
   background-repeat: repeat-x;
