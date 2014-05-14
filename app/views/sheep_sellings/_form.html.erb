@@ -1,41 +1,56 @@
 <%= form_for(@sheep_selling) do |f| %>
-  <% if @sheep_selling.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@sheep_selling.errors.count, "error") %> prohibited this sheep_selling from being saved:</h2>
 
-      <ul>
-      <% @sheep_selling.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+  <input type='hidden' name='activity_id'> 
+  <div class="field activity_header" >
+    <table class='table'>
+      <thead>
+        <th class="col-sm-1"><strong>Datum </strong>
+          <input type="text" data-behaviour='datepicker' data-format="YYYY/MM/DD" name='date'<% if @activity!= nil %>value='<%=@activity.show_date %>'<%end%>></th>
+        <th class="col-sm-2"> ukupan prihod
+          <input type="text" name="total_costs" id="total_price" style='width:60px'  <% if @activity!= nil %> value='<%=@activity.total_costs%>'<%end%>/>
+           
+          </input>&nbsp;<span id="errmsg">
+        </span>evra</th>
+      </thead>
+
+    </table>
+
+    
+        Ovce: 
+    <select id='selling_sheeps' class='multiselect mutliselect-primary' name='selected_sheeps[]' multiple="multiple" size=5>
+      <% @sheeps.each do |s| %>
+        <% if @activity!=nil and @activity.selled_sheeps.distinct.include? s %>
+           <option data-value='{"id" : "<%= s.id %>", "nickname" : "<%= s.nickname %>", "code" : "<%= s.code %>", "sex" : "<%= s.sex %>", "describe" : "<%= s.describe %>" }' SELECTED><%= s.code%> <%= s.nickname %></option>
+        <% else %>
+           <option data-value='{"id" : "<%= s.id %>", "nickname" : "<%= s.nickname %>", "code" : "<%= s.code %>", "sex" : "<%= s.sex %>", "describe" : "<%= s.describe %>" }'><%= s.code%> <%= s.nickname %></option>
+        <% end %>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    </select>
 
-  <div class="field">
-    <%= f.label :activity_id %><br>
-    <%= f.number_field :activity_id %>
   </div>
-  <div class="field">
-    <%= f.label :sheep_id %><br>
-    <%= f.number_field :sheep_id %>
-  </div>
-  <div class="field">
-    <%= f.label :weight %><br>
-    <%= f.text_field :weight %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :place %><br>
-    <%= f.text_field :place %>
-  </div>
-  <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_field :comment %>
-  </div>
+         <div  id="sellings">
+            <table class='table table-hover'>
+              <thead>
+                <tr class='info'>
+                  <th class="col-sm-1">oznaka</th>
+                  <th class="col-sm-1">nadimak</th>
+                  <th class="col-sm-1">pol</th>         
+                  <th class="col-sm-2">opis</th>
+                  <th class="col-sm-1">prodaja na kilo</th>
+                  <th class="col-sm-1">cena po kg</th>
+                  <th class="col-sm-1">tezina</th>
+                  <th class="col-sm-1">cena grla</th>
+                  <th class="col-sm-1">napomena</th>
+                </tr>
+              </thead>
+              <tbody class='selling_list'>
+
+              </tbody>
+            </table> 
+        </div>
+  <textarea class="form-control" rows="3" name='comment' placeholder="Unesi zapazanje protekle prodaje..."></textarea><br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :Snimi, class:"btn btn-primary" %>
+    <%= link_to 'Nazad', :back, class:"btn btn-default" %>
   </div>
 <% end %>

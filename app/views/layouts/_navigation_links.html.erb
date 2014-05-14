@@ -1,22 +1,33 @@
 <%# add navigation links to this file %>
-<li><%= link_to 'Ovce', '/sheeplist' %></li>
-<li><%= link_to 'aktivnosti', activities_path %></li>
-<li><%= link_to 'nabaka ovaca', sheep_purchases_path %></li>
-<li><%= link_to 'ostale nabavke', other_purchases_path %></li>
-<li><%= link_to 'vakcinacije/lecenja', vacinations_path %></li>
-<li><%= link_to 'jagnjenja', lambings_path %></li>
-<li><%= link_to 'uginuca', uginuces_path %></li>
-<% if not current_user.nil? %>
+
+<li><%= link_to 'ovce', '/sheeplist' %></li>
+
   <li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Nova aktivnost<b class="caret"></b></a>
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">na farmi<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li><%= link_to 'jagnjenja', lambings_path %></li>
+        <li><%= link_to 'vakcinacije/lecenja', vacinations_path %></li>
+        <li><%= link_to 'prodaje', sheep_sellings_path %></li>
+        <li><%= link_to 'nabaka ovaca', sheep_purchases_path %></li>
+        <li><%= link_to 'ostale nabavke', other_purchases_path %></li>
+        <li><%= link_to 'uginuca', uginuces_path %></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">nova aktivnost<b class="caret"></b></a>
     <ul class="dropdown-menu">
         <li><%= link_to 'jagnjenje', new_lambing_path %></li>
+        <li><%= link_to 'vakcinacija/lecenje', new_vacination_path %></li>
+        <li><%= link_to 'prodaje', new_sheep_selling_path %></li>
         <li><%= link_to 'nabavka ovaca', new_sheep_purchase_path %></li>
         <li><%= link_to 'ostale nabavke', new_other_purchase_path %></li>
-        <li><%= link_to 'vakcinacija/lecenje', new_vacination_path %></li>
         <li><%= link_to 'uginuce', new_uginuce_path %></li>
     </ul>
   </li>
+
+<li><%= link_to 'sve aktivnosti', activities_path %></li>
+<li><%= link_to 'statistika', '/sheeplist' %></li>
+<% if not current_user.nil? %>
   <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= current_user.username%><b class="caret"></b></a>
     <ul class="dropdown-menu">

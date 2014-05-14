@@ -20,7 +20,7 @@ class SheepController < ApplicationController
       f.options[:xAxis][:title] = {text: 'broj jaganjaca po ovci (kom.)'  }
       f.labels(:items=>[:html=>""+Lambing.count.to_s+" jagnjenjadi iz "+number_of_lambings.to_s+" jagnjenja: " + average_lambings.to_s + "%", :style=>{:left=>"20px", :top=>"4px", :color=>"green"} ])      
       # f.series(:type=> 'column',:name=> '2013 prosek ' + average_lambings.to_s,:data=> [2, 17, 26, 22, 4])
-      f.series(:type=> 'column',:name=> 'borj ovaca',:data=> [l_find(1), l_find(2), l_find(3), l_find(4), l_find(5), l_find(6)])
+      f.series(:type=> 'column',:name=> 'broj ovaca',:data=> [l_find(1), l_find(2), l_find(3), l_find(4), l_find(5), l_find(6)])
       #f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
     end
     @chart2 = LazyHighCharts::HighChart.new('graph') do |f|
@@ -29,7 +29,7 @@ class SheepController < ApplicationController
       f.options[:yAxis][:title] = {text: 'broj grla (kom.)'  }
       # f.series(:type=> 'column',:name=> '2013 prosek ' + average_lambings.to_s,:data=> [2, 17, 26, 22, 4])
       #f.series(:type=> 'column',:name=> '2014 prosek ' + average_lambings.to_s + '%',:data=> [l_find(1), l_find(2), l_find(3), l_find(4), l_find(5), l_find(6)])
-      f.series(:type=> 'spline',:name=> 'Trenutno stanje:', :data=> sheeps_number_in_time)
+      f.series(:type=> 'spline',:name=> 'Trenutno stanje:', :data=> sheeps_number_in_time, :color=> 'red')
     end
     @chart3 = LazyHighCharts::HighChart.new('graph') do |f|
       f.title({ :text=>"Najbolje ovce"})  
@@ -46,12 +46,11 @@ class SheepController < ApplicationController
       f.options[:xAxis][:categories] = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dec']
       f.options[:yAxis][:title] = {text: 'iznos u evrima' }
       f.options[:xAxis][:title] = {text: '2014' }
-      f.series(:name=> 'Rashodi',
+      f.series(:type=>'column', :name=> 'Rashodi',
                :data=> c)
-      f.series(:name=> 'Prihodi',
-               :data=> m)
-      f.series(:type=> 'areaspline',:name=> 'Total',
-               :data=> c)
+      f.series(:type=>'column', :name=> 'Prihodi',
+               :data=> m,  color: 'green')
+
     end
     sr = starosna_raspodela
     @chart5 = LazyHighCharts::HighChart.new('graph') do |f|
@@ -62,8 +61,6 @@ class SheepController < ApplicationController
       f.labels(:items=>[:html=>"Prosecna starost " + average_age + " god.", :style=>{:left=>"20px", :top=>"4px", :color=>"green"} ])      
       # f.series(:type=> 'column',:name=> '2013 prosek ' + average_lambings.to_s,:data=> [2, 17, 26, 22, 4])
       f.series(:type=> 'column',:name=> 'borj ovaca',:data=> sr)
-       f.series(:type=> 'column',:data=> sr)
-      #f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
     end
     bl = Sheep.best_female_lambs(5)
     @chart6 = LazyHighCharts::HighChart.new('graph') do |f|

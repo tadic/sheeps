@@ -1,34 +1,45 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Activity:</strong>
-  <%= @sheep_selling.activity_id %>
-</p>
+    <h3><strong> Dana</strong> <%=@activity.show_date%>&nbsp;
+    prodato je &nbsp;<%=@activity.sheep_sellings.count%> grla.</h3> 
+    <h3><strong>Ukupan prihod: </strong><%=@activity.total_costs%> evra</h3>
+    <br><h2>Prodata grla:</h2>
 
-<p>
-  <strong>Sheep:</strong>
-  <%= @sheep_selling.sheep_id %>
-</p>
+        <div  id="accordion">
+            <table class='table table-hover'>
+              <thead>
+                <tr class='info'>
+                  <th class="col-sm-1">oznaka</th>
+                  <th class="col-sm-1">nadimak</th>
+                  <th class="col-sm-1">pol</th>         
+                  <th class="col-sm-2">opis</th>
+                  <th class="col-sm-1">prodaja na kilo</th>
+                  <th class="col-sm-1">cena po kg</th>
+                  <th class="col-sm-1">tezina</th>
+                  <th class="col-sm-1">cena grla</th>
+                  <th class="col-sm-1">napomena</th>
+              </thead>
+              <tbody class='purchasing_list'>
+                <%@activity.sheep_sellings.each do |ss|%>
+                <tr><td><%= ss.sheep.code %></td>
+                    <td><%= ss.sheep.nickname%></td>
+                    <td><%= ss.sheep.sex %></td>
+                    <td><%= ss.sheep.describe %></td>
+                    <td><input type='checkbox' disabled='true' <% if ss.weight!=nil %> checked <% end %>></td>
+                    <td><%= ss.pricekg %></td>
+                    <td><%= ss.weight %></td>
+                    <td><%= ss.price %></td>
+                    <td><%= ss.comment %></td>
+                <% end %>
+              </tbody>
+            </table> 
+        </div>
+  
+  <br>      
+  <textarea class="form-control" rows="3" name='comment' readonly='true'  placeholder="Nije bilo zapaznja..."><%= @activity.comment %></textarea><br>
 
-<p>
-  <strong>Weight:</strong>
-  <%= @sheep_selling.weight %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @sheep_selling.price %>
-</p>
-
-<p>
-  <strong>Place:</strong>
-  <%= @sheep_selling.place %>
-</p>
-
-<p>
-  <strong>Comment:</strong>
-  <%= @sheep_selling.comment %>
-</p>
-
-<%= link_to 'Edit', edit_sheep_selling_path(@sheep_selling) %> |
-<%= link_to 'Back', sheep_sellings_path %>
+<% if not current_user.nil? %>
+    <%= link_to 'Izmeni', edit_sheep_selling_path(@activity), class:"btn btn-default" %>
+    <%= link_to 'Izbrisi', @activity.sheep_sellings.first, method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %>
+<% end %>
+<%= link_to 'Nazad', :back, class:"btn btn-primary" %> 

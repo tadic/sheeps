@@ -62,6 +62,7 @@ class ApplicationController < ActionController::Base
     activities.each do |a|
       while a.date%10000 > upDate
         arr.push(-costs)
+        costs = 0
         upDate += 100
       end     
           if  a.a_type=='ostale_nabavke' or a.a_type=='nabavka_ovaca'
@@ -73,6 +74,7 @@ class ApplicationController < ActionController::Base
     arr.push(-costs)
     return arr
   end
+  
   def many_in_time
     return [0,0,0,0,0]
   end

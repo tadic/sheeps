@@ -2,8 +2,10 @@ class Activity < ActiveRecord::Base
   has_many :lambings, :dependent => :destroy
   has_many :sheep_purchases, :dependent => :destroy
   has_many :vacinations, :dependent => :destroy
+  has_many :sheep_sellings, :dependent => :destroy
   has_many :sheeps, through: :lambings
   has_many :vaccin_sheeps, through: :vacinations, :source => :sheep
+  has_many :selled_sheeps, through: :sheep_sellings, :source => :sheep
   has_many :lambs, through: :lambings
   has_one :uginuce
   has_one :other_purchase
@@ -21,7 +23,8 @@ class Activity < ActiveRecord::Base
       return '/vacinations/'+id.to_s+'/edit' if a_type == 'lecenje' || a_type == 'vakcinacija'
   end
   def show_path
-      return '/lambings/'+id.to_s if a_type == 'jagnjenja'   
+      return '/lambings/'+id.to_s if a_type == 'jagnjenja'
+      return '/sheep_sellings/'+id.to_s if a_type == 'prodaja' 
       return '/sheep_purchases/'+id.to_s if a_type == 'nabavka_ovaca'
       return '/vacinations/'+id.to_s if a_type == 'lecenje' || a_type == 'vakcinacija'
       return '/uginuces/'+id.to_s if a_type == 'uginuce'

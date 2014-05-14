@@ -1,7 +1,7 @@
 class Sheep < ActiveRecord::Base
   
-  scope :ready_for_lambing, -> { where "sex='zensko' AND not code=''" }
-    
+  scope :ready_for_lambing, -> { where "sex='zensko' AND status='na farmi'" }
+    scope :on_farm, -> { where status: 'na farmi'}
     has_one :birth, :class_name => 'Lambing', :foreign_key => 'lamb_id'
     has_many :lambings, :class_name => 'Lambing', :foreign_key => 'sheep_id'
     has_one :sheep_purchase
@@ -61,7 +61,7 @@ end
 
 
 def self.best_sheep(n)
-  Sheep.all.sort_by{|a| [a.percent_of_lambings, a.birthdate]}.last(n).reverse
+  Sheep.on_farm.sort_by{|a| [a.percent_of_lambings, a.birthdate]}.last(n).reverse
 end
 
 def birthdate
@@ -117,7 +117,9 @@ end
      end
      
    end
-   
+   def average_lambing
+     
+   end
    def self.best_female_lambs(n)
      females = Sheep.where("sex= 'zensko' AND status = 'na farmi'")
      best_f_l = []
