@@ -1,0 +1,16 @@
+  <% if @sheep.sheep_selling != nil%>
+  <div class="panel panel-default" id="panel6">
+    <div class="panel-heading">
+      <h3 class="status">
+        Prodata <%= @sheep.sheep_selling.activity.show_date %>
+        <a data-toggle="collapse" data-target="#collapse6" href="#collapse7" > </a>
+      </h3>
+    </div>
+    <div id="collapse6" class="panel-collapse collapse in">
+      <div class="panel-body">
+          <h4>Kilaza - <%= @sheep.sheep_selling.weight %> kg</h4>
+          <h4>Cena - <%= @sheep.sheep_selling.price %> evra</h4>
+      </div>
+    </div>
+  </div>
+  <% end %>

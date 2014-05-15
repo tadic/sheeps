@@ -1,24 +1,73 @@
-<h3 class='page_title'>Preventiva <% if @sheep.self_vacinations.length==0%><%= 'nije bilo'%></h3><% else %></h3>
-<ul>
-  <li>Ovca je redovno tretirana <%= @sheep.self_vacinations.count%> puta</li>
-  <li>poslednji tretman bio je <strong><%=@sheep.self_vacinations.last.reason%></strong>, dana <%= @sheep.self_vacinations.last.activity.show_date%></li>
-</ul>
-<% end %>
-<h3 class='page_title'>Lecenja <% if @sheep.terapies.length==0%><%= 'nije bilo'%></h3><% else %></h3>
-  <br>
-  <h4>Ovca je lecena <%= @sheep.terapies.count%> puta</h4>
-  <table class='table table-hover'>
-    <thead>
-      <th>datum</th>
-      <th>bolest</th>
-      <th>sredstvo</th>
-    </thead>
-    <tbody>
-       <%@sheep.terapies.each do |t|%>
-         <tr><td><%=t.activity.show_date%></td> <td><strong><%=t.reason%></strong></td><td><%= t.vaccin_name%></td>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="panel panel-default" id="panel4">
+    <div class="panel-heading">
+      <h3 class="page_title">
+        Preventiva <% if @sheep.self_vacinations.length==0%><%= 'nije bilo'%><% else%><%= @sheep.self_vacinations.count%><% end %>
+        <a data-toggle="collapse" data-target="#collapse4" href="#collapse4"></a>
+      </h3>
+    </div>
+    <% if @sheep.self_vacinations.length>0%>
+    <div id="collapse4" class="panel-collapse collapse in">
+      <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class='col-sm-3'>Datum</th>
+                  <th class='col-sm-1'>razlog</th>
+                  <th class='col-sm-1'>sredstvo</th>
+                  <th class='col-sm-1'>napomena</th>
+                </tr>
+              </thead>
+            
+              <tbody>
+                <% @sheep.self_vacinations.each do |vac| %>
+                  <tr>
+                    <td><%= link_to vac.activity.show_date%></td>
+                    <td><%= vac.reason %> </td>
+                    <td><%= vac.vaccin_name %> </td>
+                    <td><%= vac.comment %> </td>
+               </tr>
+                <% end %>
+              </tbody>
+            </table>
 
+      </div>
+    </div>
+    <% end %>
+  </div>
 
-<% end %>
+  <div class="panel panel-default" id="panel5">
+    <div class="panel-heading">
+      <h3 class="page_title">
+        Lecenja <% if @sheep.terapies.length==0%><%= 'nije bilo'%><% else%><%= @sheep.terapies.count%><% end %>
+        <a data-toggle="collapse" data-target="#collapse5" href="#collapse5"></a>
+      </h3>
+    </div>
+    <% if @sheep.terapies.length>0%>
+    <div id="collapse5" class="panel-collapse collapse in">
+      <div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class='col-sm-3'>Datum</th>
+                  <th class='col-sm-1'>razlog</th>
+                  <th class='col-sm-1'>sredstvo</th>
+                  <th class='col-sm-1'>napomena</th>
+                </tr>
+              </thead>
+            
+              <tbody>
+                <% @sheep.terapies.each do |vac| %>
+                  <tr>
+                    <td><%= link_to vac.activity.show_date%></td>
+                    <td><%= vac.reason %> </td>
+                    <td><%= vac.vaccin_name %> </td>
+                    <td><%= vac.comment %> </td>
+               </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+      </div>
+    </div>
+    <% end %>
+  </div>

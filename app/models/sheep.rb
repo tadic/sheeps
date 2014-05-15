@@ -5,6 +5,7 @@ class Sheep < ActiveRecord::Base
     has_one :birth, :class_name => 'Lambing', :foreign_key => 'lamb_id'
     has_many :lambings, :class_name => 'Lambing', :foreign_key => 'sheep_id'
     has_one :sheep_purchase
+    has_one :sheep_selling
     has_one :uginuce, :dependent => :destroy
     has_many :vacinations, :dependent => :destroy
     
@@ -102,13 +103,22 @@ end
       'napoznata'
     end
   end
-  def born_date_and_place
+  def birth_date
     if birth!=nil
-      return birth.activity.show_date  + ' - na farmi'
+      return birth.activity.show_date
     else
-      return sheep_purchase.show_date_of_birth + ' - lokacija nepoznata' 
+      return sheep_purchase.show_date_of_birth
     end
   end
+  
+  def birth_place
+        if birth!=nil
+          return 'na farmi'
+        else
+          return 'lokacija nepoznata'
+        end
+  end
+  
    def nik_n
      if nickname==nil
       return 'nema'

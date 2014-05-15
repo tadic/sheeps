@@ -1,30 +1,40 @@
-<h3 class='page_title'>Jagnjenja
-  <% if @sheep.lambings.count== 0%>
-    <%= 'jos nije bilo'%></h3>
-  <% else %>
-<%= @sheep.percent_of_lambings %>%</h3>
-
-
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th class='col-sm-3'>Datum</th>
-      <th class='col-sm-1'>oznaka</th>
-      <th class='col-sm-1'>nadimak</th>
-      <th class='col-sm-1'>pol</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sheep.lambings.each do |l| %>
-      <tr>
-        <td><%= link_to l.activity.show_date, l.lamb%></td>
-        <td><%= l.lamb.code %> </td>
-        <td><%= l.lamb.nickname %> </td>
-        <td><%= l.lamb.sex %> </td>
-   </tr>
-    <% end %>
-  </tbody>
-</table>
-  <% end %>
+  <div class="panel panel-default" id="panel3">
+    <div class="panel-heading">
+      <h3 class="page_title">
+          Jagnjenja
+          <% if @sheep.lambings.count== 0%>
+             <%= 'jos nije bilo'%>
+          <% else %>
+            <%=@sheep.number_of_lambings%> - <%= @sheep.percent_of_lambings %>%
+          <% end %>
+        <a data-toggle="collapse" data-target="#collapse3" href="#collapse3"></a>
+      </h3>
+    </div>
+    <div id="collapse3" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <% if @sheep.lambings.count > 0%>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class='col-sm-3'>Datum</th>
+                  <th class='col-sm-1'>oznaka</th>
+                  <th class='col-sm-1'>nadimak</th>
+                  <th class='col-sm-1'>pol</th>
+                </tr>
+              </thead>
+            
+              <tbody>
+                <% @sheep.lambings.each do |l| %>
+                  <tr>
+                    <td><%= link_to l.activity.show_date, l.lamb%></td>
+                    <td><%= l.lamb.code %> </td>
+                    <td><%= l.lamb.nickname %> </td>
+                    <td><%= l.lamb.sex %> </td>
+               </tr>
+                <% end %>
+              </tbody>
+            </table>
+        <% end %>  
+      </div>
+    </div>
+  </div>

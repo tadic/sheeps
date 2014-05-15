@@ -1,8 +1,19 @@
 <% if @sheep.sheep_purchase!=nil%>
-  <h3 class='page_title'>Nabavljena <%= @sheep.sheep_purchase.activity.show_date%></h3>
-  <ul>
-    <li><strong>mesto</strong> - <%= @sheep.sheep_purchase.activity.location%></li>
-    <li><strong>cena</strong> - <%= @sheep.sheep_purchase.price%></li>
-  </ul>
-
+  <div class="panel panel-default" id="panel2">
+    <div class="panel-heading">
+      <h3 class="page_title">
+        Nabavljena <%= @sheep.sheep_purchase.activity.show_date%>
+        <a data-toggle="collapse" data-target="#collapse2"  href="#collapse2" class="collapsed"> </a>
+      </h3>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+      <div class="panel-body">
+          <ul>
+            <li><strong>mesto</strong> <%= @sheep.sheep_purchase.activity.location%></li>
+            <li><strong>cena</strong>  <%= @sheep.sheep_purchase.price%></li>
+            <li><strong>napomena</strong> <%= @sheep.sheep_purchase.comment%></li>
+          </ul>
+      </div>
+    </div>
+  </div>
 <% end %>

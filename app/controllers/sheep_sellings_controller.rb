@@ -41,6 +41,7 @@ class SheepSellingsController < ApplicationController
 
 
 def create_activity_from_params
+  
   sheeps = params[:sheep_selling]
   return if params_are_empty(sheeps)
     
@@ -57,10 +58,17 @@ end
   # POST /sheep_sellings
   # POST /sheep_sellings.json
   def create
+    if params[:activity_id]!=''
+          destroy_activity(Activity.find(params[:activity_id]))
+    end
+    
     @activity = create_activity_from_params
+    if @activity==nil
+      return
+    end
     
     respond_to do |format|
-      if @activity.save
+      if  @activity.save
         format.html { redirect_to '/sheep_sellings/'+ @activity.id.to_s, notice: 'Prodaja je uspesno uneta!' }
         format.json { render action: 'show', status: :created, location: @vacination }
       else
@@ -73,7 +81,8 @@ end
   # PATCH/PUT /sheep_sellings/1
   # PATCH/PUT /sheep_sellings/1.json
   def update
-    destroy_activity(Activity.find(params[:id]))
+  raise
+    destroy_activity(Activity.find(params[:activity_id]))
     @activity = create_activity_from_params
     respond_to do |format|
       if @activity.save
@@ -89,12 +98,10 @@ end
   # DELETE /sheep_sellings/1
   # DELETE /sheep_sellings/1.json
   def destroy_activity(a)
-    if a.a_type == 'prodaja'
       a.sheep_sellings.each do |sel|
         sel.sheep.update status:'na farmi'
       end
       a.destroy
-    end
   end
   
   def destroy

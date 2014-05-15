@@ -1,26 +1,21 @@
 <p id="notice"><%= notice %></p>
+              
+<div class="panel-group" id="accordion">
+        <div class="row">
+          <div class="col-md-6">
+            <%= render 'header'%>
+            <%= render 'birth'%>
+            <%= render 'purchase'%>
+          </div>
+          <div class="col-md-6">
+            <%= render 'lambings'%>
+            <%= render 'health'%>
+            <%= render 'death'%>
+            <%= render 'selling'%>
+          </div>
+      </div>
+</div>
 
-      <div class="row">
-        <div class="col-md-8">
-          <h2>Ovca: <strong class='page_title'><%= @sheep.nickname %></strong>, oznaka: <%= @sheep.code %> </h2>
-<h3><%= @sheep.percent_of_r %>% romanov</h3>
-<h3 class='status'>Status: <%= @sheep.status%></h3>
-<p>--------------------------------------------------------<p>
-      <div class="row">
-        <div class="col-md-6">
-          <%= render 'purchase'%>
-          <%= render 'birth'%>
-        </div>
-        <div class="col-md-6">
-          <%= render 'lambings'%>
-        </div>
-      </div>
-        </div>
-        <div class="col-md-4  ">
-          <%= render 'health'%>
-        </div>
-      </div>
-      
 
 
 <br><br><br>
@@ -28,3 +23,4 @@
         <%= link_to 'Izmeni', edit_sheep_path(@sheep), class:"btn btn-primary" %>
 <% end %>
 <%= link_to 'Nazad', sheep_index_path, class:"btn btn-default" %>
+

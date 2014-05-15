@@ -1,8 +1,22 @@
-<h3 class='page_title'>Rodjenje</h3>
-<ul>
-  <li><strong>Ojagnjena dana</strong> <%= @sheep.born_date_and_place %></li>
-  <li><strong>Tezina na rodjenju </strong><%=@sheep.birthweight%>kg</li>
-  <li><strong>Majka</strong> <% if @sheep.birth!=nil%><%= link_to @sheep.mother.to_s, @sheep.birth.sheep %><% else %><%= @sheep.mother %><% end %></li>
-  <li><strong>Otac</strong> <%= @sheep.father %></li>
-  <li><strong>Opis</strong> <%= @sheep.describe %></li>
-</ul>
+  <div class="panel panel-default" id="panel1">
+    <div class="panel-heading">
+      <h3 class="page_title">
+        Rodjena dana <%= @sheep.birth_date %>
+        <a data-toggle="collapse" data-target="#collapse1" 
+           href="#collapse1" >
+          
+        </a>
+      </h3>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse in">
+      <div class="panel-body">
+          <ul>
+            <li><strong>Mesto rodjenja </strong><%=@sheep.birth_place%></li>
+            <li><strong>Tezina na rodjenju </strong><%=@sheep.birthweight%> kg</li>
+            <li><strong>Majka</strong> <% if @sheep.birth!=nil%><%= link_to @sheep.mother.to_s, @sheep.birth.sheep %><% else %><%= @sheep.mother %><% end %></li>
+            <li><strong>Otac</strong> <%= @sheep.father %></li>
+            <li><strong>Opis</strong> <%= @sheep.describe %></li>
+          </ul>
+      </div>
+    </div>
+  </div>

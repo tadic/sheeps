@@ -13,8 +13,20 @@ color: red;
 .page_title{
     color: #306EFF;
 }
+.page_red{
+    color: #FF0000;
+}
 .status{
     color: #0FB509;
+}
+.panel-heading a:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e114";    
+    float: right; 
+    color: grey; 
+}
+.panel-heading a.collapsed:after {
+    content: "\e080";
 }
 #add_sheep {
   background-color: hsl(201, 100%, 30%) !important;
