@@ -22,7 +22,7 @@
 <% if not current_user.nil? %>
         <%= link_to 'Izmeni', edit_sheep_path(@sheep), class:"btn btn-primary" %>
 <% end %>
-<%= link_to 'Preuzmi PDF', '/sheep/'+ @sheep.id.to_s + '.pdf', class:"btn btn-danger" %>
+<%= link_to 'Preuzmi PDF', '/sheep/'+ @sheep.id.to_s + '.pdf', class:"btn btn-success" %>
 
 <%= link_to 'Nazad', sheep_index_path, class:"btn btn-default" %>
 

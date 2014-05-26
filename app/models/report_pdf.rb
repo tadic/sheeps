@@ -8,7 +8,7 @@ class ReportPdf < Prawn::Document
   end
  def title
       bounding_box([30, 690], :width => 270) do
-        text "Grlo: '"+@sheep.nickname.to_s+"', oznaka: <color rgb='ff0000'>"+@sheep.code.to_s+"</color>", size: 18, :inline_format => true
+        text "Grlo: '"+@sheep.nickname.to_s+"', oznaka: <color rgb='ff0000'>"+@sheep.code.to_s+"</color>", size: 16, :inline_format => true
         text  "<color rgb='ff0000'>"+@sheep.sex.to_s+"</color>"+ ", " + @sheep.percent_of_r.to_s + "% romanov", size: 16, :inline_format => true
         text "Status: " +@sheep.status.to_s+ " ", :color => "009900", size: 16
       end
@@ -61,7 +61,7 @@ class ReportPdf < Prawn::Document
           if @sheep.terapies.count == 0
              text "Lecenja nije bilo", size: 15, style: :bold
           else
-            text "Grlo je leceno " + @sheep.terapies.count + " puta", size: 15, style: :bold
+            text "Grlo je leceno " + @sheep.terapies.count.to_s + " puta", size: 15, style: :bold
             table_content(terapies_rows)
           end
       end
@@ -71,9 +71,9 @@ class ReportPdf < Prawn::Document
     if @sheep.sheep_purchase!=nil
       bounding_box([30, y_position], :width => 270) do
           text "Nabavljena " +  @sheep.sheep_purchase.activity.show_date, size: 15, style: :bold
-          text "  -  Mesto:         " + @sheep.sheep_purchase.activity.location
-          text "  -  Cena:          " + @sheep.sheep_purchase.price.to_s + "evra"
-          text "  -  Napomena:      " + @sheep.sheep_purchase.comment
+          text "  -  Mesto:  " + @sheep.sheep_purchase.activity.location
+          text "  -  Cena:  " + @sheep.sheep_purchase.price.to_s + "evra"
+          text "  -  Napomena:  " + @sheep.sheep_purchase.comment
       end
     end
   end
