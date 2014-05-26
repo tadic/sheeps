@@ -11,6 +11,7 @@ class ReportPdf < Prawn::Document
         text "Grlo: '"+@sheep.nickname.to_s+"', oznaka: <color rgb='ff0000'>"+@sheep.code.to_s+"</color>", size: 16, :inline_format => true
         text  "<color rgb='ff0000'>"+@sheep.sex.to_s+"</color>"+ ", " + @sheep.percent_of_r.to_s + "% romanov", size: 16, :inline_format => true
         text "Status: " +@sheep.status.to_s+ " ", :color => "009900", size: 16
+        text '-------------------------------------------------'
       end
  end
  def birth(y_position)
@@ -80,10 +81,10 @@ class ReportPdf < Prawn::Document
  
   def tree
       bounding_box([313, 700], :width => 100, :height => 30) do
-          text "Majka", size: 12, :align => :center, :valign => :center
+          text "Majka", size: 12, style: :bold, :align => :center, :valign => :center
       end
       bounding_box([418, 700], :width => 100, :height => 30) do
-          text "Otac", size: 12, :align => :center, :valign => :center
+          text "Otac", size: 12, style: :bold, :align => :center, :valign => :center
       end
       bounding_box([323, 673], :width => 80, :height => 30) do
           text  @sheep.mother + " - "+ @sheep.mother_background, size: 9, :align => :center, :valign => :center
@@ -143,14 +144,14 @@ class ReportPdf < Prawn::Document
   def vacinations_rows
     data = [['Datum', 'razlog', 'sredstvo']] 
       @sheep.self_vacinations.map do |vac|
-     data+= [[vac.id, vac.reason, vac.vaccin_name]]
+     data+= [[vac.activity.show_date, vac.reason, vac.vaccin_name]]
     end
       return data
   end
   def terapies_rows
     data = [['Datum', 'razlog', 'sredstvo']] 
       @sheep.terapies.map do |vac|
-     data+= [[vac.id, vac.reason, vac.vaccin_name]]
+     data+= [[vac.activity.show_date, vac.reason, vac.vaccin_name]]
     end
       return data
   end
