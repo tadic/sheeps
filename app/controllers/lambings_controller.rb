@@ -7,6 +7,14 @@ class LambingsController < ApplicationController
   def index
     @lambings = Activity.where(a_type: 'jagnjenja').sort_by{|a| a[:date]}
     @sheeps = Sheep.all
+   respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ReportPdf.new(@sheep)
+
+        send_data pdf.render, filename: 'lambings.pdf', type: 'application/pdf'
+      end
+    end
   end
 
   # GET /lambings/1

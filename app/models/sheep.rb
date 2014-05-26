@@ -19,6 +19,23 @@ class Sheep < ActiveRecord::Base
       return vacc
     end
     
+    def lambing_activities
+      la =   lambings.select(:activity_id).distinct
+     return la
+    end
+    
+    def lambs_list_from_lambing(id)
+      list = ''
+      lambings.where(activity_id: id).each  do |l| 
+        list += l.lamb.nick_or_code + ', '
+      end
+      return list
+    end
+    
+    def lamb_number_from_lambing(a_id)
+      lambings.where(activity_id: a_id).count
+    end
+    
     def code_nickname
       code.to_s + ' ' + nickname.to_s
     end
@@ -60,6 +77,12 @@ def number_of_lambings
   lambings.select(:activity_id).distinct.count
 end
 
+ def nick_or_code
+   if nickname==nil or nickname==''
+    return kod
+   end
+   return nik_n
+ end
 
 def self.best_sheep(n)
   Sheep.on_farm.sort_by{|a| [a.percent_of_lambings, a.birthdate]}.last(n).reverse
@@ -164,28 +187,32 @@ end
     return '?'
   end
   
+  
   def mother
     if birth!=nil
-      if birth.sheep.nickname!= ''
-        return birth.sheep.nickname
-      else
-        return birth.sheep.code
-      end
+        return birth.sheep.nickname + ", " + birth.sheep.code
     else
       if sheep_purchase.mother_code==''
         return 'nepoznata'
       else
         return sheep_purchase.mother_code
       end
-      
     end 
+  end
+  
+  def mother_background
+    if birth!=nil
+      birth.sheep.background
+    else
+      'nepoznato'
+    end
   end
 
   def father
     if birth==nil
       return sheep_purchase.father_code
     else
-      'u potrazi za...'
+      'nepoznat'
     end
   end
 end

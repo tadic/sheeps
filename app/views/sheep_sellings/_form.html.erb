@@ -1,6 +1,6 @@
 <%= form_for(@sheep_selling) do |f| %>
 
-  <input type='text' name='activity_id'<% if @activity!= nil %>value='<%=@activity.id %>'<%end%>> 
+  <input type='hidden' name='activity_id'<% if @activity!= nil %>value='<%=@activity.id %>'<%end%>> 
   <div class="field activity_header" >
     <table class='table'>
       <thead>

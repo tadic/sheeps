@@ -114,6 +114,14 @@ end
   # GET /sheep/1
   # GET /sheep/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ReportPdf.new(@sheep)
+        send_data pdf.render, filename: 'sheep.pdf', type: 'application/pdf'
+
+      end
+    end
   end
 
   # GET /sheep/new

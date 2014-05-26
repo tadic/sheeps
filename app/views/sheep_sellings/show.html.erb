@@ -42,4 +42,4 @@
     <%= link_to 'Izmeni', edit_sheep_selling_path(@activity), class:"btn btn-default" %>
     <%= link_to 'Izbrisi', @activity.sheep_sellings.first, method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %>
 <% end %>
-<%= link_to 'Nazad', :back, class:"btn btn-primary" %> 
+<%= link_to 'Nazad', :root, class:"btn btn-primary" %> 

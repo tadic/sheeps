@@ -9,4 +9,7 @@ class Lambing < ActiveRecord::Base
     return lambings.where(count :'1').count 
   end
 
+def  self.from_interval(start_date, end_date)
+  @lambings = Activity.where("a_type= 'jagnjenja' AND date >  ? AND date < ?", start_date, end_date).sort_by{|a| a[:date]}
+end
 end

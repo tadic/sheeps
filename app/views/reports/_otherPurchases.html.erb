@@ -1,0 +1,30 @@
+<h3>Ostale nabavke <% if @o_purchases.count==0%>nije bilo</h3>
+<% else %></h3>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr class='danger'>
+      <th class="col-sm-1">Datum</th>
+      <th class="col-sm-1">lokacija</th>
+      <th class="col-sm-2">sta je nabavljeno</th>
+      <th class="col-sm-2">razlog</th>
+      <th class="col-sm-1">troskovi</th>
+      <th class="col-sm-2">opste zapazanje</th>
+      <th class="col-sm-1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @o_purchases.each do |op| %>
+      <tr>
+        <td><%= op.show_date %></td>
+        <td><%= op.location %></td>
+        <td><strong><%= op.other_purchase.what %></strong></td>
+        <td><strong><%= op.other_purchase.why %></strong></td>
+        <td><%= op.total_costs%></td>
+        <td><%= op.comment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

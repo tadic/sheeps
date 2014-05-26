@@ -5,7 +5,6 @@ class Activity < ActiveRecord::Base
   has_many :sheep_sellings, :dependent => :destroy
   has_many :sheeps, through: :lambings
   has_many :vaccin_sheeps, through: :vacinations, :source => :sheep
-  has_many :selled_sheeps, through: :sheep_sellings, :source => :sheep
   has_many :lambs, through: :lambings
   has_one :uginuce
   has_one :other_purchase

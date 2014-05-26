@@ -3,7 +3,10 @@ class SheepPurchase < ActiveRecord::Base
     belongs_to :sheep, :dependent => :destroy
     
     
-    
+  def self.from_interval(start_date, end_date)
+     Activity.where("a_type= 'nabavka_ovaca' AND date >  ? AND date < ?", start_date, end_date).sort_by{|a| a[:date]}
+  end
+  
   def show_date_of_birth
    if date_of_birth==nil || date_of_birth==0
      return 'prazno'

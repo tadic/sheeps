@@ -69,8 +69,12 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.8.4)
+    pdf-core (0.2.5)
     pg (0.17.1)
     polyglot (0.3.4)
+    prawn (1.0.0)
+      pdf-core (~> 0.2.2)
+      ttfunk (~> 1.1.1)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -123,6 +127,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.1.1)
     turbolinks (2.2.1)
       coffee-rails
     tzinfo (0.3.38)
@@ -146,6 +151,7 @@ DEPENDENCIES
   jquery-turbolinks
   lazy_high_charts
   pg
+  prawn
   rails (= 4.0.2)
   rails_12factor
   rails_layout

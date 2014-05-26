@@ -1,0 +1,30 @@
+<h3>Nabavke ovaca
+<% if @s_purchases.count == 0 %> nije bilo </h3>
+<% else %>
+</h3>
+
+<table class="table table-hover">
+  <thead>
+    <tr class='danger'>
+      <th class="col-sm-2">Datum</th>
+      <th class="col-sm-1">lokacija</th>
+      <th class="col-sm-1">broj muskih</th>
+      <th class="col-sm-1">troskovi</th>
+      <th class="col-sm-3">Opste zapazanje</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @s_purchases.each do |sp| %>
+      <tr>
+        <td><%= sp.show_date %></td>
+        <td><%= sp.location %></td>
+        <td><strong><%= sp.sheep_purchases.count %></strong></td>
+        <td><%= sp.total_costs%></td>
+        <td><%= sp.comment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

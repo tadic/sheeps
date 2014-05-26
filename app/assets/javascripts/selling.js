@@ -26,8 +26,10 @@ $("document").ready(function(){
 
 function add_sheep_to_selling(){
     all_html = '';
+    
         $('#selling_sheeps').find(":selected").each(function() {
             sheep = $(this).data("value");
+            
             all_html += "<tr><td><input type='hidden' name='sheep_selling[][sheep_id]' style='width: 50px' value='"+sheep.id+"'>"+ sheep.code +"</td>"+
                     "<td><strong>"+ sheep.nickname +"</strong></td>"+
                     "<td>"+ sheep.sex +"</td>"+

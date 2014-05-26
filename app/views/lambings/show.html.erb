@@ -39,5 +39,6 @@
 <% if not current_user.nil? %>
       <%= link_to 'Izmeni', edit_lambing_path(@activity), class:"btn btn-default" %> 
       <%= link_to 'Izbrisi', @activity.lambings.first, method: :delete, data: { confirm: 'Jesi li siguran?' }, class:"btn btn-danger" %>
+    
 <% end %>
 <%= link_to 'Nazad', :back, class:"btn btn-primary" %>

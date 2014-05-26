@@ -21,13 +21,16 @@ Sheeps::Application.routes.draw do
   
   resources :sessions, only: [:new, :create]
   
+  get "welcome/index"
+  
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   
     resources :uginuces
 get '/', to: 'sheep#statistics'
 get 'root', to: 'sheep#statistics'
-
+get '/reports', to: 'reports#index'
+get '/report_new', to: 'reports#report'
 get '/statistics', to: 'sheep#statistics'
 
 get 'sheeplist', to:'sheep#sheeplist'

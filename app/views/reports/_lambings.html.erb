@@ -1,0 +1,37 @@
+<h3>Jagnjenja <% if @lambings.count == 0 %> nije bilo</h3>
+<% else %>
+</h3>
+<table class="table table-hover">
+  <thead>
+    <tr class='danger'>
+      <th class="col-sm-2">Datum</th>
+      <th class="col-sm-1">Broj ovaca</th>
+       <th class="col-sm-2">ovce</th>
+      <th class="col-sm-1">ukupno</th>
+      <th class="col-sm-1">zenskih</th>
+      <th class="col-sm-3">Opste zapazanje</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lambings.each do |lambing| %>
+      <tr>
+        <td><%= lambing.show_date %></td>
+        <td><%= lambing.sheeps.group_by(&:id).count %></td>
+        <td><strong><% lambing.sheeps.distinct.each do |s| %>
+               <% if s.nickname!= '' %>
+                  <%= s.nickname + ', '%>
+               <% else %>
+                  <%= s.code + ', ' %>       
+               <% end %>
+            <% end %>
+        </strong></td>
+        <td><strong><%= lambing.lambs_total %>/<%= lambing.lambs_alive %></strong></td>
+        <td><%= lambing.females_total%>/<%= lambing.females_alive%></td>
+        <td><%= lambing.comment %></td>
+ </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

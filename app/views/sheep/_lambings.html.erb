@@ -16,20 +16,19 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th class='col-sm-3'>Datum</th>
-                  <th class='col-sm-1'>oznaka</th>
-                  <th class='col-sm-1'>nadimak</th>
-                  <th class='col-sm-1'>pol</th>
+                  <th class='col-sm-2'>Datum</th>
+                  <th class='col-sm-3'>jaganjci</th>
+                  <th class='col-sm-1'>kom</th>
+
                 </tr>
               </thead>
             
               <tbody>
-                <% @sheep.lambings.each do |l| %>
+                <% @sheep.lambing_activities.each do |l| %>
                   <tr>
-                    <td><%= link_to l.activity.show_date, l.lamb%></td>
-                    <td><%= l.lamb.code %> </td>
-                    <td><%= l.lamb.nickname %> </td>
-                    <td><%= l.lamb.sex %> </td>
+                    <td><%=  l.activity.show_date%></td>
+                    <td><%= @sheep.lambs_list_from_lambing(l.activity_id)%></td>
+                    <td><%= @sheep.lamb_number_from_lambing(l.activity_id) %> </td>
                </tr>
                 <% end %>
               </tbody>

@@ -25,6 +25,7 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 
 gem 'angularjs-rails'
 
+
 group :development do
   gem 'rails_layout'
 end
@@ -36,6 +37,7 @@ gem 'turbolinks'
 gem 'jquery-turbolinks'
 
 gem 'jbuilder', '~> 1.2'
+gem 'prawn'
 
 group :doc do
  
