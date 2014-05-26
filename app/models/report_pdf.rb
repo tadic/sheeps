@@ -18,9 +18,9 @@ class ReportPdf < Prawn::Document
     # The bounding_box takes the x and y coordinates for positioning its content and some options to style it
     bounding_box([30, y_position], :width => 270) do
       text "Rodjena dana " + @sheep.birth_date, size: 15, style: :bold
-      text "  -  Mesto rodjenja:      " + @sheep.birth_place
-      text "  -  Tezina na rodjenju:  " + @sheep.birthweight
-      text "  -  Opis grla:           " + @sheep.describe
+      text "  -  Mesto     : " + @sheep.birth_place
+      text "  -  Tezina    : " + @sheep.birthweight
+      text "  -  Opis grla : " + @sheep.describe
     end
  end
  
@@ -71,9 +71,9 @@ class ReportPdf < Prawn::Document
     if @sheep.sheep_purchase!=nil
       bounding_box([30, y_position], :width => 270) do
           text "Nabavljena " +  @sheep.sheep_purchase.activity.show_date, size: 15, style: :bold
-          text "  -  Mesto:               " + @sheep.sheep_purchase.activity.location
-          text "  -  Cena:                " + @sheep.sheep_purchase.price.to_s
-          text "  -  Napomena:            " + @sheep.sheep_purchase.comment
+          text "  -  Mesto:         " + @sheep.sheep_purchase.activity.location
+          text "  -  Cena:          " + @sheep.sheep_purchase.price.to_s + "evra"
+          text "  -  Napomena:      " + @sheep.sheep_purchase.comment
       end
     end
   end
@@ -115,13 +115,12 @@ class ReportPdf < Prawn::Document
   def content
     y_position = cursor - 50
     birth(y_position)
-    tree
-    vacinations(y_position)
-    terapies(cursor-30)
     purchase(cursor-30)
     lambings(cursor-30)
     selling(cursor-30)
- 
+    tree
+    vacinations(y_position)
+    terapies(cursor-30)
   end
  
   def table_content(some_table)
@@ -130,7 +129,7 @@ class ReportPdf < Prawn::Document
       self.cell_style =  {:size => 9}
       self.header = true
       self.row_colors = ['DDDDDD', 'FFFFFF']
-      self.column_widths = [60, 130, 50]
+      self.column_widths = [60, 120, 60]
     end
 
   end
@@ -158,7 +157,7 @@ class ReportPdf < Prawn::Document
   
   def footer
       bounding_box([400, 15], :width => 200) do
-          text "farma ovaca Tadici - " + Time.now.strftime("%d/%m/%Y %H:%M") + " - " , size: 6
+          text "farma ovaca Tadici - " + Time.now.strftime("%d/%m/%Y %H:%M") , size: 7
       end
   end
   
