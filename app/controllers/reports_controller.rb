@@ -13,8 +13,15 @@ def report
      @lecenja = Vacination.lek_from_interval(start_date, end_date)
      @o_purchases = OtherPurchase.from_interval(start_date, end_date)
      @sellings = SheepSelling.from_interval(start_date, end_date)
-  else
   end
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ReportPdf.new(Sheep.find 428)
+        show_data pdf.render, filename: 'report.pdf', type: 'application/pdf'
+
+      end
+    end
 
 end
 end
