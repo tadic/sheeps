@@ -37,7 +37,7 @@ class Sheep < ActiveRecord::Base
     end
     
     def code_nickname
-      code.to_s + ' ' + nickname.to_s
+      nik_n.to_s + ' ' + kod.to_s
     end
     
     def terapies
